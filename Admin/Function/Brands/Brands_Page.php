@@ -1,31 +1,12 @@
 <?php
 include("./Function/Manager/Check_login.php");
 ?>
+
+
 <?php
-//phân trang
-$limit = 10;
-if (!isset($_GET['trang'])) {
-    $_GET['trang'] = 1;
-}
-$tv = "select count(*) as total from ThuongHieu";
-$tv_1 = mysqli_query($conn, $tv);
-$tv_2 = mysqli_fetch_array($tv_1);
-$total_records = $tv_2['total'];
-$so_trang = ceil($total_records  / $limit);
-$start = ($_GET['trang'] - 1) * $limit;
-$current_page = isset($_GET['trang']) ? $_GET['trang'] : 1;
-if ($current_page > $so_trang) {
-    $current_page = $so_trang;
-} else if ($current_page < 1) {
-    $current_page = 1;
-}
 
-if (isset($_POST['searchdata'])) {
 
-    $str = $_POST['str'];
-    $query = "select * from thuonghieu where TenTH like '%$str%' or MaTH like '%$str%' ";
-}
-$query = "SELECT * FROM ThuongHieu order by MaTH limit $start,$limit";
+$query = "SELECT * FROM ThuongHieu";
 $query_run = mysqli_query($conn, $query);
 
 ?>
@@ -65,7 +46,7 @@ $query_run = mysqli_query($conn, $query);
 <div class="container-fluid ">
 
     <div class="card p-3">
-        <h2 class="font-weight-bold text-center"> QUẢN LÍ THƯƠNG HIỆU </h2>
+        <h1 class="font-weight-bold text-center"> QUẢN LÍ THƯƠNG HIỆU </h1>
     </div>
 
     <div class="card">
@@ -74,44 +55,19 @@ $query_run = mysqli_query($conn, $query);
             <button type="button" class="btn btn-primary p-3" data-bs-toggle="modal" data-bs-target="#addmodal">
                 <i class="bi bi-plus-lg"></i>Thêm mới
             </button>
-            <div class="search-bar">
-                <form class="search-form d-flex" method="POST">
-                    <input class="form-control" type="text" name="str" value="<?php if (isset($str)) echo $str; ?>" placeholder="Tìm kiếm" title="Nhập từ khoá !">
-                    <button name="searchdata" class="btn btn-primary " type="submit" title="Search"><i class="bi bi-search"></i></button>
-                </form>
-            </div>
 
         </div>
     </div>
 
     <div class="card">
         <div class="card-body">
-            <div>
-                <h6 class="font-weight-bold text-center">
-                <?php if(isset($_POST["searchdata"])) { 
-                    if($str == "") {
-                        echo "";
-                    }
-                    else {
-                        if(mysqli_num_rows($query_run) > 0 ) {
-                            echo "Có " .mysqli_num_rows($query_run) ." kết quả được tìm thấy !";
-                    }
-                    
-                    else {
-                        echo "Không tìm thâý kết quả nào !";
-                    }
-                    }
-                  
-                }  ?>
-                </h6>
-            </div>
             <?php
 
 
 
             $index = 1;
             ?>
-            <table id="data-table" class="table table-bordered table-secondary table-hover">
+            <table id="data-table" class="table table-bordered table-secondary table-hover display">
                 <thead class="thead-dark">
                     <tr>
                         <th>STT</th>
@@ -120,11 +76,9 @@ $query_run = mysqli_query($conn, $query);
                         <th> Chức năng </th>
                     </tr>
                 </thead>
-                <?php
-                if ($query_run) {
-                    foreach ($query_run as $row) {
-                ?>
-                        <tbody>
+                <tbody>
+                    <?php if (mysqli_num_rows($query_run) != 0) {
+                        while ($row = mysqli_fetch_array($query_run)) { ?>
                             <tr>
                                 <td> <?php echo $index;
                                         $index++; ?></td>
@@ -241,43 +195,51 @@ $query_run = mysqli_query($conn, $query);
 
                                 </td>
                             </tr>
-                        </tbody>
-                <?php
+
+                    <?php  }
                     }
-                } else {
-                    echo "Truy vấn lỗi";
-                }
-                ?>
+                    ?>
+                </tbody>
             </table>
         </div>
-        <div class="container">
-            <ul class="pagination justify-content-center">
-                <?php
-                if ($current_page > 1 && $so_trang > 1) {
-                    echo '<a  class="page-link" href="?thamso=thuonghieu&trang=' . ($current_page - 1) . '">Trước</a>';
-                }
-                for ($i = 1; $i <= $so_trang; $i++) {
-                    $link_phan_trang = "?thamso=thuonghieu&trang=" . $i;
-                    if ($i == $current_page) {
-                        echo '<span class="page-link active">' . $i . '</span> ';
-                    } else {
-                        echo "<a class='page-link' href='$link_phan_trang' >";
-                        echo $i;
-                        echo "</a> ";
-                    }
-                }
-                if ($current_page < $so_trang && $so_trang > 1) {
-                    echo '<a class="page-link" href="?thamso=thuonghieu&trang=' . ($current_page + 1) . '">Sau</a>';
-                }
-                ?>
-
-            </ul>
-        </div>
+ 
     </div>
 
 
 
-
-
-
 </div>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
+
+<script>
+    $(document).ready(function() {
+        $('#data-table').DataTable({
+            language: {
+                lengthMenu: 'Hiển thị _MENU_ trường một trang',
+                zeroRecords: 'Không tìm thấy dữ liệu !',
+                info: 'Đang hiển thị trang _PAGE_ / _PAGES_',
+                infoEmpty: 'Không có bản ghi nào',
+                infoFiltered: '(được lọc từ _MAX_ bản ghi)',
+                "search": "Tìm kiếm:",
+                searchPlaceholder: "Nhập từ khoá !",
+                "paginate": {
+                    "first": "Đầu",
+                    "last": "Cuối",
+                    "next": "Sau",
+                    "previous": "Trước"
+                },
+            },
+        });
+    });
+</script>
+
+
+<script>
+    $(document).ready(function() {
+        $('#data-table').DataTable();
+    });
+</script>
