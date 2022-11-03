@@ -20,7 +20,6 @@ $conn = mysqli_connect($servername, $usename, $pass, $dbname);
             echo '<script> alert("Thêm dữ liệu thành công!"); </script>';
             Page_Back();
             
-          
         }
         else
         {
