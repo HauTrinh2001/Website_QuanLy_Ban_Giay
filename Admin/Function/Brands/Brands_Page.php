@@ -1,15 +1,14 @@
 <?php
 include("./Function/Manager/Check_login.php");
+include("./Function/Sup/Success.php");
+include("./Function/Brands/Handle.php");
 ?>
-
 
 <?php
-
-
 $query = "SELECT * FROM ThuongHieu";
 $query_run = mysqli_query($conn, $query);
-
 ?>
+
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
 
@@ -22,7 +21,7 @@ $query_run = mysqli_query($conn, $query);
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="./Function/Brands/Insert.php" method="post">
+                <form action="" method="post">
                     <div class="form-group">
                         <label for="TenTH">Tên thương hiệu</label>
                         <input required value="" required type="text" name="I_TenTH" class="form-control" id="I_TenTH" placeholder="Nhập tên thương hiệu">
@@ -133,7 +132,7 @@ $query_run = mysqli_query($conn, $query);
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form action="./Function/Brands/Edit.php" method="post">
+                                                    <form action="" method="post">
 
                                                         <input type="hidden" name="MaTH" id="MaTH" value="<?php echo $row['MaTH']; ?>">
 
@@ -171,12 +170,14 @@ $query_run = mysqli_query($conn, $query);
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form action="./Function/Brands/Delete.php" method="post">
+                                                    <form action="" method="post">
 
                                                         <input type="hidden" name="D_MaTH" id="D_MaTH" value="<?php echo $row['MaTH']; ?>">
 
                                                         <div class="form-group">
-                                                            <label>Bạn có chắc muốn xoá thương hiệu <?php echo $row['TenTH'] . " không ?"; ?></label>
+
+                                                            <label>Xoá thương hiệu <span class="text-danger font-weight-bold"> <?php echo $row['TenTH']; ?></span> sẽ xoá các sản phẩm có thương hiệu này ?</label>
+
                                                         </div>
 
 
@@ -202,7 +203,7 @@ $query_run = mysqli_query($conn, $query);
                 </tbody>
             </table>
         </div>
- 
+
     </div>
 
 

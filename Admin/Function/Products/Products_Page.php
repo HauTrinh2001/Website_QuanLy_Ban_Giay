@@ -1,53 +1,138 @@
 <?php
 include("./Function/Manager/Check_login.php");
+include("./Function/Sup/Success.php");
+include("./Function/Products/Handle.php");
 ?>
+
+
+
+
 <?php
-//phân trang
-$limit = 10;
-if (!isset($_GET['trang'])) {
-    $_GET['trang'] = 1;
-}
-$tv = "select count(*) as total from Giay";
-$tv_1 = mysqli_query($conn, $tv);
-$tv_2 = mysqli_fetch_array($tv_1);
-$total_records = $tv_2['total'];
-$so_trang = ceil($total_records  / $limit);
-$start = ($_GET['trang'] - 1) * $limit;
-$current_page = isset($_GET['trang']) ? $_GET['trang'] : 1;
-if ($current_page > $so_trang) {
-    $current_page = $so_trang;
-} else if ($current_page < 1) {
-    $current_page = 1;
-}
-$query = "";
-$query = "SELECT * FROM Giay order by MaGiay limit $start,$limit";
-if (isset($_POST['searchdata'])) {
-
-    $str = $_POST['str'];
-    $query = "select * from Giay where TenGiay like '%$str%' ";
-}
-
+$query = "SELECT * FROM Giay join LoaiGiay on Giay.MaLG = LoaiGiay.MaLG join ThuongHieu on Giay.MaTH = ThuongHieu.MaTH";
 $query_run = mysqli_query($conn, $query);
 
+$query_brands = "SELECT * FROM ThuongHieu";
+$query_run_brands = mysqli_query($conn, $query_brands);
+$query_run_brands1 = mysqli_query($conn, $query_brands);
+$query_run_brands2 = mysqli_query($conn, $query_brands);
+
+
+
+$query_products_type = "SELECT * FROM LoaiGiay";
+$query_run_products_type = mysqli_query($conn, $query_products_type);
+$query_run_products_type1 = mysqli_query($conn, $query_products_type);
+$query_run_products_type2 = mysqli_query($conn, $query_products_type);
+
+
+
+$query_suppliers = "SELECT * FROM NhaCungCap";
+$query_run_suppliers  = mysqli_query($conn, $query_suppliers);
+$query_run_suppliers1  = mysqli_query($conn, $query_suppliers);
+$query_run_suppliers2  = mysqli_query($conn, $query_suppliers);
+
+$arr = [];
+$arr1 = [];
+while ($row = mysqli_fetch_array($query_run_products_type1)) {
+    array_push($arr, $row["MaLG"]);
+}
+while ($row = mysqli_fetch_array($query_run_products_type2)) {
+    array_push($arr1, $row["TenLoaiGiay"]);
+}
+
+
+$arr2 = [];
+$arr3 = [];
+while ($row = mysqli_fetch_array($query_run_brands1)) {
+    array_push($arr2, $row["MaTH"]);
+}
+while ($row = mysqli_fetch_array($query_run_brands2)) {
+    array_push($arr3, $row["TenTH"]);
+}
+
+$arr4 = [];
+$arr5 = [];
+while ($row = mysqli_fetch_array($query_run_suppliers1)) {
+    array_push($arr4, $row["MaNCC"]);
+}
+while ($row = mysqli_fetch_array($query_run_suppliers2)) {
+    array_push($arr5, $row["TenNCC"]);
+}
+
+
+
 ?>
+
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
 
 <!-- ADD  -->
 <div class="modal fade" id="addmodal" tabindex="-1" aria-labelledby="Label_Add" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="Label_Add">Thêm mới</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="./Function/Products/Insert.php" method="post">
-                    <div class="form-group">
-                        <label for="TenGiay">Tên sản phẩm</label>
-                        <input required value="" required type="text" name="I_TenGiay" class="form-control" id="I_TenGiay" placeholder="Nhập tên sản phẩm">
+                <form action="" method="post" enctype="multipart/form-data">
+                    <div class="form-group ">
+                        <label for="I_TenGiay">Tên giày</label>
+                        <input required value="<?php if (isset($I_TenGiay))  echo $I_TenGiay ?>" required type="text" name="I_TenGiay" class="form-control" id="I_TenGiay" placeholder="Nhập tên giày">
+                    </div>
+
+                    <div class="form-group ">
+                        <label for="I_GiaBan">Giá bán</label>
+                        <input required value="" required type="text" name="I_GiaBan" class="form-control" id="I_GiaBan" placeholder="Nhập giá bán">
+                        <small class="text-danger"><?php if (isset($loi))  echo $loi ?></small>
 
                     </div>
+                    <div class="form-group ">
+                        <label for="I_MoTa">Mô tả</label>
+                        <div class="form-group shadow-textarea">
+
+                            <textarea name="I_MoTa" class="form-control z-depth-1" id="I_MoTa" rows="3" placeholder="Nhập mô tả..."></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <label for="I_AnhBia">Ảnh</label>
+                        <input accept=".jpg, .jpeg, .png" required value="" required type="file" name="I_AnhBia" class="form-control" id="I_AnhBia" placeholder="Nhập tên ảnh">
+                    </div>
+                    <div class="form-group ">
+
+                        <label for="I_SoLuongTon">Số lượng</label>
+                        <input required value="" required type="text" name="I_SoLuongTon" class="form-control" id="I_SoLuongTon" placeholder="Số lượng">
+                        <small class="text-danger"><?php if (isset($loi2))  echo $loi2 ?></small>
+
+                    </div>
+                    <div class="form-group ">
+
+                        <label for="I_MaLG">Loại giày</label>
+                        <select name="I_MaLG" class="form-select" id="I_MaLG">
+
+                            <?php while ($row = mysqli_fetch_array($query_run_products_type)) { ?>
+                                <option value="<?php echo $row["MaLG"] ?>"><?php echo $row["TenLoaiGiay"] ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    <div class="form-group ">
+
+                        <label for="I_MaTH">Thương hiệu</label>
+                        <select name="I_MaTH" class="form-select" id="I_MaTH">
+                            <?php while ($row = mysqli_fetch_array($query_run_brands)) { ?>
+                                <option value="<?php echo $row["MaTH"] ?>"><?php echo $row["TenTH"] ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    <div class="form-group ">
+                        <label for="I_MaNCC">Nhà cung cấp</label>
+                        <select name="I_MaNCC" class="form-select" id="I_MaNCC">
+                            <?php while ($row = mysqli_fetch_array($query_run_suppliers)) { ?>
+                                <option value="<?php echo $row["MaNCC"] ?>"><?php echo $row["TenNCC"] ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+
+
 
             </div>
             <div class="modal-footer">
@@ -66,7 +151,7 @@ $query_run = mysqli_query($conn, $query);
 <div class="container-fluid ">
 
     <div class="card p-3">
-        <h2 class="font-weight-bold text-center"> QUẢN LÍ SẢN PHẨM </h2>
+        <h1 class="font-weight-bold text-center"> QUẢN LÍ SẢN PHẨM </h1>
     </div>
 
     <div class="card">
@@ -75,69 +160,49 @@ $query_run = mysqli_query($conn, $query);
             <button type="button" class="btn btn-primary p-3" data-bs-toggle="modal" data-bs-target="#addmodal">
                 <i class="bi bi-plus-lg"></i>Thêm mới
             </button>
-            <div class="search-bar">
-                <form class="search-form d-flex" method="POST">
-                    <input class="form-control" type="text" name="str" value="<?php if (isset($str)) echo $str; ?>" placeholder="Tìm kiếm" title="Nhập từ khoá !">
-                    <button name="searchdata" class="btn btn-primary " type="submit" title="Search"><i class="bi bi-search"></i></button>
-                </form>
-            </div>
 
         </div>
     </div>
 
     <div class="card">
         <div class="card-body">
-            <div>
-                <h6 class="font-weight-bold text-center">
-                <?php if(isset($_POST["searchdata"])) { 
-                    if($str == "") {
-                        echo "";
-                    }
-                    else {
-                        if(mysqli_num_rows($query_run) > 0 ) {
-                            echo "Có " .mysqli_num_rows($query_run) ." kết quả được tìm thấy !";
-                    }
-                    
-                    else {
-                        echo "Không tìm thâý kết quả nào !";
-                    }
-                    }
-                  
-                }  ?>
-                </h6>
-            </div>
             <?php
 
 
 
             $index = 1;
             ?>
-            <table id="data-table" class="table table-bordered table-secondary table-hover">
+            <table id="data-table" class="table table-bordered table-secondary table-hover display">
                 <thead class="thead-dark">
                     <tr>
                         <th>STT</th>
-                        <th> Mã</th>
-                        <th>Tên sản phẩm</th>
-                        <th> Chức năng </th>
+                        <th>Mã</th>
+                        <th>Tên giày</th>
+                        <th>Giá bán </th>
+                        <th>Ảnh</th>
+                        <th>Số lượng</th>
+                        <th>Chức năng </th>
+                        <th>Trạng thái</th>
                     </tr>
                 </thead>
-                <?php
-                if ($query_run) {
-                    foreach ($query_run as $row) {
-                ?>
-                        <tbody>
+                <tbody>
+                    <?php if (mysqli_num_rows($query_run) != 0) {
+                        while ($row = mysqli_fetch_array($query_run)) { ?>
                             <tr>
                                 <td> <?php echo $index;
                                         $index++; ?></td>
                                 <td> <?php echo $row['MaGiay']; ?></td>
                                 <td> <?php echo $row['TenGiay']; ?> </td>
+                                <td> <?php echo $row['GiaBan']; ?> </td>
+                                <td style="width:50px"><img style="width:100%" src="../Images/ImgProducts/<?php echo $row['AnhBia'] ?>" alt=""></td>
+                                <td> <?php echo $row['SoLuongTon']; ?> </td>
                                 <td>
                                     <!-- DETAIL  -->
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Modal_Detail<?php echo $row['MaGiay']; ?>">
                                         Chi tiết
                                     </button> |
                                     <div class="modal fade" id="Modal_Detail<?php echo $row['MaGiay']; ?>" tabindex="-1" aria-labelledby="LabelModal" aria-hidden="true">
-                                        <div class="modal-dialog modal-lg ">
+                                        <div class="modal-dialog modal-xl ">
                                             <!-- modal-xl -->
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -145,12 +210,78 @@ $query_run = mysqli_query($conn, $query);
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form method="post">
-                                                        <div class="form-group">
-                                                            <p> Mã sản phẩm <?php echo $row['MaGiay']; ?></p>
-                                                            <p> Tên sản phẩm <?php echo $row['TenGiay']; ?></p>
+                                                    <div class="container d-flex justify-content-center mt-50 mb-50">
+                                                        <div class="row">
+                                                            <div class="col-md-12 ">
+
+                                                                <div class="card card-body ">
+                                                                    <div class="media align-items-center align-items-lg-start text-center text-lg-left flex-column flex-lg-row">
+                                                                        <div class="mr-2 mb-3 mb-lg-0">
+
+
+                                                                            <img src="../Images/ImgProducts/<?php echo $row['AnhBia'] ?>" width="200" height="200" alt="">
+
+                                                                        </div>
+
+                                                                        <div class="media-body">
+                                                                            <h6 class="media-title font-weight-semibold">
+
+                                                                                <p class="text-primary"><?php echo $row['TenGiay']; ?></p>
+                                                                            </h6>
+
+                                                                            <ul class="list-inline list-inline-dotted mb-3 mb-lg-2">
+                                                                                <li class="list-inline-item text-muted"><?php echo $row['TenLoaiGiay']; ?></li>
+                                                                                <li class="list-inline-item text-muted"><?php echo $row['TenTH']; ?></li>
+
+                                                                            </ul>
+                                                                         
+                                                                                <p class="mb-3"><?php echo $row['MoTa']; ?></p>
+                                                                        
+                                                                          
+                                                                            <p class="mb-3"><span class="font-weight-bold"> Hiển thị ở trang khách hàng: </span><?php if ($row['HienThiSanPham'] == 1) echo "Có";                                                                                                                                                  else echo "Không"; ?></p>
+                                                                            <p class="mb-3"><span class="font-weight-bold"> Giá bán cũ: </span> <?php echo $row['GiaBanCu']; ?> đồng</p>
+                                                                            <p class="mb-3"><span class="font-weight-bold"> Ngày cập nhật cuối: </span> <?php echo $row['NgayCapNhat']; ?></p>
+
+
+
+                                                                        </div>
+
+                                                                        <div class="mt-3 mt-lg-0 ml-lg-3 text-center">
+                                                                            <h3 class="mb-0 font-weight-semibold"><?php echo $row['GiaBan']; ?></h3>
+
+                                                                            <div>
+                                                                                <i class="fa fa-star"></i>
+                                                                                <i class="fa fa-star"></i>
+                                                                                <i class="fa fa-star"></i>
+                                                                                <i class="fa fa-star"></i>
+
+                                                                            </div>
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                                                         </div>
+                                                    </div>
 
                                                 </div>
                                                 <div class="modal-footer">
@@ -180,14 +311,75 @@ $query_run = mysqli_query($conn, $query);
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form action="./Function/Products/Edit.php" method="post">
-
+                                                    <form action="" method="post" enctype="multipart/form-data">
                                                         <input type="hidden" name="MaGiay" id="MaGiay" value="<?php echo $row['MaGiay']; ?>">
-
-                                                        <div class="form-group">
-                                                            <label> Tên sản phẩm </label>
-                                                            <input required value="<?php echo $row['TenGiay']; ?>" type="text" name="TenGiay" id="TenGiay" class="form-control" placeholder="Nhập tên sản phẩm ">
+                                                        <div class="form-group ">
+                                                            <label for="TenGiay">Tên giày</label>
+                                                            <input required value="<?php echo $row['TenGiay']; ?>" required type="text" name="TenGiay" class="form-control" id="TenGiay" placeholder="Nhập tên giày">
                                                         </div>
+
+                                                        <div class="form-group ">
+                                                            <label for="GiaBan">Giá bán</label>
+                                                            <input required value="<?php echo $row['GiaBan']; ?>" required type="text" name="GiaBan" class="form-control" id="GiaBan" placeholder="Nhập giá bán">
+                                                            <small class="text-danger"><?php if (isset($loi))  echo $loi ?></small>
+
+                                                        </div>
+                                                        <div class="form-group ">
+                                                            <label for="MoTa">Mô tả</label>
+                                                            <div class="form-group shadow-textarea">
+
+                                                                <textarea name="MoTa" class="form-control z-depth-1" id="MoTa" rows="3" placeholder="Nhập mô tả..."><?php echo $row['MoTa']; ?></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group ">
+                                                            <label for="">Ảnh</label>
+                                                            <img height="200px" src="../Images/ImgProducts/<?php echo $row['AnhBia'] ?>" alt="" srcset="">
+                                                            <input accept=".jpg, .jpeg, .png" value="" type="file" name="AnhBia" class="form-control" id="AnhBia" placeholder="Nhập tên ảnh">
+                                                            <input type="hidden" name="AnhBiaCu" id="" value="<?php echo $row["AnhBia"] ?>">
+
+                                                        </div>
+
+                                                        <div class="form-group ">
+
+                                                            <label for="SoLuongTon">Số lượng</label>
+                                                            <input required value="<?php echo $row['SoLuongTon']; ?>" required type="text" name="SoLuongTon" class="form-control" id="SoLuongTon" placeholder="Số lượng">
+                                                            <small class="text-danger"><?php if (isset($loi2))  echo $loi2 ?></small>
+
+                                                        </div>
+                                                        <div class="form-group ">
+                                                            <label for="GiaBanCu">Giá Bán Cũ</label>
+                                                            <input class="form-control" type="text" name="GiaBanCu" value="<?php echo $row["GiaBanCu"] ?>">
+                                                            <small class="text-danger"><?php if (isset($loi3))  echo $loi3 ?></small>
+
+                                                        </div>
+                                                        <div class="form-group ">
+                                                            <label for="MaLG">Loại giày</label>
+                                                            <select name="MaLG" class="form-select" id="MaLG">
+                                                                <?php for ($i = 0; $i < count($arr); $i++) {  ?>
+                                                                    <option <?php if ($row["MaLG"] == $arr[$i]) echo "selected='selected' ";  ?> value="<?php echo $arr[$i]; ?>"><?php echo $arr1[$i]; ?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group ">
+                                                            <label for="MaTH">Thương hiệu</label>
+                                                            <select name="MaTH" class="form-select" id="MaTH">
+                                                                <?php for ($i = 0; $i < count($arr2); $i++) {  ?>
+                                                                    <option <?php if ($row["MaTH"] == $arr2[$i]) echo "selected='selected' ";  ?> value="<?php echo $arr2[$i]; ?>"><?php echo $arr3[$i]; ?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group ">
+                                                            <label for="MaNCC">Nhà cung cấp</label>
+                                                            <select name="MaNCC" class="form-select" id="MaNCC">
+                                                                <?php for ($i = 0; $i < count($arr4); $i++) {  ?>
+                                                                    <option <?php if ($row["MaNCC"] == $arr4[$i]) echo "selected='selected' ";  ?> value="<?php echo $arr4[$i]; ?>"><?php echo $arr5[$i]; ?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </div>
+
+
+
+
 
 
 
@@ -218,12 +410,13 @@ $query_run = mysqli_query($conn, $query);
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form action="./Function/Products/Delete.php" method="post">
+                                                    <form action="" method="post">
 
                                                         <input type="hidden" name="D_MaGiay" id="D_MaGiay" value="<?php echo $row['MaGiay']; ?>">
+                                                        <input type="hidden" name="D_AnhBiaCu" id="" value="<?php echo $row["AnhBia"] ?>">
 
                                                         <div class="form-group">
-                                                            <label>Bạn có chắc muốn xoá sản phẩm<?php echo $row['TenGiay'] . " không ?"; ?></label>
+                                                            <label>Bạn có chắc muốn xoá sản phẩm <span class="text-danger font-weight-bold"> <?php echo $row['TenGiay']; ?></span> không?</label>
                                                         </div>
 
 
@@ -240,45 +433,137 @@ $query_run = mysqli_query($conn, $query);
 
                                     <!-- END-DELETE  -->
 
+
+
+
+
+
+
+
+
+
+
+
+
                                 </td>
+                                <td>
+                                    <!-- Status  -->
+                                    <?php if ($row["HienThiSanPham"] == 1) { ?>
+                                        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#ModelStatus<?php echo $row['MaGiay']; ?>">
+                                            Bật <i class="bi bi-lightbulb"></i>
+                                        </button>
+                                        <div class="modal fade" id="ModelStatus<?php echo $row['MaGiay']; ?>" tabindex="-1" aria-labelledby="Label_Edit" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg ">
+                                                <!-- modal-xl -->
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="Label_Edit">Ẩn sản phẩm</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="" method="post">
+
+                                                            <input type="hidden" name="S_MaGiay" id="S_MaGiay" value="<?php echo $row['MaGiay']; ?>">
+
+                                                            <div class="form-group">
+                                                                <label>Bạn có chắc muốn ẩn sản phẩm <span class="text-danger font-weight-bold"> <?php echo $row['TenGiay']; ?></span> không?</label>
+                                                            </div>
+
+
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                                        <button type="submit" name="hidedata" class="btn btn-primary">Ẩn</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php } else { ?>
+
+                                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ModelStatus<?php echo $row['MaGiay']; ?>">
+                                            Tắt <i class="bi bi-lightbulb-off"></i>
+                                        </button>
+                                        <div class="modal fade" id="ModelStatus<?php echo $row['MaGiay']; ?>" tabindex="-1" aria-labelledby="Label_Edit" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg ">
+                                                <!-- modal-xl -->
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="Label_Edit">Xoá</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="" method="post">
+
+                                                            <input type="hidden" name="SS_MaGiay" id="SS_MaGiay" value="<?php echo $row['MaGiay']; ?>">
+
+                                                            <div class="form-group">
+                                                                <label>Bạn có chắc muốn hiện sản phẩm <span class="text-danger font-weight-bold"> <?php echo $row['TenGiay']; ?></span> không?</label>
+                                                            </div>
+
+
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                                        <button type="submit" name="showdata" class="btn btn-primary">Hiện</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    <?php } ?>
+                                    <!-- END-Status  -->
+                                </td>
+
                             </tr>
-                        </tbody>
-                <?php
+
+                    <?php  }
                     }
-                } else {
-                    echo "Truy vấn lỗi";
-                }
-                ?>
+                    ?>
+                </tbody>
             </table>
         </div>
-        <div class="container">
-            <ul class="pagination justify-content-center">
-                <?php
-                if ($current_page > 1 && $so_trang > 1) {
-                    echo '<a  class="page-link" href="?thamso=giay&trang=' . ($current_page - 1) . '">Trước</a>';
-                }
-                for ($i = 1; $i <= $so_trang; $i++) {
-                    $link_phan_trang = "?thamso=giay&trang=" . $i;
-                    if ($i == $current_page) {
-                        echo '<span class="page-link active">' . $i . '</span> ';
-                    } else {
-                        echo "<a class='page-link' href='$link_phan_trang' >";
-                        echo $i;
-                        echo "</a> ";
-                    }
-                }
-                if ($current_page < $so_trang && $so_trang > 1) {
-                    echo '<a class="page-link" href="?thamso=giay&trang=' . ($current_page + 1) . '">Sau</a>';
-                }
-                ?>
 
-            </ul>
-        </div>
     </div>
 
 
-
-
-
-
 </div>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
+
+<script>
+    $(document).ready(function() {
+        $('#data-table').DataTable({
+            language: {
+                lengthMenu: 'Hiển thị _MENU_ trường một trang',
+                zeroRecords: 'Không tìm thấy dữ liệu !',
+                info: 'Đang hiển thị trang _PAGE_ / _PAGES_',
+                infoEmpty: 'Không có bản ghi nào',
+                infoFiltered: '(được lọc từ _MAX_ bản ghi)',
+                "search": "Tìm kiếm:",
+                searchPlaceholder: "Nhập từ khoá !",
+                "paginate": {
+                    "first": "Đầu",
+                    "last": "Cuối",
+                    "next": "Sau",
+                    "previous": "Trước"
+                },
+            },
+        });
+    });
+</script>
+
+
+<script>
+    $(document).ready(function() {
+        $('#data-table').DataTable();
+    });
+</script>
+
+<!-- <img src="../Images/ImgProducts/Image202211051378.jpg" alt="" srcset=""> -->

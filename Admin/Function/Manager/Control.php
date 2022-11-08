@@ -14,9 +14,10 @@
 		case "thuonghieu":
             include("./Function/Brands/Brands_Page.php");     
 		break;
-		case "giay":
+		case "sanpham":
             include("./Function/Products/Products_Page.php");     
 		break;
+
 		default:
 			include("./Function/Manager/Members.php");  
 		
