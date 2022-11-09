@@ -175,7 +175,7 @@ while ($row = mysqli_fetch_array($query_run_suppliers2)) {
             <table id="data-table" class="table table-bordered table-secondary table-hover display">
                 <thead class="thead-dark">
                     <tr>
-                        <th>STT</th>
+                        <th>#</th>
                         <th>Mã</th>
                         <th>Tên giày</th>
                         <th>Giá bán </th>
@@ -198,9 +198,9 @@ while ($row = mysqli_fetch_array($query_run_suppliers2)) {
                                 <td> <?php echo $row['SoLuongTon']; ?> </td>
                                 <td>
                                     <!-- DETAIL  -->
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Modal_Detail<?php echo $row['MaGiay']; ?>">
+                                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#Modal_Detail<?php echo $row['MaGiay']; ?>">
                                         Chi tiết
-                                    </button> |
+                                    </button>
                                     <div class="modal fade" id="Modal_Detail<?php echo $row['MaGiay']; ?>" tabindex="-1" aria-labelledby="LabelModal" aria-hidden="true">
                                         <div class="modal-dialog modal-xl ">
                                             <!-- modal-xl -->
@@ -245,20 +245,6 @@ while ($row = mysqli_fetch_array($query_run_suppliers2)) {
 
 
                                                                         </div>
-
-                                                                        <div class="mt-3 mt-lg-0 ml-lg-3 text-center">
-                                                                            <h3 class="mb-0 font-weight-semibold"><?php echo $row['GiaBan']; ?></h3>
-
-                                                                            <div>
-                                                                                <i class="fa fa-star"></i>
-                                                                                <i class="fa fa-star"></i>
-                                                                                <i class="fa fa-star"></i>
-                                                                                <i class="fa fa-star"></i>
-
-                                                                            </div>
-
-
-                                                                        </div>
                                                                     </div>
                                                                 </div>
 
@@ -298,9 +284,9 @@ while ($row = mysqli_fetch_array($query_run_suppliers2)) {
 
                                     <!-- EDIT  -->
 
-                                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ModalEdit<?php echo $row['MaGiay']; ?>">
+                                    <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#ModalEdit<?php echo $row['MaGiay']; ?>">
                                         Sửa
-                                    </button> |
+                                    </button>
 
                                     <div class="modal fade" id="ModalEdit<?php echo $row['MaGiay']; ?>" tabindex="-1" aria-labelledby="Label_Edit" aria-hidden="true">
                                         <div class="modal-dialog modal-lg ">
@@ -398,7 +384,7 @@ while ($row = mysqli_fetch_array($query_run_suppliers2)) {
 
                                     <!-- DELETE  -->
 
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ModalDelete<?php echo $row['MaGiay']; ?>">
+                                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#ModalDelete<?php echo $row['MaGiay']; ?>">
                                         Xoá
                                     </button>
                                     <div class="modal fade" id="ModalDelete<?php echo $row['MaGiay']; ?>" tabindex="-1" aria-labelledby="Label_Edit" aria-hidden="true">
@@ -449,7 +435,7 @@ while ($row = mysqli_fetch_array($query_run_suppliers2)) {
                                 <td>
                                     <!-- Status  -->
                                     <?php if ($row["HienThiSanPham"] == 1) { ?>
-                                        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#ModelStatus<?php echo $row['MaGiay']; ?>">
+                                        <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#ModelStatus<?php echo $row['MaGiay']; ?>">
                                             Bật <i class="bi bi-lightbulb"></i>
                                         </button>
                                         <div class="modal fade" id="ModelStatus<?php echo $row['MaGiay']; ?>" tabindex="-1" aria-labelledby="Label_Edit" aria-hidden="true">
@@ -482,7 +468,7 @@ while ($row = mysqli_fetch_array($query_run_suppliers2)) {
                                         </div>
                                     <?php } else { ?>
 
-                                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ModelStatus<?php echo $row['MaGiay']; ?>">
+                                        <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#ModelStatus<?php echo $row['MaGiay']; ?>">
                                             Tắt <i class="bi bi-lightbulb-off"></i>
                                         </button>
                                         <div class="modal fade" id="ModelStatus<?php echo $row['MaGiay']; ?>" tabindex="-1" aria-labelledby="Label_Edit" aria-hidden="true">

@@ -139,20 +139,20 @@ include("Header.php");
     </li><!-- End Icons Nav -->
 
     <li class="nav-heading">Quản lí</li>
-
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="?thamso=sanpham">
+      <i class="bi bi-gem"></i>
+        <span>Sản phẩm</span>
+      </a>
+    </li><!-- End F.A.Q Page Nav -->
     <li class="nav-item">
       <a class="nav-link collapsed" href="?thamso=thuonghieu">
-        <i class="bi bi-person"></i>
+      <i class="bi bi-card-list"></i>
         <span>Thương hiệu</span>
       </a>
     </li><!-- End Profile Page Nav -->
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="?thamso=sanpham">
-        <i class="bi bi-question-circle"></i>
-        <span>Sản phẩm</span>
-      </a>
-    </li><!-- End F.A.Q Page Nav -->
+
 
     <li class="nav-item">
       <a class="nav-link collapsed" href="">

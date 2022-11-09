@@ -69,10 +69,10 @@ $query_run = mysqli_query($conn, $query);
             <table id="data-table" class="table table-bordered table-secondary table-hover display">
                 <thead class="thead-dark">
                     <tr>
-                        <th>STT</th>
-                        <th> Mã</th>
+                        <th>#</th>
+                        <th>Mã</th>
                         <th>Tên thương hiệu</th>
-                        <th> Chức năng </th>
+                        <th>Chức năng </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -99,8 +99,8 @@ $query_run = mysqli_query($conn, $query);
                                                 <div class="modal-body">
                                                     <form method="post">
                                                         <div class="form-group">
-                                                            <p> Mã thương hiệu <?php echo $row['MaTH']; ?></p>
-                                                            <p> Tên thương hiệu <?php echo $row['TenTH']; ?></p>
+                                                            <p><span class="font-weight-bold">Mã thương hiệu: </span> <?php echo $row['MaTH']; ?></p>
+                                                            <p><span class="font-weight-bold">Tên thương hiệu: </span>  <?php echo $row['TenTH']; ?></p>
 
                                                         </div>
 

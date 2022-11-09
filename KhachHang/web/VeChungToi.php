@@ -1,10 +1,9 @@
+<!DOCTYPE html>
+<html>
+<?php include("Layout_KhachHang_Header.php"); ?>
 
-<?php
-    include("Check_login.php");
-?>
-  <div class="pt-4 pb-2">
-              Danh sách thành viên
-              
+<head>
+    <title>Xem ví dụ</title>
     <style type="text/css">
         table,
         th,
@@ -36,9 +35,9 @@
             background-color: skyblue;
         }
     </style>
+</head>
 
-
-
+<body>
     <br>
     <h1 style="color:black;text-align:center">THÔNG TIN</h1>
     <BR>
@@ -87,14 +86,7 @@
         </tr>
     </table>
     <br>
+</body>
+<?php include("Layout_KhachHang_Footer.php"); ?>
 
-  </div>
-           
-
-
-
-
-
-
-
-
+</html>
