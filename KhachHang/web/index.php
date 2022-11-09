@@ -2,7 +2,9 @@
     <?php
 
     include("Layout_KhachHang_Header.php");
+
     $query = "SELECT MaGiay,`TenGiay`, `GiaBan`,GiaBanCu, `AnhBia`,TenLoaiGiay FROM `giay`,loaigiay where loaigiay.MaLG= giay.MaLG and  GiaBan > 2000000 and HienThiSanPham=1 ";
+
     $result = mysqli_query($con, $query);
 
 

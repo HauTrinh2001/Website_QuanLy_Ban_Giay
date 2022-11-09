@@ -169,7 +169,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     </form>
                 </div>
                 <div class="mid-grid-right">
+
                     <a class="logo" href="index.php"><span> </span></a>
+
                 </div>
                 <div class="clear"> </div>
             </div>
