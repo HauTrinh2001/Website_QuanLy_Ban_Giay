@@ -24,16 +24,19 @@
         $mail->SMTPDebug = 0;                                 // Enable verbose debug output
         $mail->isSMTP();                                      // Set mailer to use SMTP
         $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
-        $mail->SMTPAuth = true;                               // Enable SMTP authentication
-        $mail->Username = 'tmhaunct2001@gmail.com';                 // SMTP username
-        $mail->Password = 'ooakwovagpxsevav';                           // SMTP password
-        $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-        $mail->Port = 587;                                    // TCP port to connect to
-        if (isset($_POST['submit'])) {
+
+        $mail->SMTPAuth = true;
+        if (isset($_POST['submit'])) {                             // Enable SMTP authentication
+            $mail->Username = $_POST['email'];                 // SMTP username
+            $mail->Password = $_POST['password'];                           // SMTP password
+            $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+            $mail->Port = 587;                                    // TCP port to connect to
+
             //Recipients
-            $mail->setFrom('tmhaunct2001@gmail.com', 'Minh Hậu');
-            $mail->addAddress($_POST['email'], $_POST['name']);     // Add a recipient              // Name is optional
-            // $mail->addReplyTo('info@example.com', 'Information');
+            $mail->setFrom('tmhaunct2001@gmail.com', 'Minh Hau');
+            $mail->addAddress($_POST['email'], 'Minh Hậu');     // Add a recipient              // Name is optional
+            //$mail->addReplyTo('info@example.com', 'Information');
+
             // $mail->addCC('cc@example.com');
             // $mail->addBCC('bcc@example.com');
 
@@ -108,6 +111,10 @@
                             <input type="text" class="text" name="name" value="Name..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name...';}">
                             <input type="text" class="text" name="email" value="Email..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email...';}">
                             <input type="text" class="text" name="subject" value="Subject..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Subject...';}">
+
+                            <input type="password" class="text" name="password" placeholder="Password..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Subject...';}">
+
+
                         </div>
                         <div class="text2">
                             <textarea value="Message:" name="message" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message';}">Message..</textarea>
@@ -132,4 +139,33 @@
     <?php include("Layout_KhachHang_Footer.php"); ?>
 </body>
 
+
 </html>
+<style>
+    input {
+        padding: 12px 10px;
+        width: 30.66%;
+        font-family: "Open Sans", sans-serif;
+        margin: 12px 0;
+        border: 1px solid rgba(192, 192, 192, 0.61);
+        color: #626262;
+        background: #fff;
+        float: left;
+        outline: none;
+        font-size: 0.85em;
+        transition: border-color 0.3s;
+        -o-transition: border-color 0.3s;
+        -ms-transition: border-color 0.3s;
+        -moz-transition: border-color 0.3s;
+        -webkit-transition: border-color 0.3s;
+        box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.05);
+        -webkit-box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.05);
+        -moz-box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.05);
+        -o-box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.05);
+        border-radius: 4px;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        -o-border-radius: 4px;
+    }
+</style>
+

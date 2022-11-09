@@ -10,7 +10,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <?php
     include("Layout_KhachHang_Header.php");
     $per_page_record = 9;
-    $query = "SELECT * FROM `giay` ";
+
+    $query = "SELECT * FROM `giay` where HienThiSanPham=1 ";
+
     $result = mysqli_query($con, $query);
     $number_of_result = mysqli_num_rows($result);
     $number_of_page = ceil($number_of_result / $per_page_record);
@@ -21,7 +23,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         $page = 1;
     }
     $start_from = ($page - 1) * $per_page_record;
-    $query = "SELECT * FROM `giay` LIMIT $start_from,$per_page_record ";
+
+    $query = "SELECT * FROM `giay` where HienThiSanPham=1 LIMIT $start_from,$per_page_record ";
+
     $result = mysqli_query($con, $query);
     ?>
 
