@@ -1,5 +1,6 @@
+
 <div class="bottom-grids">
-    <div class="bottom-top-grids">
+    <div class="bottom-top-grids" style="background: none;">
         <div class="wrap">
             <div id="ThongTin" style="margin-left:20px ;">
                 <h4>NHIỀU THÔNG TIN HƠN ?</h4>
@@ -33,3 +34,4 @@
         font-size: 0.8em;
     }
 </style>
+

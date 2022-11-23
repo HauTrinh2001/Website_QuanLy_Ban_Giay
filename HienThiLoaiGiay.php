@@ -10,6 +10,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <?php
     include("Layout_KhachHang_Header.php");
     $MaLoaiGiay = $_GET['MaLG'];
+
     $query = "SELECT * FROM `giay`,loaigiay where loaigiay.MaLG= giay.MaLG and giay.MaLG='$MaLoaiGiay' and HienThiSanPham=1 ";
     $result = mysqli_query($con, $query);
     ?>
@@ -58,7 +59,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
                     <?php if (mysqli_num_rows($result) != 0) { ?>
                         <?php while ($row = mysqli_fetch_array($result)) { ?>
-                            <div onclick="location.href='details.html';" class="product-grid fade">
+                            <div style="cursor: pointer;" onclick="location.href='details.php?MaGiay=<?php echo $row['MaGiay'] ?>';" class="product-grid fade">
                                 <div class="product-grid-head">
                                     <ul class="grid-social">
                                         <li><a class="facebook" href="#"><span> </span></a></li>

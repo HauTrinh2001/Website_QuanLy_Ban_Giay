@@ -2,7 +2,9 @@
     <?php
 
     include("Layout_KhachHang_Header.php");
+
     $query = "SELECT MaGiay,`TenGiay`, `GiaBan`,GiaBanCu, `AnhBia`,TenLoaiGiay FROM `giay`,loaigiay where loaigiay.MaLG= giay.MaLG and  GiaBan > 2000000 and HienThiSanPham=1 ";
+
     $result = mysqli_query($con, $query);
 
 
@@ -95,7 +97,7 @@
                         <!---//caption-script---->
                         <?php if (mysqli_num_rows($result) != 0) { ?>
                             <?php while ($row = mysqli_fetch_array($result)) { ?>
-                                <div onclick="location.href='details.html';" class="product-grid fade">
+                                <div style="cursor: pointer;" onclick="location.href='details.php?MaGiay=<?php echo $row['MaGiay'] ?>';" class="product-grid fade">
                                     <div class="product-grid-head">
                                         <ul class="grid-social">
                                             <li><a class="facebook" href="#"><span> </span></a></li>

@@ -14,8 +14,10 @@
 
         table {
             border-collapse: collapse;
+
             width: 80%;
             margin: 0 auto;
+
         }
 
         th,

@@ -24,6 +24,7 @@
         $mail->SMTPDebug = 0;                                 // Enable verbose debug output
         $mail->isSMTP();                                      // Set mailer to use SMTP
         $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+
         $mail->SMTPAuth = true;
         if (isset($_POST['submit'])) {                             // Enable SMTP authentication
             $mail->Username = $_POST['email'];                 // SMTP username
@@ -35,6 +36,7 @@
             $mail->setFrom('tmhaunct2001@gmail.com', 'Minh Hau');
             $mail->addAddress($_POST['email'], 'Minh Hậu');     // Add a recipient              // Name is optional
             //$mail->addReplyTo('info@example.com', 'Information');
+
             // $mail->addCC('cc@example.com');
             // $mail->addBCC('bcc@example.com');
 
@@ -109,7 +111,9 @@
                             <input type="text" class="text" name="name" value="Name..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name...';}">
                             <input type="text" class="text" name="email" value="Email..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email...';}">
                             <input type="text" class="text" name="subject" value="Subject..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Subject...';}">
+
                             <input type="password" class="text" name="password" placeholder="Password..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Subject...';}">
+
 
                         </div>
                         <div class="text2">
@@ -134,6 +138,7 @@
     <!---//End-wrap---->
     <?php include("Layout_KhachHang_Footer.php"); ?>
 </body>
+
 
 </html>
 <style>
@@ -163,3 +168,4 @@
         -o-border-radius: 4px;
     }
 </style>
+

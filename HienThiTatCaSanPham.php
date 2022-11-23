@@ -5,12 +5,38 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 
+<style>
+    /* thiết lập style cho thẻ a */
+    .pagination a {
+        color: black;
+
+        padding: 12px 18px;
+        text-decoration: none;
+    }
+
+    /* thiết lập style cho class active */
+    .pagination a.active {
+        background-color: dodgerblue;
+        color: white;
+        /*Thiết kế hình tròn với CSS*/
+        border-radius: 50%;
+    }
+
+    /* thêm màu nền khi người dùng hover vào class không active */
+    .pagination a:hover:not(.active) {
+        background-color: #ddd;
+        /*Thiết kế hình tròn với CSS*/
+        border-radius: 50%;
+    }
+</style>
 
 <body>
     <?php
     include("Layout_KhachHang_Header.php");
     $per_page_record = 9;
+
     $query = "SELECT * FROM `giay` where HienThiSanPham=1 ";
+
     $result = mysqli_query($con, $query);
     $number_of_result = mysqli_num_rows($result);
     $number_of_page = ceil($number_of_result / $per_page_record);
@@ -21,7 +47,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         $page = 1;
     }
     $start_from = ($page - 1) * $per_page_record;
+
     $query = "SELECT * FROM `giay` where HienThiSanPham=1 LIMIT $start_from,$per_page_record ";
+
     $result = mysqli_query($con, $query);
     ?>
 
@@ -71,7 +99,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
                     <?php if (mysqli_num_rows($result) != 0) { ?>
                         <?php while ($row = mysqli_fetch_array($result)) { ?>
-                            <div onclick="location.href='details.html';" class="product-grid fade">
+                            <div style="cursor: pointer;" onclick="location.href='details.php?MaGiay=<?php echo $row['MaGiay'] ?>';" class="product-grid fade">
                                 <div class="product-grid-head">
                                     <ul class="grid-social">
                                         <li><a class="facebook" href="#"><span> </span></a></li>
@@ -114,36 +142,39 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <div style="clear: both ;"></div>
             <div style="text-align:center">
 
+                <div class="pagination">
 
-                <?php
-                $pagLink = "";
-                if ($page >= 2) {
 
-                    echo "<a href='HienThiTatCaSanPham.php?page=" . ($page - 1) . "'>  Prev </a>";
-                }
+                    <?php
+                    $pagLink = "";
+                    if ($page >= 2) {
 
-                for ($i = 1; $i <= $number_of_page; $i++) {
+                        echo "<a href='HienThiTatCaSanPham.php?page=" . ($page - 1) . "'>  Prev </a>";
+                    }
 
-                    if ($i == $page) {
+                    for ($i = 1; $i <= $number_of_page; $i++) {
 
-                        $pagLink .= "<a class = 'active' href='HienThiTatCaSanPham.php?page="
+                        if ($i == $page) {
 
-                            . $i . "'>" . $i . "</a>";
-                    } else {
+                            $pagLink .= "<a class = 'active' href='HienThiTatCaSanPham.php?page="
 
-                        $pagLink .= "<a href='HienThiTatCaSanPham.php?page=" . $i . "'>
+                                . $i . "'>" . $i . "</a>";
+                        } else {
+
+                            $pagLink .= "<a href='HienThiTatCaSanPham.php?page=" . $i . "'>
                  
                  " . $i . " </a>";
+                        }
+                    };
+                    echo $pagLink;
+
+
+                    if ($page < $number_of_page) {
+
+                        echo "<a href='HienThiTatCaSanPham.php?page=" . ($page + 1) . "'>  Next </a>";
                     }
-                };
-                echo $pagLink;
-
-
-                if ($page < $number_of_page) {
-
-                    echo "<a href='HienThiTatCaSanPham.php?page=" . ($page + 1) . "'>  Next </a>";
-                }
-                ?>
+                    ?>
+                </div>
             </div>
             <!---- //End-bottom-grids---->
             <!--- //End-content---->

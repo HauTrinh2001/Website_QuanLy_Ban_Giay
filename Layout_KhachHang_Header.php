@@ -107,7 +107,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <!---start-wrap---->
     <!---start-header---->
     <div class="header">
-        <div class="top-header">
+        <div class="top-header" style="padding: 10px 0px;">
             <div class="wrap">
                 <div class="top-header-left">
                     <ul>
@@ -155,6 +155,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <ul>
                         <li><a href="login.html">Login</a><span> </span></li>
                         <li><a href="register.html">Join</a></li>
+                        <li class="dropdown o">
+                            <img src="https://img.vn/uploads/thuvien/singa-png-20220719150401Tdj1WAJFQr.png" alt="" srcset="">
+                            <button class="nut_dropdown">Dropdown</button>
+                            <div class="noidung_dropdown">
+                                <a style="color:black;" href="#">Xem thông tin</a>
+                                <a style="color:black" href="#">Đổi mật khẩu</a>
+                                <a style="color:black" href="#">Đăng xuất</a>
+                            </div>
+
+                        </li>
                     </ul>
                 </div>
                 <div class="clear"> </div>
@@ -169,7 +179,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     </form>
                 </div>
                 <div class="mid-grid-right">
+
                     <a class="logo" href="index.php"><span> </span></a>
+
                 </div>
                 <div class="clear"> </div>
             </div>
@@ -207,3 +219,76 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </body>
 
 </html>
+<style>
+    /* Nút Dropdown*/
+    .nut_dropdown {
+        background: black;
+        color: white;
+
+        font-size: 16px;
+        border: none;
+    }
+
+    /* Thiết lập vị trí cho thẻ div với class dropdown*/
+    .dropdown {
+        position: absolute;
+        display: inline-block;
+        z-index: 100000;
+    }
+
+    /* Nội dung Dropdown */
+    .noidung_dropdown {
+        /*Ẩn nội dụng các đường dẫn*/
+        display: none;
+        position: absolute;
+        color: black;
+        background: white;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+
+
+    }
+
+
+    /* Thiết kế style cho các đường dẫn tronng Dropdown */
+    .noidung_dropdown a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+
+    }
+
+    /* thay đổi màu background khi hover vào đường dẫn */
+    .noidung_dropdown a:hover {
+        background-color: #ddd;
+
+    }
+
+    /* hiển thị nội dung dropdown khi hover */
+
+    /* Thay đổi màu background cho nút khi được hover */
+    .dropdown:hover .noidung_dropdown {
+        display: block;
+        z-index: 1000000000000;
+    }
+
+    /*Dùng Để hiển thị nội dung*/
+    .hienThi {
+        display: block;
+    }
+
+    .o {
+
+        top: 12px;
+        position: absolute;
+        right: 230px;
+    }
+
+    .o img {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+
+    }
+</style>
