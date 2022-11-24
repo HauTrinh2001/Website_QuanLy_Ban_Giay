@@ -1,9 +1,10 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
+<?php
+    session_start();
+    require 'connection.php';
+    if(!isset($_SESSION['email'])){
+        header('location:index.php');
+    }
+?>
 <!DOCTYPE HTML>
 <html>
 
@@ -186,13 +187,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <div class="mid-header">
             <div class="wrap">
                 <div class="mid-grid-left">
-                    <form>
-                        <input type="text" placeholder="Tìm kiếm" />
-                    </form>
                 </div>
                 <div class="mid-grid-right">
-
-                    <a class="logo" href="index.php"><span> </span></a>
 
                 </div>
                 <div class="clear"> </div>
@@ -203,13 +199,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <div class="header-bottom">
             <div class="wrap">
                 <!-- start header menu -->
-                <ul class="megamenu skyblue">
-                    <?php while ($row = mysqli_fetch_array($result1)) { ?>
-                        <li class="grid"> <?php echo  "<a class='color2' href='HienThiLoaiGiay.php?MaLG=" . $row['MaLG'] . " '>" . $row['TenLoaiGiay'] . "</a>" ?></li>
-                    <?php } ?>
-                    <li class="grid"> <?php echo  "<a class='color2' href='HienThiTatCaSanPham.php'>" . 'TẤT CẢ SẢN PHẨM' . "</a>" ?></li>
-
-                </ul>
+                
 
             </div>
         </div>
@@ -228,10 +218,72 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <div></div>
 
 
-</body>
-
+    <?php
+    include("connection.php");
+    $email = $_SESSION['email'];
+    $query = "SELECT * FROM khachhang WHERE Email='$email'";
+    $result = mysqli_query($con, $query);
+    $row=mysqli_fetch_array($result);
+    if (mysqli_num_rows($result) <> 0) {
+    ?>
+    <div class="row col-lg-8 border rounded mx-auto mt-5 p-2 shadow-lg">
+            <div class="col-md-4 text-center" style="display: block; justify-content: center; margin-top: auto; margin-bottom: auto;">
+                <?php
+                    if (!($row['AnhKH'])) {
+                ?>
+                        <img src="imgKH/user.jpg" class="img-fluid rounded" style="width: 180px;height:180px;object-fit: cover;">
+                <?php
+                    } else {
+                        $anh = $row['AnhKH'];
+                        echo "<img src='imgKH/$anh'  class='img-fluid rounded' style='width: 180px;height:180px;object-fit: cover;'>";
+                    }
+                ?>
+                <div>
+                    <a href="profile_edit.php">
+						<button class="mx-auto m-1 btn-sm btn btn-primary">Chỉnh sửa</button>
+					</a>
+                    <a href="index.php">
+                            <button class="mx-auto m-1 btn-sm btn btn-warning text-white">Trang chủ</button>
+                    </a>
+                </div>
+        </div>
+        
+        <div class="col-md-8">
+            <div class="h2" style="font-weight: bold;">THÔNG TIN NGƯỜI DÙNG</div>
+            <table class="table table-striped">
+                <tr><th style="font-weight: bold;"><i></i> Họ tên</th><td><?=($row['HoTen'])?></td></tr>
+                <tr><th style="font-weight: bold;"><i></i> Tên tài khoản</th><td><?=($row['TaiKhoan'])?></td></tr>
+                <tr><th style="font-weight: bold;"><i></i> Email</th><td><?=($row['Email'])?></td></tr>
+                <tr><th style="font-weight: bold;"><i></i> Địa chỉ</th><td><?=($row['DiaChiKH'])?></td></tr>
+                <tr><th style="font-weight: bold;"><i></i> Điện thoại</th><td><?=($row['DienThoaiKH'])?></td></tr>
+                <tr><th style="font-weight: bold;"><i></i> Ngày sinh</th><td><?=($row['NgaySinh'])?></td></tr>
+                <tr><th style="font-weight: bold;"><i></i> Giới tính</th><td><?php if ($row['GioiTinh']==1) echo "Nam"; if ($row['GioiTinh']==0) echo "Nữ";?></td></tr>
+            </table>
+        </div>
+    </div>
+    <?php
+        }
+    ?>
+    <div>
+            <br><br><br><br><br>
+            <?php include("Layout_KhachHang_Footer.php"); ?>
+        </div>
+    </body>
 </html>
 <style>
+    .login-box {
+        padding: 0;
+        min-height: 700px;
+    }
+    .login-main h1 {
+        color: #08080b;
+        font-weight: 700;
+        font-size: 1.2em;
+        padding: 1em 0;
+    }
+    .login-main {
+        border-top: 1px solid #eee;
+    }
     /* Nút Dropdown*/
     .nut_dropdown {
         background: black;

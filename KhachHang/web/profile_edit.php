@@ -1,9 +1,11 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
+<?php
+    session_start();
+    require 'connection.php';
+    if(!isset($_SESSION['email'])){
+        header('location:index.php');
+    }
+    // include("Layout_KhachHang_Header.php");
+?>
 <!DOCTYPE HTML>
 <html>
 
@@ -101,9 +103,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <body>
     <?php
     include("connection.php");
-
-    $query1 = "SELECT * FROM loaigiay";
-    $result1 = mysqli_query($con, $query1);
     ?>
 
     <!---start-wrap---->
@@ -182,56 +181,157 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="clear"> </div>
             </div>
         </div>
-        <!----start-mid-head---->
-        <div class="mid-header">
-            <div class="wrap">
-                <div class="mid-grid-left">
-                    <form>
-                        <input type="text" placeholder="Tìm kiếm" />
-                    </form>
-                </div>
-                <div class="mid-grid-right">
-
-                    <a class="logo" href="index.php"><span> </span></a>
-
-                </div>
-                <div class="clear"> </div>
-            </div>
-        </div>
-        <!----//End-mid-head---->
-        <!----start-bottom-header---->
-        <div class="header-bottom">
-            <div class="wrap">
-                <!-- start header menu -->
-                <ul class="megamenu skyblue">
-                    <?php while ($row = mysqli_fetch_array($result1)) { ?>
-                        <li class="grid"> <?php echo  "<a class='color2' href='HienThiLoaiGiay.php?MaLG=" . $row['MaLG'] . " '>" . $row['TenLoaiGiay'] . "</a>" ?></li>
-                    <?php } ?>
-                    <li class="grid"> <?php echo  "<a class='color2' href='HienThiTatCaSanPham.php'>" . 'TẤT CẢ SẢN PHẨM' . "</a>" ?></li>
-
-                </ul>
-
-            </div>
-        </div>
-
     </div>
-    <!----//End-bottom-header---->
-    <!---//End-header---->
-    <!----start-image-slider---->
-    <div class="clear"> </div>
-    <!----//End-image-slider---->
-    <!----start-price-rage--->
+        <?php
+            include("connection.php");
+            $email = $_SESSION['email'];
+            $query = "SELECT * FROM khachhang WHERE Email='$email'";
+            $result = mysqli_query($con, $query);
+            $row=mysqli_fetch_array($result);
+            if (mysqli_num_rows($result) <> 0) {
+        ?>
+	<form method="post" action="profile_edit_script.php">
+		<div class="row col-lg-8 border rounded mx-auto mt-3 p-2 shadow-lg">
+			<div class="col-md-4 text-center" style="display: block; justify-content: center; margin-top: auto; margin-bottom: auto;">
+			<?php
+                    if (!($row['AnhKH'])) {
+                ?>
+                        <img src="imgKH/user.jpg" class="js-image img-fluid rounded" style="width: 180px;height:180px;object-fit: cover;">
+                <?php
+                    } else {
+                        $anh = $row['AnhKH'];
+                        echo "<img src='imgKH/$anh'  class='js-image img-fluid rounded' style='width: 180px;height:180px;object-fit: cover;'>";
+                    }
+                ?>
+				<div>
+					<!-- <div class="mb-3">
+					  <label for="formFile" class="form-label" style="font-style: italic; font-size: 12px;">(Nhấn bên dưới để chọn ảnh từ thư viện)</label>
+					  <input onchange="display_image(this.files[0])" class="js-image-input form-control" type="file" id="formFile" name="anhkh">
+					</div> -->
+				</div>
+			</div>
+			<div class="col-md-8">
+				
+				<div class="h2" style="font-weight: bold;">CHỈNH SỬA THÔNG TIN</div>
 
-    <!----//End-price-rage--->
-    <!--- start-content---->
-    <div></div>
-    <div></div>
+				
+					<table class="table table-striped">
+                        <tr>
+                            <th style="font-weight: bold;"> Họ tên</th>
+							<td>
+								<input value="<?php if(isset($row['HoTen'])) echo $row['HoTen'];?>" type="text" class="form-control" name="hoten">
+							</td>
+						</tr>
+                        <tr>
+                            <th style="font-weight: bold;"> Tên tài khoản</th>
+							<td>
+								<input value="<?php if(isset($row['TaiKhoan'])) echo $row['TaiKhoan'];?>" type="text" class="form-control" name="taikhoan">
+							</td>
+						</tr>
+						<tr>
+                            <th style="font-weight: bold;"> Email</th>
+							<td>
+								<input value="<?php if(isset($row['Email'])) echo $row['Email'];?>" type="text" class="form-control" name="email" style="background-color: #dedeed;" readonly>
+							</td>
+                        </tr>
+						<tr>
+                            <th style="font-weight: bold;"> Địa chỉ</th>
+							<td>
+								<input value="<?php if(isset($row['DiaChi'])) echo $row['DiaChi'];?>" type="text" class="form-control" name="diachikh">
+							</td>
+						</tr>
+                        <tr>
+                            <th style="font-weight: bold;"> Điện thoại</th>
+							<td>
+								<input value="<?php if(isset($row['DienThoaiKH'])) echo $row['DienThoaiKH'];?>" type="text" class="form-control" name="dienthoaikh">
+							</td>
+						</tr>
+                        <tr>
+                            <th style="font-weight: bold;"> Ngày sinh</th>
+							<td>
+								<input value="<?php if(isset($row['NgaySinh'])) echo $row['NgaySinh'];?>" type="date" class="form-control" name="ngaysinh">
+							</td>
+						</tr>
+						<tr>
+                            <th style="font-weight: bold;"> Giới tính</th>
+							<td>
+								<select name="gioitinh" class="form-select form-select mb-3" aria-label=".form-select-lg example">
+								    <?php if ($row['GioiTinh'] == 1) {?>
+                                        <option value="1" >Nam</option>
+                                        <option value="0" >Nữ</option>
+                                    <?php
+                                    }if ($row['GioiTinh'] == 0) {?>
+                                        <option value="0" >Nữ</option>
+                                        <option value="1" >Nam</option>
+                                    <?php
+                                    }
+                                    ?>
+								</select>
+							</td>
+						</tr>
+						<tr>
+                            <th style="font-weight: bold;"> Ảnh đại diện</th>
+                            <td>
+                                <input type="file" onchange="display_image(this.files[0])" class="js-image-input form-control" id="formFile" name="anhkh" value="<?if ($row['AnhKH']) echo ($row['AnhKH']);?>">
+                            </td>
+                        </tr>
+					</table>
+                    <?php
+                        }
+                    ?>
+					<div class="p-2">
+                        
+						<a href="profile_edit_script.php">
+                            <button class="btn btn-primary float-end">Lưu</button>
+                        </a>
 
+                        <a href="delete_account.php">
+                            <label class="btn btn-danger float-end" style="margin-right: 10px;">Xóa tài khoản</label>
+                        </a>
+						
+						<a href="javascript:window.history.back(-1);">
+							<label class="btn btn-secondary">Thoát</label>
+						</a>
 
+					</div>
+				</form>
+
+			</div>
+		</div>
+        <div>
+            <br><br><br><br><br>
+            <?php include("Layout_KhachHang_Footer.php"); ?>
+        </div>
 </body>
-
 </html>
+<script>
+
+	var image_added = false;
+
+	function display_image(file)
+	{
+		var img = document.querySelector(".js-image");
+		img.src = URL.createObjectURL(file);
+
+		image_added = true;
+	}
+
+</script>
+
 <style>
+    .login-box {
+        padding: 0;
+        min-height: 700px;
+    }
+    .login-main h1 {
+        color: #08080b;
+        font-weight: 700;
+        font-size: 1.2em;
+        padding: 1em 0;
+    }
+    .login-main {
+        border-top: 1px solid #eee;
+    }
     /* Nút Dropdown*/
     .nut_dropdown {
         background: black;

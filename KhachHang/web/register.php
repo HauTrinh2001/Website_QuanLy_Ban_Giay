@@ -4,10 +4,18 @@ Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
+<?php
+    require 'connection.php';
+    session_start();
+    if(isset($_SESSION['email'])){
+        header('location: index.php'); //điều hướng đến trang này
+    }
+?>
+
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Spike shoes Website Template | login :: w3layouts</title>
+		<title>Spike shoes Website Template | REGISTER :: w3layouts</title>
 		<link href="css/style.css" rel='stylesheet' type='text/css' />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
@@ -86,7 +94,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							<div class="top-header-center-alert-right">
 								<div class="vticker">
 								  <ul>
-									 <li>Applies to orders of $50 or more. <label>Returns are always free.</label></li>
+									  <li>Applies to orders of $50 or more. <label>Returns are always free.</label></li>
 								  </ul>
 								</div>
 							</div>
@@ -94,8 +102,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						</div>
 						<div class="top-header-right">
 							<ul>
-								<li><a href="login.html">Login</a><span> </span></li>
-								<li><a href="register.html">Join</a></li>
+								<li><a href="login.php">Login</a><span> </span></li>
+								<li><a href="register.php">Join</a></li>
 							</ul>
 						</div>
 						<div class="clear"> </div>
@@ -527,29 +535,46 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="content login-box">
 			<div class="login-main">
 				<div class="wrap">
-					<h1>LOGIN OR CREATE AN ACCOUNT</h1>
-					<div class="login-left">
-						<h3>NEW CUSTOMERS</h3>
-						<p>By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.</p>
-						<a class="acount-btn" href="register.html">Creat an Account</a>
-					</div>
-					<div class="login-right">
-						<h3>REGISTERED CUSTOMERS</h3>
-						<p>If you have an account with us, please log in.</p>
-						<form>
-							<div>
-								<span>Email Address<label>*</label></span>
-								<input type="text"> 
-							</div>
-							<div>
-								<span>Password<label>*</label></span>
-								<input type="text"> 
-							</div>
-							<a class="forgot" href="#">Forgot Your Password?</a>
-							<input type="submit" value="Login" />
+					<h1>CREATE AN ACCOUNT</h1>
+					<div class="register-grids">
+						<form action="user_registration_script.php" method="post"> 
+								<div class="register-top-grid">
+										<h3>PERSONAL INFORMATION</h3>
+										<div>
+											<span>First Name<label>*</label></span>
+											<input type="text" name="firstname" required="true">
+										</div>
+										<div>
+											<span>Last Name<label>*</label></span>
+											<input type="text" name="lastname" required="true"> 
+										</div>
+										<div>
+											<span>Email Address<label>*</label></span>
+											<input type="email" name="email" required="true" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"> 
+										</div>
+										<div class="clear"> </div>
+											<a class="news-letter" href="#">
+												<label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i>Sign Up for Newsletter</label>
+											</a>
+										<div class="clear"> </div>
+								</div>
+								<div class="clear"> </div>
+								<div class="register-bottom-grid">
+										<h3>LOGIN INFORMATION</h3>
+										<div>
+											<span>Password<label>*</label></span>
+											<input type="password" name="password" required="true" pattern=".{6,}"> <!-- password > 6 ký tự -->
+										</div>
+										<div>
+											<span>Confirm Password<label>*</label></span>
+											<input type="password" name="ConfirmPassword" required="true" pattern=".{6,}"> <!-- password > 6 ký tự -->
+										</div>
+										<div class="clear"> </div>
+								</div>
+								<div class="clear"> </div>
+								<input type="submit" value="submit" name="submit"/>
 						</form>
 					</div>
-					<div class="clear"> </div>
 				</div>
 			</div>
 		</div>

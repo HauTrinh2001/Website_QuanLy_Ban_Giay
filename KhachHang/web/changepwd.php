@@ -1,9 +1,11 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
+<?php
+    session_start();
+    require 'connection.php';
+    if(!isset($_SESSION['email'])){
+        header('location:index.php');
+    }
+    // include("Layout_KhachHang_Header.php");
+?>
 <!DOCTYPE HTML>
 <html>
 
@@ -186,13 +188,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <div class="mid-header">
             <div class="wrap">
                 <div class="mid-grid-left">
-                    <form>
-                        <input type="text" placeholder="Tìm kiếm" />
-                    </form>
                 </div>
                 <div class="mid-grid-right">
-
-                    <a class="logo" href="index.php"><span> </span></a>
 
                 </div>
                 <div class="clear"> </div>
@@ -203,13 +200,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <div class="header-bottom">
             <div class="wrap">
                 <!-- start header menu -->
-                <ul class="megamenu skyblue">
-                    <?php while ($row = mysqli_fetch_array($result1)) { ?>
-                        <li class="grid"> <?php echo  "<a class='color2' href='HienThiLoaiGiay.php?MaLG=" . $row['MaLG'] . " '>" . $row['TenLoaiGiay'] . "</a>" ?></li>
-                    <?php } ?>
-                    <li class="grid"> <?php echo  "<a class='color2' href='HienThiTatCaSanPham.php'>" . 'TẤT CẢ SẢN PHẨM' . "</a>" ?></li>
-
-                </ul>
+                
 
             </div>
         </div>
@@ -228,9 +219,75 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <div></div>
 
 
-</body>
+    <?php
+            include("connection.php");
+            $email = $_SESSION['email'];
+            $query = "SELECT * FROM khachhang WHERE Email='$email'";
+            $result = mysqli_query($con, $query);
+            $row=mysqli_fetch_array($result);
+            if (mysqli_num_rows($result) <> 0) {
+        ?>
+        <div class="row col-lg-8 border rounded mx-auto mt-5 p-2 shadow-lg">
+            <div class="col-md-4 text-center" style="display: block; justify-content: center; margin-top: auto; margin-bottom: auto;">
+                <?php
+                    if (!($row['AnhKH'])) {
+                ?>
+                        <img src="imgKH/user.jpg" class="img-fluid rounded" style="width: 180px;height:180px;object-fit: cover;">
+                <?php
+                    } else {
+                        $anh = $row['AnhKH'];
+                        echo "<img src='imgKH/$anh'  class='img-fluid rounded' style='width: 180px;height:180px;object-fit: cover;'>";
+                    }
+                ?>
+                <div>
+                    <a href="index.php">
+                        <button class="mx-auto m-1 btn-sm btn btn-warning text-white">Về trang chủ</button>
+                    </a>
+                </div>
+			</div>
+            <?php
+                }
+            ?>
+            <div class="col-md-8">
+				
+				<div class="h2" style="font-weight: bold;">Đổi mật khẩu</div>
 
+				<form method="post" action="changepwd_script.php">
+					<table class="table table-striped">
+						<tr><th> Mật khẩu cũ</th>
+							<td>
+                                <input type="password" name="oldPassword" class="form-control" pattern=".{6,}" required>
+							</td>
+						</tr>
+                        <tr><th> Mật khẩu mới</th>
+							<td>
+                                <input type="password" name="newPassword" class="form-control" pattern=".{6,}" required>
+							</td>
+						</tr>
+						<tr><th> Nhập lại mật khẩu mới</th>
+							<td>
+                                <input type="password" name="retypePassword" class="form-control" pattern=".{6,}" required>
+							</td>
+						</tr>
+
+					</table>
+
+					<div class="p-2">
+                        <a href="changepwd_script.php">
+                            <button class="btn btn-primary float-end">Lưu</button>
+                        </a>
+					</div>
+				</form>
+
+			</div>
+		</div>
+        <div>
+            <br><br><br><br><br>
+            <?php include("Layout_KhachHang_Footer.php"); ?>
+        </div>
+    </body>
 </html>
+
 <style>
     /* Nút Dropdown*/
     .nut_dropdown {
