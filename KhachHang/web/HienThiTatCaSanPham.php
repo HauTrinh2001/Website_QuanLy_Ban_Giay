@@ -5,10 +5,6 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 
-<?php
-    session_start();
-?>
-
 
 <style>
     /* thiết lập style cho thẻ a */
@@ -37,27 +33,48 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 <body>
     <?php
-        require 'Layout_KhachHang_Header.php';
+    require 'Layout_KhachHang_Header.php';
     ?>
     <?php
-    $per_page_record = 9;
+    if (isset($_GET['Ten']) && !empty($_GET['Ten'])) {
+        $t = $_GET['Ten'];
+        $per_page_record = 9;
 
-    $query = "SELECT * FROM `giay` where HienThiSanPham=1 ";
+        $query = "SELECT * FROM `giay` where HienThiSanPham=1 and TenGiay like '%$t%' ";
 
-    $result = mysqli_query($con, $query);
-    $number_of_result = mysqli_num_rows($result);
-    $number_of_page = ceil($number_of_result / $per_page_record);
-    if (isset($_GET['page'])) {
+        $result = mysqli_query($con, $query);
+        $number_of_result = mysqli_num_rows($result);
+        $number_of_page = ceil($number_of_result / $per_page_record);
+        if (isset($_GET['page'])) {
 
-        $page  = $_GET['page'];
+            $page  = $_GET['page'];
+        } else {
+            $page = 1;
+        }
+        $start_from = ($page - 1) * $per_page_record;
+
+        $query = "SELECT * FROM `giay` where HienThiSanPham=1 and TenGiay like '%$t%' LIMIT $start_from,$per_page_record ";
+        $result = mysqli_query($con, $query);
+        $row = mysqli_num_rows($result);
+        echo "<p style='text-align:center; font-weight:bold'>" . "Có " . $row . " sản phẩm được tìm thấy" . "</p>";
     } else {
-        $page = 1;
+        $per_page_record = 9;
+        $query = "SELECT * FROM `giay` where HienThiSanPham=1";
+        $result = mysqli_query($con, $query);
+        $number_of_result = mysqli_num_rows($result);
+        $number_of_page = ceil($number_of_result / $per_page_record);
+        if (isset($_GET['page'])) {
+
+            $page  = $_GET['page'];
+        } else {
+            $page = 1;
+        }
+        $start_from = ($page - 1) * $per_page_record;
+
+        $query = "SELECT * FROM `giay` where HienThiSanPham=1 LIMIT $start_from,$per_page_record ";
+
+        $result = mysqli_query($con, $query);
     }
-    $start_from = ($page - 1) * $per_page_record;
-
-    $query = "SELECT * FROM `giay` where HienThiSanPham=1 LIMIT $start_from,$per_page_record ";
-
-    $result = mysqli_query($con, $query);
     ?>
 
     <!---start-wrap---->

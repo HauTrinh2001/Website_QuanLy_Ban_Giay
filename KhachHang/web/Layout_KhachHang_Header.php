@@ -4,13 +4,13 @@ Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
+<?php session_start(); ?>
 <!DOCTYPE HTML>
 <html>
 
 <head>
     <title>Spike shoes Website Template | Home :: w3layouts</title>
-	<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="./css/bootstrap-icons.css">
+
     <link href="css/style.css" rel='stylesheet' type='text/css' />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="application/x-javascript">
@@ -100,6 +100,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 <body>
     <?php
+
     include("connection.php");
 
     $query1 = "SELECT * FROM loaigiay";
@@ -155,28 +156,27 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 </div>
                 <div class="top-header-right">
                     <ul>
-                    <?php
-                            if(isset($_SESSION['email'])){
-                            ?>
-                                <li class="dropdown o">
-                                    <img src="https://img.vn/uploads/thuvien/singa-png-20220719150401Tdj1WAJFQr.png" alt="" srcset="">
-                                    <button class="nut_dropdown">Dropdown</button>
-                                    <div class="noidung_dropdown">
-                                        <a style="color:black;" href="profileKH.php">Xem thông tin</a>
-                                        <a style="color:black" href="changepwd.php">Đổi mật khẩu</a>
-                                        <a style="color:black" href="logout.php">Đăng xuất</a>
-                                    </div>
+                        <?php
+                        if (isset($_SESSION['email'])) {
+                        ?>
+                            <li class="dropdown o">
+                                <img src="https://img.vn/uploads/thuvien/singa-png-20220719150401Tdj1WAJFQr.png" alt="" srcset="">
+                                <button class="nut_dropdown"><?php echo substr($_SESSION['email'], 0, 12) ?></button>
+                                <div class="noidung_dropdown">
+                                    <a style="color:black;" href="profileKH.php">Xem thông tin</a>
+                                    <a style="color:black" href="changepwd.php">Đổi mật khẩu</a>
+                                    <a style="color:black" href="logout.php">Đăng xuất</a>
+                                </div>
 
-                                </li>
-                            <?php
-                           }
-                           else{
-                            ?>
+                            </li>
+                        <?php
+                        } else {
+                        ?>
                             <li><a href="login.php">Login</a><span> </span></li>
                             <li><a href="register.php">Join</a></li>
-                           <?php
-                           }
-                           ?>
+                        <?php
+                        }
+                        ?>
                     </ul>
                 </div>
                 <div class="clear"> </div>
@@ -187,7 +187,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <div class="wrap">
                 <div class="mid-grid-left">
                     <form>
-                        <input type="text" placeholder="Tìm kiếm" />
+                        <input type="text" name="Ten" value="<?php if (isset($_GET['Ten'])) echo $_GET['Ten'];  ?>" placeholder="Tìm kiếm" />
                     </form>
                 </div>
                 <div class="mid-grid-right">

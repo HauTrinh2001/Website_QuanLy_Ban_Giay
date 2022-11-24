@@ -1,4 +1,11 @@
+<style>
+	.mid-grid-left {
+		display: none;
+	}
+</style>
+
 <body>
+
 	<?php
 	include("Layout_KhachHang_Header.php");
 	$MaGiay = $_GET['MaGiay'];

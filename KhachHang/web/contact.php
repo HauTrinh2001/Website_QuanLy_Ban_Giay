@@ -1,3 +1,9 @@
+<style>
+    .mid-grid-left {
+        display: none;
+    }
+</style>
+
 <body>
     <?php
     include("Layout_KhachHang_Header.php");
@@ -168,4 +174,3 @@
         -o-border-radius: 4px;
     }
 </style>
-
