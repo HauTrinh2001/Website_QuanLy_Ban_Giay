@@ -4,11 +4,15 @@ Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
-
+<?php
+    session_start();
+?>
 
 <body>
     <?php
-    include("Layout_KhachHang_Header.php");
+        require 'Layout_KhachHang_Header.php';
+    ?>
+    <?php
     $per_page_record = 9;
 
     $query = "SELECT * FROM `giay` where HienThiSanPham=1 ";
