@@ -1,97 +1,44 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
-
-
-<style>
-    /* thiết lập style cho thẻ a */
-    .pagination a {
-        color: black;
-
-        padding: 12px 18px;
-        text-decoration: none;
-    }
-
-    /* thiết lập style cho class active */
-    .pagination a.active {
-        background-color: dodgerblue;
-        color: white;
-        /*Thiết kế hình tròn với CSS*/
-        border-radius: 50%;
-    }
-
-    /* thêm màu nền khi người dùng hover vào class không active */
-    .pagination a:hover:not(.active) {
-        background-color: #ddd;
-        /*Thiết kế hình tròn với CSS*/
-        border-radius: 50%;
-    }
-</style>
-
-<body>
     <?php
-    require 'Layout_KhachHang_Header.php';
-    ?>
-    <?php
+    include("Layout_KhachHang_Header.php");
+    $query1 = "SELECT * FROM loaigiay";
+    $result1 = mysqli_query($con, $query1);
     if (isset($_GET['Ten']) && !empty($_GET['Ten'])) {
         $t = $_GET['Ten'];
-        $per_page_record = 9;
-
-        $query = "SELECT * FROM `giay` where HienThiSanPham=1 and TenGiay like '%$t%' ";
-
-        $result = mysqli_query($con, $query);
-        $number_of_result = mysqli_num_rows($result);
-        $number_of_page = ceil($number_of_result / $per_page_record);
-        if (isset($_GET['page'])) {
-
-            $page  = $_GET['page'];
-        } else {
-            $page = 1;
-        }
-        $start_from = ($page - 1) * $per_page_record;
-
-        $query = "SELECT * FROM `giay` where HienThiSanPham=1 and TenGiay like '%$t%' LIMIT $start_from,$per_page_record ";
+        $query = "SELECT MaGiay,`TenGiay`, `GiaBan`,GiaBanCu, `AnhBia`,TenLoaiGiay FROM `giay`,loaigiay where loaigiay.MaLG= giay.MaLG and  GiaBan > 1000000 and HienThiSanPham=1 and TenGiay like '%$t%'";
         $result = mysqli_query($con, $query);
         $row = mysqli_num_rows($result);
         echo "<p style='text-align:center; font-weight:bold'>" . "Có " . $row . " sản phẩm được tìm thấy" . "</p>";
     } else {
-        $per_page_record = 9;
-        $query = "SELECT * FROM `giay` where HienThiSanPham=1";
-        $result = mysqli_query($con, $query);
-        $number_of_result = mysqli_num_rows($result);
-        $number_of_page = ceil($number_of_result / $per_page_record);
-        if (isset($_GET['page'])) {
-
-            $page  = $_GET['page'];
-        } else {
-            $page = 1;
-        }
-        $start_from = ($page - 1) * $per_page_record;
-
-        $query = "SELECT * FROM `giay` where HienThiSanPham=1 LIMIT $start_from,$per_page_record ";
-
+        $query = "SELECT MaGiay,`TenGiay`, `GiaBan`,GiaBanCu, `AnhBia`,TenLoaiGiay FROM `giay`,loaigiay where loaigiay.MaLG= giay.MaLG and  GiaBan > 1000000 and HienThiSanPham=1";
         $result = mysqli_query($con, $query);
     }
     ?>
-    <a style="margin-left:200px;font-size:13px" href="LoaiSanPham.php">LOẠI SẢN PHẨM/</a><a style="font-size:14px" href="#">TẤT CẢ SẢN PHẨM</a>
 
-    <!---start-wrap---->
-    <!---start-header---->
     <!----//End-bottom-header---->
     <!---//End-header---->
-    <!----start-image-slider---->
-    <div class="clear"> </div>
-    <!----//End-image-slider---->
-    <!----start-price-rage--->
-
-    <!----//End-price-rage--->
     <!--- start-content---->
-    <div class="content">
+
+    <div class="content product-box-main">
         <div class="wrap">
-            <div class="content-right">
+            <div class="content-left" style="width:120px;">
+                <div class="content-left-top-brands">
+                    <h3>Categories</h3>
+                    <ul>
+                        <?php while ($row = mysqli_fetch_array($result1)) { ?>
+                            <li> <?php echo  "<a href='HienThiLoaiGiay.php?MaLG=" . $row['MaLG'] . " '>" . $row['TenLoaiGiay'] . "</a>" ?></li>
+                        <?php } ?>
+                        <li> <?php echo  "<a href='HienThiTatCaSanPham.php'>" . 'ALL' . "</a>" ?></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content-right product-box" style="width:950px">
+                <div class="product-box-head">
+                    <div class="product-box-head-left">
+                        <h3>Products
+                    </div>
+
+                    <div class="clear"> </div>
+                </div>
                 <div class="product-grids" style="display:flex;flex-wrap: wrap;">
                     <!--- start-rate---->
                     <script src="js/jstarbox.js"></script>
@@ -175,51 +122,42 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <?php    } ?>
                     <?php } ?>
                 </div>
+                <div class="clear"> </div>
             </div>
-            <div style="clear: both ;"></div>
-            <div style="text-align:center">
-
-                <div class="pagination">
-
-
-                    <?php
-                    $pagLink = "";
-                    if ($page >= 2) {
-
-                        echo "<a href='HienThiTatCaSanPham.php?page=" . ($page - 1) . "'>  Prev </a>";
-                    }
-
-                    for ($i = 1; $i <= $number_of_page; $i++) {
-
-                        if ($i == $page) {
-
-                            $pagLink .= "<a class = 'active' href='HienThiTatCaSanPham.php?page="
-
-                                . $i . "'>" . $i . "</a>";
-                        } else {
-
-                            $pagLink .= "<a href='HienThiTatCaSanPham.php?page=" . $i . "'>
-                 
-                 " . $i . " </a>";
-                        }
-                    };
-                    echo $pagLink;
-
-
-                    if ($page < $number_of_page) {
-
-                        echo "<a href='HienThiTatCaSanPham.php?page=" . ($page + 1) . "'>  Next </a>";
-                    }
-                    ?>
+        </div>
+        <!---- start-bottom-grids---->
+        <div class="bottom-grids">
+            <div class="bottom-top-grids">
+                <div class="wrap">
+                    <!-- <div class="bottom-top-grid">
+						<h4>ORDERS</h4>
+						<ul>
+							<li><a href="#">Payment options</a></li>
+							<li><a href="#">Shipping and delivery</a></li>
+							<li><a href="#">Returns</a></li>
+						</ul>
+					</div>
+					<div class="bottom-top-grid last-bottom-top-grid">
+						<h4>REGISTER</h4>
+						<p>Create one account to manage everything you do with Nike, from your shopping preferences to your Nike+ activity.</p>
+						<a class="learn-more" href="#">Learn more</a>
+					</div> -->
+                    <div class="clear"> </div>
                 </div>
             </div>
-            <!---- //End-bottom-grids---->
-            <!--- //End-content---->
-            <!---start-footer---->
-        </div>
-        <div></div>
-        <div></div>
-        <?php include("Layout_KhachHang_Footer.php"); ?>
-</body>
 
-</html>
+        </div>
+    </div>
+    <!---- //End-bottom-grids---->
+    <!--- //End-content---->
+    <!---start-footer---->
+    </div>
+    <div></div>
+    <div></div>
+    <?php include("Layout_KhachHang_Footer.php"); ?>
+
+    </form>
+
+    </body>
+
+    </html>

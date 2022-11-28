@@ -39,8 +39,8 @@
             $mail->Port = 587;                                    // TCP port to connect to
 
             //Recipients
-            $mail->setFrom('tmhaunct2001@gmail.com', 'Minh Hau');
-            $mail->addAddress($_POST['email'], 'Minh Hậu');     // Add a recipient              // Name is optional
+            $mail->setFrom('hau.tm.61cntt@ntu.edu.vn', 'MinhHau');
+            $mail->addAddress('hau.tm.61cntt@ntu.edu.vn', 'MinhHau');     // Add a recipient              // Name is optional
             //$mail->addReplyTo('info@example.com', 'Information');
 
             // $mail->addCC('cc@example.com');
@@ -104,7 +104,7 @@
                             <li>
                                 <img src="images/email.png" alt="">
                                 <div class="extra-wrap">
-                                    <p><span class="mail"><a href="mailto:yoursite.com">tmhaunct2001@gmail.com</a></span></p>
+                                    <p><span class="mail"><a href="mailto:yoursite.com">hau.tm.61cntt@ntu.edu.vn</a></span></p>
                                 </div>
                             </li>
                         </ul>

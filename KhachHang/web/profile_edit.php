@@ -22,7 +22,7 @@ $result = mysqli_query($con, $query);
 $row = mysqli_fetch_array($result);
 if (mysqli_num_rows($result) <> 0) {
 ?>
-    <form method="post" action="profile_edit_script.php">
+    <form method="post" action="profile_edit_script.php" enctype="multipart/form-data">
         <div class="row col-lg-8 border rounded mx-auto mt-3 p-2 shadow-lg">
             <div class="col-md-4 text-center" style="display: block; justify-content: center; margin-top: auto; margin-bottom: auto;">
                 <?php

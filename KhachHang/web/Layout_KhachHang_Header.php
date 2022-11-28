@@ -9,7 +9,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <html>
 
 <head>
-    <title>Spike shoes Website Template | Home :: w3layouts</title>
+    <title>Website Bán Giày Nhóm 11</title>
 
     <link href="css/style.css" rel='stylesheet' type='text/css' />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -157,11 +157,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="top-header-right">
                     <ul>
                         <?php
-                        if (isset($_SESSION['email'])) {
+                        if (isset($_SESSION['MaKH'])) {
+                            $MaKH = $_SESSION["MaKH"];
+                            $qr = "select * from KhachHang where MaKH = '$MaKH'";
+                            $qr_run = mysqli_query($con, $qr);
+                            $r = mysqli_fetch_array($qr_run);
                         ?>
                             <li class="dropdown o">
-                                <img src="https://img.vn/uploads/thuvien/singa-png-20220719150401Tdj1WAJFQr.png" alt="" srcset="">
-                                <button class="nut_dropdown"><?php echo substr($_SESSION['email'], 0, 12) ?></button>
+                                <img src="./imgKH/<?php echo $r["AnhKH"] ?>" alt="<?php echo $r["AnhKH"] ?>" srcset="">
+                                <button class="nut_dropdown"><?php echo $r["HoTen"] ?></button>
                                 <div class="noidung_dropdown">
                                     <a style="color:black;" href="profileKH.php">Xem thông tin</a>
                                     <a style="color:black" href="changepwd.php">Đổi mật khẩu</a>
@@ -201,15 +205,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <!----//End-mid-head---->
         <!----start-bottom-header---->
         <div class="header-bottom">
-            <div class="wrap">
+            <div class="wrap" style="margin-bottom:20px ;">
                 <!-- start header menu -->
-                <ul class="megamenu skyblue">
+                <!-- <ul class="megamenu skyblue">
                     <?php while ($row = mysqli_fetch_array($result1)) { ?>
                         <li class="grid"> <?php echo  "<a class='color2' href='HienThiLoaiGiay.php?MaLG=" . $row['MaLG'] . " '>" . $row['TenLoaiGiay'] . "</a>" ?></li>
                     <?php } ?>
                     <li class="grid"> <?php echo  "<a class='color2' href='HienThiTatCaSanPham.php'>" . 'TẤT CẢ SẢN PHẨM' . "</a>" ?></li>
 
+                </ul> -->
+                <ul class="megamenu skyblue">
+                    <li class="grid"><a class="color2" href="index.php">TRANG CHỦ</a>
+                    <li class="grid"><a class="color2" href="LOAISANPHAM.php">SẢN PHẨM</a>
+                    <li class="grid"><a class="color2" href="contact.php">GỬI PHẢN HỒI</a>
+                    <li class="grid"><a class="color2" href="VeChungToi.php">VỀ CHÚNG TÔI</a>
                 </ul>
+
+
 
             </div>
         </div>
