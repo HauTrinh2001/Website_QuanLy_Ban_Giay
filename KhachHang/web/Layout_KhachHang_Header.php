@@ -206,14 +206,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <!----start-bottom-header---->
         <div class="header-bottom">
             <div class="wrap" style="margin-bottom:20px ;">
-                <!-- start header menu -->
-                <!-- <ul class="megamenu skyblue">
-                    <?php while ($row = mysqli_fetch_array($result1)) { ?>
-                        <li class="grid"> <?php echo  "<a class='color2' href='HienThiLoaiGiay.php?MaLG=" . $row['MaLG'] . " '>" . $row['TenLoaiGiay'] . "</a>" ?></li>
-                    <?php } ?>
-                    <li class="grid"> <?php echo  "<a class='color2' href='HienThiTatCaSanPham.php'>" . 'TẤT CẢ SẢN PHẨM' . "</a>" ?></li>
 
-                </ul> -->
                 <ul class="megamenu skyblue">
                     <li class="grid"><a class="color2" href="index.php">TRANG CHỦ</a>
                     <li class="grid"><a class="color2" href="LOAISANPHAM.php">SẢN PHẨM</a>

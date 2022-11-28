@@ -1,7 +1,6 @@
     <?php
     include("Layout_KhachHang_Header.php");
-    $query1 = "SELECT * FROM loaigiay";
-    $result1 = mysqli_query($con, $query1);
+
     if (isset($_GET['Ten']) && !empty($_GET['Ten'])) {
         $t = $_GET['Ten'];
         $query = "SELECT MaGiay,`TenGiay`, `GiaBan`,GiaBanCu, `AnhBia`,TenLoaiGiay FROM `giay`,loaigiay where loaigiay.MaLG= giay.MaLG and  GiaBan > 1000000 and HienThiSanPham=1 and TenGiay like '%$t%'";
