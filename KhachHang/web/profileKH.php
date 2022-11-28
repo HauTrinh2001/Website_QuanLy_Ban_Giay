@@ -11,14 +11,14 @@ include("Layout_KhachHang_Header.php");
 <?php
 
 
-if (!isset($_SESSION['email'])) {
-    header('location:index.php');
+if (!isset($_SESSION['MaKH'])) {
+    header('location: index.php');
 }
 ?>
 
 <?php
-$email = $_SESSION['email'];
-$query = "SELECT * FROM khachhang WHERE Email='$email'";
+$email = $_SESSION['MaKH'];
+$query = "SELECT * FROM khachhang WHERE MaKH='$email'";
 $result = mysqli_query($con, $query);
 $row = mysqli_fetch_array($result);
 if (mysqli_num_rows($result) <> 0) {
