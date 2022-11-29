@@ -6,6 +6,6 @@
     echo "<script>
     alert('Xoá thanh cong')
     </script>";
-    header("location: cart.php");
+    header("location: cart2.php");
 
 ?>
