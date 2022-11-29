@@ -134,10 +134,20 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             });
                         </script>
                         <!---//cart-tonggle-script---->
-                        <li><a class="cart" href="cart.php"><span id="clickme"> </span></a></li>
+                        <?php
+                        if (isset($_SESSION['MaKH'])) {
+
+                        ?>
+                            <li><a class="cart" href="cart.php"><span id="clickme"> </span></a></li>
                         <!---start-cart-bag---->
-                        <div id="cart">Your Cart is Empty <span>(0)</span></div>
-                        <!---start-cart-bag---->
+                            <div id="cart">Your Cart is Empty <span>(0)</span></div>
+                        <?php
+                        } else {
+                        ?>
+
+                        <?php
+                        }
+                        ?>
 
                     </ul>
                 </div>

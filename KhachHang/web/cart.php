@@ -32,7 +32,7 @@
       </thead>
       <tbody>
       <?php if (mysqli_num_rows($result) != 0) { ?>
-                    <?php while ($row = mysqli_fetch_array($result)) { ?>
+        <?php while ($row = mysqli_fetch_array($result)) { ?>
           <tr>
            <td><?php echo $row["TenGiay"] ?></td>
             <td><?php echo $row["GiaBan"] ?></td>
@@ -43,8 +43,6 @@
             </td>
             <td><?php echo (float) $row["GiaBan"] * (float) $row["soluong"] ?></td>
             <td class="text-center align-middle px-0"><input href="#" class="shop-tooltip close float-none text-danger" type="submit" value="x" style="border-color: #fff" ></input></td>
-
-
           </tr>
           <?php } } ?>
       </tbody>
