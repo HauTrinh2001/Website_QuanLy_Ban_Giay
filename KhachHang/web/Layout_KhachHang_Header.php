@@ -65,7 +65,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <script type="text/javascript" src="js/jquery-ui.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
     <script type='text/javascript'>
-        //<![CDATA[ 
+        //<![CDATA[
         $(window).load(function() {
             $("#slider-range").slider({
                 range: true,
@@ -78,7 +78,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             });
             $("#amount").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
 
-        }); //]]>  
+        }); //]]>
     </script>
     <!----//End-pricerage-seletion---->
     <!---move-top-top---->
@@ -134,7 +134,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             });
                         </script>
                         <!---//cart-tonggle-script---->
-                        <li><a class="cart" href="#"><span id="clickme"> </span></a></li>
+                        <li><a class="cart" href="cart.php"><span id="clickme"> </span></a></li>
                         <!---start-cart-bag---->
                         <div id="cart">Your Cart is Empty <span>(0)</span></div>
                         <!---start-cart-bag---->

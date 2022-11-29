@@ -4,6 +4,8 @@
 	}
 </style>
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
 <body>
 
 	<?php
@@ -13,6 +15,34 @@
 	$query = "SELECT `MaGiay`,`TenGiay`, `GiaBan`, `AnhBia`,TenLoaiGiay, MoTa, GiaBanCu FROM `giay`,loaigiay where loaigiay.MaLG= giay.MaLG and  MaGiay = '$MaGiay' and HienThiSanPham=1 ";
 
 	$result = mysqli_query($con, $query);
+
+	if(isset($_POST['submit_cart'])){
+		if(isset($_SESSION["MaKH"])){
+			$MaKH =  $_SESSION["MaKH"];
+			$giohang = "insert into GioHang value(null,'$MaKH','$MaGiay',1,1)";
+			$giohang_trung = "select * from giohang where MaKH = '$MaKH' and MaGiay = '$MaGiay'";
+			$giohang_trung_result = mysqli_query($con, $giohang_trung);
+			$row = mysqli_fetch_array($giohang_trung_result);
+			if(mysqli_num_rows($giohang_trung_result) != 0) {
+				$soluongmoi =  $row["soluong"]+1;
+				$u = "UPDATE giohang SET soluong = '$soluongmoi' WHERE giohang.MaGiay = '$MaGiay';";
+				mysqli_query($con, $u);
+				echo "<script>
+				alert('Da them vao gio thanh cong');
+				</script>";
+
+			}else {
+				mysqli_query($con, $giohang);
+				echo "<script>
+				alert('Da them vao gio thanh cong');
+				</script>";
+			}}
+		else {
+			echo "<script>
+			alert('Vui long dang nhap');
+			</script>";
+		}
+	}
 
 	?>
 	<!---start-wrap---->
@@ -111,7 +141,9 @@
 												<option>6</option>
 											</select>
 										</ul>
-										<input type="button" value="add to cart" />
+										<form method="post">
+											<button name="submit_cart" class="ps-btn mb-10 btn btn-danger">Add to cart</button>
+										</form>
 										<ul class="product-share">
 											<h3>All so Share On</h3>
 											<ul>
@@ -139,7 +171,7 @@
 					<script type="text/javascript">
 						$(document).ready(function() {
 							$('#horizontalTab').easyResponsiveTabs({
-								type: 'default', //Types: default, vertical, accordion           
+								type: 'default', //Types: default, vertical, accordion
 								width: 'auto', //auto or any width like 600px
 								fit: true, // 100% fit in a container
 								closed: 'accordion', // Start closed if in accordion view

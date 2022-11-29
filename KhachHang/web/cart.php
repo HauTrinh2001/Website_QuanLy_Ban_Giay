@@ -16,7 +16,6 @@
   $tongtien = "select sum(giay.GiaBan * giohang.soluong) from giohang join giay on giohang.MaGiay = giay.MaGiay where giohang.MaKH = '$MaKH'";
   $run_tongtien = mysqli_query($con, $tongtien);
   $tinh = mysqli_fetch_column($run_tongtien);
-  $donHang = mysqli_fetch_array($result);
   ?>
 <body>
   <div class="card-body">
