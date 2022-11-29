@@ -69,7 +69,7 @@ if (mysqli_num_rows($result) <> 0) {
                     <tr>
                         <th style="font-weight: bold;"> Địa chỉ</th>
                         <td>
-                            <input value="<?php if (isset($row['DiaChi'])) echo $row['DiaChi']; ?>" type="text" class="form-control" name="diachikh">
+                            <input value="<?php if (isset($row['DiaChiKH'])) echo $row['DiaChiKH']; ?>" type="text" class="form-control" name="diachikh">
                         </td>
                     </tr>
                     <tr>

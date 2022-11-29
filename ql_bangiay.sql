@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 28, 2022 at 04:33 PM
+-- Generation Time: Nov 29, 2022 at 07:41 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -125,6 +125,20 @@ INSERT INTO `giay` (`MaGiay`, `TenGiay`, `GiaBan`, `MoTa`, `AnhBia`, `NgayCapNha
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `giohang`
+--
+
+CREATE TABLE `giohang` (
+  `id` int(11) NOT NULL,
+  `MaKH` int(11) NOT NULL,
+  `MaGiay` int(11) NOT NULL,
+  `TrangThai` int(11) NOT NULL,
+  `soluong` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `khachhang`
 --
 
@@ -147,12 +161,15 @@ CREATE TABLE `khachhang` (
 
 INSERT INTO `khachhang` (`MaKH`, `HoTen`, `TaiKhoan`, `MatKhau`, `Email`, `DiaChiKH`, `DienThoaiKH`, `NgaySinh`, `GioiTinh`, `AnhKH`) VALUES
 (2, 'Trịnh Minh Hậu', '', '224cf2b695a5e8ecaecfb9015161fa4b', 'tmhaunct2001@gmail.com', '', '', NULL, b'1', 'a284294e7badfbda66fea132db44dc76.jpg'),
-(3, '@@@@ @@@@', NULL, '14e1b600b1fd579f47433b88e8d85291', '123@gmail.com', NULL, NULL, NULL, NULL, NULL),
 (4, 'Trịnh Minh Hậu', 'MinhHau', '14e1b600b1fd579f47433b88e8d85291', 'hau.tm.61cntt@ntu.edu.vn', '', '0355587440', '2001-12-03 00:00:00', b'1', 'MinhHau.png'),
 (5, 'Trịnh Minh Hậu1', '', '819147a9688f575cf66eb8d8005f90ca', 'tmhau@gmail.com', '', '', NULL, b'1', 'MinhHau.png'),
 (6, 'Minh Hậu', NULL, '14e1b600b1fd579f47433b88e8d85291', 'hoai123@gmail.com', NULL, NULL, NULL, NULL, NULL),
 (7, 'Hau Minh', '', '14e1b600b1fd579f47433b88e8d85291', 'a@gmail.com', '', '', NULL, b'1', 'Image2022112838382.jpg'),
-(8, 'Lê Như Của', 'LeCua', '14e1b600b1fd579f47433b88e8d85291', 'cua@gmail.com', 'Ninh Hòa', '0355587440', '2001-12-15 00:00:00', b'1', 'Image2022112827270.jpg');
+(8, 'Lê Như Của', 'LeCua', '224cf2b695a5e8ecaecfb9015161fa4b', 'cua@gmail.com', 'Ninh Hòa', '0355587440', '2001-12-15 00:00:00', b'1', 'Image2022112827270.jpg'),
+(9, 'Hau Minh', NULL, '14e1b600b1fd579f47433b88e8d85291', 'minh123@gmail.com', NULL, NULL, NULL, NULL, 'user.jpg'),
+(10, 'Trịnh Văn Hoai', 'MinhHau', '224cf2b695a5e8ecaecfb9015161fa4b', 'hoai.tv.61cntt@ntu.edu.vn', '', '', NULL, b'1', 'Image2022112825045.jpg'),
+(11, 'Thành Hưng', NULL, '14e1b600b1fd579f47433b88e8d85291', 'hung@gmail.com', NULL, NULL, NULL, NULL, 'user.jpg'),
+(12, 'Trịnh Minh Hậu', 'MinhHau', '47b180e37bfc878d68b067235649da54', 'minhhau123456@gmail.com', 'Ninh Hòa', '0355587440', '2001-12-03 00:00:00', b'1', 'Image2022112852160.png');
 
 -- --------------------------------------------------------
 
@@ -314,6 +331,12 @@ ALTER TABLE `giay`
   ADD KEY `Fk_G_NCC` (`MaNCC`);
 
 --
+-- Indexes for table `giohang`
+--
+ALTER TABLE `giohang`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `khachhang`
 --
 ALTER TABLE `khachhang`
@@ -366,10 +389,16 @@ ALTER TABLE `giay`
   MODIFY `MaGiay` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
+-- AUTO_INCREMENT for table `giohang`
+--
+ALTER TABLE `giohang`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `khachhang`
 --
 ALTER TABLE `khachhang`
-  MODIFY `MaKH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `MaKH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `loaigiay`

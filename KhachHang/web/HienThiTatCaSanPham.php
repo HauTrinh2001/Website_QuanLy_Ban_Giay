@@ -38,9 +38,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <?php
     if (isset($_GET['Ten']) && !empty($_GET['Ten'])) {
         $t = $_GET['Ten'];
-        $per_page_record = 9;
+        $per_page_record = 6;
 
-        $query = "SELECT * FROM `giay` where HienThiSanPham=1 and TenGiay like '%$t%' ";
+        $query = "SELECT * FROM `giay` where HienThiSanPham=1 and (TenGiay like '%$t%' or GiaBan like '%$t%' ) ";
 
         $result = mysqli_query($con, $query);
         $number_of_result = mysqli_num_rows($result);
@@ -53,12 +53,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         }
         $start_from = ($page - 1) * $per_page_record;
 
-        $query = "SELECT * FROM `giay` where HienThiSanPham=1 and TenGiay like '%$t%' LIMIT $start_from,$per_page_record ";
+        $query = "SELECT * FROM `giay` where HienThiSanPham=1 and (TenGiay like '%$t%' or GiaBan like '%$t%' ) LIMIT $start_from,$per_page_record ";
         $result = mysqli_query($con, $query);
-        $row = mysqli_num_rows($result);
+        $dem  = mysqli_query($con, "SELECT * FROM `giay` where HienThiSanPham=1 and (TenGiay like '%$t%' or GiaBan like '%$t%' ) ");
+        $row = mysqli_num_rows($dem);
         echo "<p style='text-align:center; font-weight:bold'>" . "Có " . $row . " sản phẩm được tìm thấy" . "</p>";
     } else {
-        $per_page_record = 9;
+        $per_page_record = 6;
         $query = "SELECT * FROM `giay` where HienThiSanPham=1";
         $result = mysqli_query($con, $query);
         $number_of_result = mysqli_num_rows($result);
@@ -183,33 +184,69 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 
                     <?php
-                    $pagLink = "";
-                    if ($page >= 2) {
 
-                        echo "<a href='HienThiTatCaSanPham.php?page=" . ($page - 1) . "'>  Prev </a>";
-                    }
+                    if (isset($_GET['Ten']) && !empty($_GET['Ten'])) {
+                        $pagLink = "";
+                        if ($page >= 2) {
 
-                    for ($i = 1; $i <= $number_of_page; $i++) {
+                            echo "<a href='HienThiTatCaSanPham.php?Ten=" . $_GET['Ten'] . "&page=" . ($page - 1) . "'>  Prev </a>";
+                        }
 
-                        if ($i == $page) {
+                        for ($i = 1; $i <= $number_of_page; $i++) {
 
-                            $pagLink .= "<a class = 'active' href='HienThiTatCaSanPham.php?page="
+                            if ($i == $page) {
 
-                                . $i . "'>" . $i . "</a>";
-                        } else {
+                                $pagLink .= "<a class = 'active' href='HienThiTatCaSanPham.php?Ten=" . $_GET['Ten'] . "&page="
 
-                            $pagLink .= "<a href='HienThiTatCaSanPham.php?page=" . $i . "'>
+                                    . $i . "'>" . $i . "</a>";
+                            } else {
+
+                                $pagLink .= "<a href='HienThiTatCaSanPham.php?Ten=" . $_GET['Ten'] . "&page=" . $i . "'>
                  
                  " . $i . " </a>";
+                            }
+                        };
+                        echo $pagLink;
+
+
+                        if ($page < $number_of_page) {
+
+                            echo "<a href='HienThiTatCaSanPham.php?page=" . ($page + 1) . "'>  Next </a>";
                         }
-                    };
-                    echo $pagLink;
+                    } else {
+                        $pagLink = "";
+                        if ($page >= 2) {
+
+                            echo "<a href='HienThiTatCaSanPham.php?page=" . ($page - 1) . "'>  Prev </a>";
+                        }
+
+                        for ($i = 1; $i <= $number_of_page; $i++) {
+
+                            if ($i == $page) {
+
+                                $pagLink .= "<a class = 'active' href='HienThiTatCaSanPham.php?page="
+
+                                    . $i . "'>" . $i . "</a>";
+                            } else {
+
+                                $pagLink .= "<a href='HienThiTatCaSanPham.php?page=" . $i . "'>
+                 
+                 " . $i . " </a>";
+                            }
+                        };
+                        echo $pagLink;
 
 
-                    if ($page < $number_of_page) {
+                        if ($page < $number_of_page) {
 
-                        echo "<a href='HienThiTatCaSanPham.php?page=" . ($page + 1) . "'>  Next </a>";
+                            echo "<a href='HienThiTatCaSanPham.php?page=" . ($page + 1) . "'>  Next </a>";
+                        }
                     }
+
+
+
+
+
                     ?>
                 </div>
             </div>
