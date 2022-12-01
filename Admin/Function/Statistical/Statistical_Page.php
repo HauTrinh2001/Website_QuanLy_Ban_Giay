@@ -54,6 +54,7 @@ include("./Function/Statistical/Handle.php");
               <?php } ?>
             </tbody>
           </table>
+          <a href="./excel.php"> Export To Excel </a> </body>
 
         </div>
         <div class="modal-footer">
