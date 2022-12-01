@@ -10,7 +10,7 @@
         <div class="d-flex justify-content-center py-4">
           <a href="#" class="logo d-flex align-items-center w-auto">
             <img src="assets/img/logo.png" alt="">
-            <span class="d-none d-lg-block">NiceAdmin</span>
+            <span class="d-none d-lg-block">Nhóm 11</span>
           </a>
         </div><!-- End Logo -->
 

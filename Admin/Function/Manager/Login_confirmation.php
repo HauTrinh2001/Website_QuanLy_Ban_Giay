@@ -17,6 +17,7 @@
             if(password_verify($mat_khau,$each["MatKhau"])) {
 				$_SESSION["MaQTV"] = $each["MaQTV"];
                 $_SESSION["TaiKhoan"] = "$tai_khoan";
+                $_SESSION["QuanLi"] = $each["QuanLi"];
 
 
             }
