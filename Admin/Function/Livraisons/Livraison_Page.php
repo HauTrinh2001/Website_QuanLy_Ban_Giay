@@ -143,7 +143,7 @@ $query_run = mysqli_query($conn, $query);
                                                                         <div class="mr-2 mb-3 mb-lg-0">
 
 
-                                                                            <img src="../Images/ImgProducts/<?php echo $row['AnhDaiDien'] ?>" width="200" height="200" alt="">
+                                                                            <img src="../Images/ImgLivraisons/<?php echo $row['AnhDaiDien'] ?>" width="200" height="200" alt="">
 
                                                                         </div>
 

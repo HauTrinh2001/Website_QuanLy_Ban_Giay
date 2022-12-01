@@ -66,14 +66,9 @@ if (isset($_POST['updatedata'])) {
           $query = "UPDATE quantrivien SET HoTen='$HoTen',DienThoaiNV ='$DienThoaiNV',DiaChi ='$DiaChi',AnhDaiDien ='$newname',Email ='$Email'  WHERE MaQTV='$id'  ";
           mysqli_query($conn, $query);
           Edit();
-          try {
+          if($AnhDaiDienCu != 'user.png') {
             unlink($path1);
-          }catch (Exception $e ) {
-
-          };
-         
-         
-          
+          }
         } else {
           if (!is_numeric($DienThoaiNV)) {
             $loi = "Vui lòng nhập dạng số !";
