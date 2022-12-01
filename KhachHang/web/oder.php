@@ -17,6 +17,10 @@
 </head>
 <?php
 include("Layout_KhachHang_Header.php");
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 $MaKH =  $_SESSION["MaKH"];
 $query = "select *,giohang.Size as 'Size_Giay',giohang.Màu as'Mau_Giay' from giohang join giay on giohang.MaGiay = giay.MaGiay join khachhang on giohang.MaKH = khachhang.MaKH where giohang.MaKH = '$MaKH' ";
 $result = mysqli_query($con, $query);
@@ -24,10 +28,14 @@ $tongtien = "select sum(giay.GiaBan * giohang.soluong) from giohang join giay on
 $run_tongtien = mysqli_query($con, $tongtien);
 $tinh = mysqli_fetch_column($run_tongtien);
 
+
 $query2 = "select count(*) as count from giohang join giay on giohang.MaGiay = giay.MaGiay join khachhang on giohang.MaKH = khachhang.MaKH where giohang.MaKH = '$MaKH'";
 $result1 = mysqli_query($con, $query2);
 $row1 = mysqli_fetch_assoc($result1);
 $count = $row1['count'];
+
+
+
 // echo "count".$count;
 if (isset($_POST['dathangne'])) {
   $diachi = $_POST["diachi"];
@@ -49,16 +57,68 @@ if (isset($_POST['dathangne'])) {
       $mag = $row["MaGiay"];
       $thuchienthem = "insert into chitietdathang value('$donhangid','$mag','$soluong','$dongia')";
       mysqli_query($con, $thuchienthem);
-
-      //xoá giỏ hàng
-      $thuchienxoa = "delete from giohang where MaKH = $MaKH";
-      mysqli_query($con, $thuchienxoa);
-      echo "<script>
-			alert('Cảm ơn bạn đã mua hàng');location = '.';
-			</script>";
     }
+    $thuchienxoa = "delete from giohang where MaKH = $MaKH";
+  mysqli_query($con, $thuchienxoa);
   }
-}
+      
+
+  
+      require './PHPMailer/src/Exception.php';
+      require './PHPMailer/src/PHPMailer.php';
+      require './PHPMailer/src/SMTP.php';
+      $mail = new PHPMailer(true);
+     
+  //xoá giỏ hàng
+  
+  echo "<script>
+  alert('Đặt hàng thàng công!!!');location = './orderlist.php';
+  </script>";
+  try {
+    $qr = "select * from khachhang where khachhang.MaKH = $MaKH";
+    $a =  mysqli_query($con, $qr);
+    $b = mysqli_fetch_array($a);
+
+        //Server settings
+        $mail->SMTPDebug = 0;                                 // Enable verbose debug output
+        $mail->isSMTP();                                      // Set mailer to use SMTP
+        $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+
+        $mail->SMTPAuth = true;
+                                 // Enable SMTP authentication
+            $mail->Username = 'tmhaunct2001@gmail.com';                 // SMTP username
+            $mail->Password = 'ooakwovagpxsevav';                           // SMTP password
+            $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+            $mail->Port = 587;                                    // TCP port to connect to
+
+            //Recipients
+            $mail->setFrom('mhaunct2001@gmail.com', "Xac nhan dat hang");
+            $mail->addAddress($b['Email'],$b['HoTen']);     // Add a recipient              // Name is optional
+            //$mail->addReplyTo('info@example.com', 'Information');
+
+            // $mail->addCC('cc@example.com');
+            // $mail->addBCC('bcc@example.com');
+
+            //Attachments
+            // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+            // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+            $hoten = $b['HoTen'];
+            //Content
+            $mail->isHTML(true);                                  // Set email format to HTML
+            $mail->Subject = "Xac nhan dat hang";
+            $mail->Body    = " Cam on  $hoten. , da dat hang thanh cong don hang co so tien la $tinh";
+            // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+            $mail->send();
+            // echo "<h2 style='text-align:center;color:red;'>" . 'Gửi phản hồi thành công, chúng tôi sẽ phản hồi bạn sớm nhất!!!' . "</h2>";
+         
+        
+    } catch (Exception $e) {
+        echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+    }
+    }
+  
+
 ?>
 <?php
 
@@ -227,6 +287,7 @@ if ($soluong <= 0) {
                         echo number_format((float) $tinh, 0, ',', '.') . " VND";
                         ?></p>
                   </li>
+                  <p></p>
                   <form method="post">
                     <input class="btn btn-lg mt-2 text-dark border border-primary w-300" type="text" name="diachi" placeholder="Nhập địa chỉ giao">
                     <input class="btn btn-lg btn-primary mt-2 text-light" type="submit" value="Đặt hàng" name="dathangne">
@@ -257,6 +318,8 @@ if ($soluong <= 0) {
 </body>
 
 </html>
+
+
 <style>
   .img {
     align-items: center;
@@ -286,4 +349,42 @@ if ($soluong <= 0) {
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
   }
+  .mid-grid-left {
+        display: none;
+    }
 </style>
+
+
+
+
+<script>
+    $(document).ready(function() {
+        $('#data-table').DataTable({
+            language: {
+                lengthMenu: 'Hiển thị _MENU_ trường một trang',
+                zeroRecords: 'Không tìm thấy dữ liệu !',
+                info: 'Đang hiển thị trang _PAGE_ / _PAGES_',
+                infoEmpty: 'Không có bản ghi nào',
+                infoFiltered: '(được lọc từ _MAX_ bản ghi)',
+                "search": "Tìm kiếm:",
+                searchPlaceholder: "Nhập từ khoá !",
+                "paginate": {
+                    "first": "Đầu",
+                    "last": "Cuối",
+                    "next": "Sau",
+                    "previous": "Trước"
+                },
+            },
+        });
+    });
+</script>
+
+
+
+
+
+<script>
+    $(document).ready(function() {
+        $('#data-table').DataTable();
+    });
+</script>
