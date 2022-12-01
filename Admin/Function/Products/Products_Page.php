@@ -67,7 +67,7 @@ while ($row = mysqli_fetch_array($query_run_suppliers2)) {
 
 <!-- ADD  -->
 <div class="modal fade" id="addmodal" tabindex="-1" aria-labelledby="Label_Add" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="Label_Add">Thêm mới</h5>
@@ -75,62 +75,92 @@ while ($row = mysqli_fetch_array($query_run_suppliers2)) {
             </div>
             <div class="modal-body">
                 <form action="" method="post" enctype="multipart/form-data">
-                    <div class="form-group ">
-                        <label for="I_TenGiay">Tên giày</label>
-                        <input required value="<?php if (isset($I_TenGiay))  echo $I_TenGiay ?>" required type="text" name="I_TenGiay" class="form-control" id="I_TenGiay" placeholder="Nhập tên giày">
-                    </div>
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="form-group ">
+                                <label for="I_TenGiay">Tên giày</label>
+                                <input required value="<?php if (isset($I_TenGiay))  echo $I_TenGiay ?>" required type="text" name="I_TenGiay" class="form-control" id="I_TenGiay" placeholder="Nhập tên giày">
+                            </div>
 
-                    <div class="form-group ">
-                        <label for="I_GiaBan">Giá bán</label>
-                        <input required value="" required type="text" name="I_GiaBan" class="form-control" id="I_GiaBan" placeholder="Nhập giá bán">
-                        <small class="text-danger"><?php if (isset($loi))  echo $loi ?></small>
+                            <div class="form-group ">
+                                <label for="I_GiaBan">Giá bán</label>
+                                <input required value="<?php if (isset($I_GiaBan))  echo $I_GiaBan ?>" required type="text" name="I_GiaBan" class="form-control" id="I_GiaBan" placeholder="Nhập giá bán">
+                                <small class="text-danger"><?php if (isset($loi))  echo $loi ?></small>
 
-                    </div>
-                    <div class="form-group ">
-                        <label for="I_MoTa">Mô tả</label>
-                        <div class="form-group shadow-textarea">
+                            </div>
+                            <div class="form-group ">
+                                <label for="I_MoTa">Mô tả</label>
+                                <div class="form-group shadow-textarea">
 
-                            <textarea name="I_MoTa" class="form-control z-depth-1" id="I_MoTa" rows="3" placeholder="Nhập mô tả..."></textarea>
+                                    <textarea name="I_MoTa" class="form-control z-depth-1" id="I_MoTa" rows="3" placeholder="Nhập mô tả..."><?php if (isset($I_MoTa))  echo $I_MoTa ?></textarea>
+                                </div>
+                            </div>
+                            <!-- <div class="form-group ">
+                        <label for="I_AnhBia">Ảnh</label>
+                        <input accept=".jpg, .jpeg, .png" required value="<?php if (isset($I_AnhBia))  echo $I_AnhBia ?>" required type="file" name="I_AnhBia" class="form-control" id="I_AnhBia" placeholder="Nhập tên ảnh">
+                    </div> -->
+                            <div class="form-group ">
+                                <label for="I_AnhBia">Ảnh</label>
+                                <label for="input-img1" class="preview1">
+                                </label>
+                                <input id="input-img1" accept=".jpg, .jpeg, .png" required value="<?php if (isset($I_AnhBia))  echo $I_AnhBia ?>" required type="file" name="I_AnhBia" class="form-control">
+
+
+                            </div>
+                            <div class="form-group ">
+
+                                <label for="I_SoLuongTon">Số lượng</label>
+                                <input required value="<?php if (isset($I_SoLuongTon))  echo $I_SoLuongTon ?>" required type="text" name="I_SoLuongTon" class="form-control" id="I_SoLuongTon" placeholder="Số lượng">
+                                <small class="text-danger"><?php if (isset($loi2))  echo $loi2 ?></small>
+
+                            </div>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="form-group ">
+
+                                <label for="I_Size">Size giày</label>
+                                <input required value="<?php if (isset($I_Size))  echo $I_Size ?>" required type="text" name="I_Size" class="form-control" id="I_Size" placeholder="Size giày">
+                             
+
+                            </div>
+                            <div class="form-group ">
+
+                                <label for="I_Màu">Màu sắc</label>
+                                <input required value="<?php if (isset($I_Màu))  echo $I_Màu ?>" required type="text" name="I_Màu" class="form-control" id="I_Màu" placeholder="Màu sắc">
+                               
+
+                            </div>
+                            <div class="form-group ">
+
+                                <label for="I_MaLG">Loại giày</label>
+                                <select name="I_MaLG" class="form-select" id="I_MaLG">
+
+                                    <?php while ($row = mysqli_fetch_array($query_run_products_type)) { ?>
+                                        <option value="<?php echo $row["MaLG"] ?>"><?php echo $row["TenLoaiGiay"] ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                            <div class="form-group ">
+
+                                <label for="I_MaTH">Thương hiệu</label>
+                                <select name="I_MaTH" class="form-select" id="I_MaTH">
+                                    <?php while ($row = mysqli_fetch_array($query_run_brands)) { ?>
+                                        <option value="<?php echo $row["MaTH"] ?>"><?php echo $row["TenTH"] ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                            <div class="form-group ">
+                                <label for="I_MaNCC">Nhà cung cấp</label>
+                                <select name="I_MaNCC" class="form-select" id="I_MaNCC">
+                                    <?php while ($row = mysqli_fetch_array($query_run_suppliers)) { ?>
+                                        <option value="<?php echo $row["MaNCC"] ?>"><?php echo $row["TenNCC"] ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+
                         </div>
                     </div>
-                    <div class="form-group ">
-                        <label for="I_AnhBia">Ảnh</label>
-                        <input accept=".jpg, .jpeg, .png" required value="" required type="file" name="I_AnhBia" class="form-control" id="I_AnhBia" placeholder="Nhập tên ảnh">
-                    </div>
-                    <div class="form-group ">
 
-                        <label for="I_SoLuongTon">Số lượng</label>
-                        <input required value="" required type="text" name="I_SoLuongTon" class="form-control" id="I_SoLuongTon" placeholder="Số lượng">
-                        <small class="text-danger"><?php if (isset($loi2))  echo $loi2 ?></small>
-
-                    </div>
-                    <div class="form-group ">
-
-                        <label for="I_MaLG">Loại giày</label>
-                        <select name="I_MaLG" class="form-select" id="I_MaLG">
-
-                            <?php while ($row = mysqli_fetch_array($query_run_products_type)) { ?>
-                                <option value="<?php echo $row["MaLG"] ?>"><?php echo $row["TenLoaiGiay"] ?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
-                    <div class="form-group ">
-
-                        <label for="I_MaTH">Thương hiệu</label>
-                        <select name="I_MaTH" class="form-select" id="I_MaTH">
-                            <?php while ($row = mysqli_fetch_array($query_run_brands)) { ?>
-                                <option value="<?php echo $row["MaTH"] ?>"><?php echo $row["TenTH"] ?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
-                    <div class="form-group ">
-                        <label for="I_MaNCC">Nhà cung cấp</label>
-                        <select name="I_MaNCC" class="form-select" id="I_MaNCC">
-                            <?php while ($row = mysqli_fetch_array($query_run_suppliers)) { ?>
-                                <option value="<?php echo $row["MaNCC"] ?>"><?php echo $row["TenNCC"] ?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
 
 
 
@@ -193,7 +223,7 @@ while ($row = mysqli_fetch_array($query_run_suppliers2)) {
                                         $index++; ?></td>
                                 <td> <?php echo $row['MaGiay']; ?></td>
                                 <td> <?php echo $row['TenGiay']; ?> </td>
-                                <td> <?php echo $row['GiaBan']; ?> </td>
+                                <td><?php echo number_format($row["GiaBan"], 0, ',', '.'); ?> </td>
                                 <td style="width:50px"><img style="width:100%" src="../Images/ImgProducts/<?php echo $row['AnhBia'] ?>" alt=""></td>
                                 <td> <?php echo $row['SoLuongTon']; ?> </td>
                                 <td>
@@ -234,12 +264,16 @@ while ($row = mysqli_fetch_array($query_run_suppliers2)) {
                                                                                 <li class="list-inline-item text-muted"><?php echo $row['TenTH']; ?></li>
 
                                                                             </ul>
-                                                                         
-                                                                                <p class="mb-3"><?php echo $row['MoTa']; ?></p>
-                                                                        
-                                                                          
-                                                                            <p class="mb-3"><span class="font-weight-bold"> Hiển thị ở trang khách hàng: </span><?php if ($row['HienThiSanPham'] == 1) echo "Có";                                                                                                                                                  else echo "Không"; ?></p>
-                                                                            <p class="mb-3"><span class="font-weight-bold"> Giá bán cũ: </span> <?php echo $row['GiaBanCu']; ?> đồng</p>
+
+                                                                            <p class="mb-3"><?php echo $row['MoTa']; ?></p>
+                                                                            <p class="mb-3"><span class="font-weight-bold">Màu sắc: </span> <?php echo $row['Màu']; ?></p>
+                                                                            <p class="mb-3"><span class="font-weight-bold">Size giày: </span> <?php echo $row['Size']; ?></p>
+
+
+                                                                            <p class="mb-3"><span class="font-weight-bold"> Hiển thị ở trang khách hàng: </span><?php if ($row['HienThiSanPham'] == 1) echo "Có";
+                                                                                                                                                                else echo "Không"; ?></p>
+                                                                            <p class="mb-3"><span class="font-weight-bold"> Giá bán cũ: </span><?php if ($row["GiaBanCu"] != null) echo number_format($row["GiaBanCu"], 0, ',', '.') . "đồng";
+                                                                                                                                                else echo "Chưa cập nhật" ?> </p>
                                                                             <p class="mb-3"><span class="font-weight-bold"> Ngày cập nhật cuối: </span> <?php echo $row['NgayCapNhat']; ?></p>
 
 
@@ -249,18 +283,6 @@ while ($row = mysqli_fetch_array($query_run_suppliers2)) {
                                                                 </div>
 
                                                             </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -289,7 +311,7 @@ while ($row = mysqli_fetch_array($query_run_suppliers2)) {
                                     </button>
 
                                     <div class="modal fade" id="ModalEdit<?php echo $row['MaGiay']; ?>" tabindex="-1" aria-labelledby="Label_Edit" aria-hidden="true">
-                                        <div class="modal-dialog modal-lg ">
+                                        <div class="modal-dialog modal-xl ">
                                             <!-- modal-xl -->
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -298,69 +320,91 @@ while ($row = mysqli_fetch_array($query_run_suppliers2)) {
                                                 </div>
                                                 <div class="modal-body">
                                                     <form action="" method="post" enctype="multipart/form-data">
-                                                        <input type="hidden" name="MaGiay" id="MaGiay" value="<?php echo $row['MaGiay']; ?>">
-                                                        <div class="form-group ">
-                                                            <label for="TenGiay">Tên giày</label>
-                                                            <input required value="<?php echo $row['TenGiay']; ?>" required type="text" name="TenGiay" class="form-control" id="TenGiay" placeholder="Nhập tên giày">
-                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-xl-6">
+                                                                <input type="hidden" name="MaGiay" id="MaGiay" value="<?php echo $row['MaGiay']; ?>">
+                                                                <div class="form-group ">
+                                                                    <label for="TenGiay">Tên giày</label>
+                                                                    <input required value="<?php echo $row['TenGiay']; ?>" required type="text" name="TenGiay" class="form-control" id="TenGiay" placeholder="Nhập tên giày">
+                                                                </div>
 
-                                                        <div class="form-group ">
-                                                            <label for="GiaBan">Giá bán</label>
-                                                            <input required value="<?php echo $row['GiaBan']; ?>" required type="text" name="GiaBan" class="form-control" id="GiaBan" placeholder="Nhập giá bán">
-                                                            <small class="text-danger"><?php if (isset($loi))  echo $loi ?></small>
+                                                                <div class="form-group ">
+                                                                    <label for="GiaBan">Giá bán</label>
+                                                                    <input required value="<?php echo $row['GiaBan']; ?>" required type="text" name="GiaBan" class="form-control" id="GiaBan" placeholder="Nhập giá bán">
+                                                                    <small class="text-danger"><?php if (isset($loi))  echo $loi ?></small>
 
-                                                        </div>
-                                                        <div class="form-group ">
-                                                            <label for="MoTa">Mô tả</label>
-                                                            <div class="form-group shadow-textarea">
+                                                                </div>
+                                                                <div class="form-group ">
+                                                                    <label for="MoTa">Mô tả</label>
+                                                                    <div class="form-group shadow-textarea">
 
-                                                                <textarea name="MoTa" class="form-control z-depth-1" id="MoTa" rows="3" placeholder="Nhập mô tả..."><?php echo $row['MoTa']; ?></textarea>
+                                                                        <textarea name="MoTa" class="form-control z-depth-1" id="MoTa" rows="3" placeholder="Nhập mô tả..."><?php echo $row['MoTa']; ?></textarea>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group ">
+                                                                    <label for="">Ảnh</label>
+                                                                    <img class="preview" height="200px" src="../Images/ImgProducts/<?php echo $row['AnhBia'] ?>" alt="" srcset="">
+                                                                    <input id="input-img" accept=".jpg, .jpeg, .png" value="" type="file" name="AnhBia" class="form-control" id="AnhBia" placeholder="Nhập tên ảnh">
+                                                                    <input type="hidden" name="AnhBiaCu" id="" value="<?php echo $row["AnhBia"] ?>">
+
+                                                                </div>
+
+
                                                             </div>
-                                                        </div>
-                                                        <div class="form-group ">
-                                                            <label for="">Ảnh</label>
-                                                            <img height="200px" src="../Images/ImgProducts/<?php echo $row['AnhBia'] ?>" alt="" srcset="">
-                                                            <input accept=".jpg, .jpeg, .png" value="" type="file" name="AnhBia" class="form-control" id="AnhBia" placeholder="Nhập tên ảnh">
-                                                            <input type="hidden" name="AnhBiaCu" id="" value="<?php echo $row["AnhBia"] ?>">
+                                                            <div class="col-xl-6">
+                                                                <div class="form-group ">
 
-                                                        </div>
+                                                                    <label for="SoLuongTon">Số lượng</label>
+                                                                    <input required value="<?php echo $row['SoLuongTon']; ?>" required type="text" name="SoLuongTon" class="form-control" id="SoLuongTon" placeholder="Số lượng">
+                                                                    <small class="text-danger"><?php if (isset($loi2))  echo $loi2 ?></small>
 
-                                                        <div class="form-group ">
+                                                                </div>
+                                                                <div class="form-group ">
 
-                                                            <label for="SoLuongTon">Số lượng</label>
-                                                            <input required value="<?php echo $row['SoLuongTon']; ?>" required type="text" name="SoLuongTon" class="form-control" id="SoLuongTon" placeholder="Số lượng">
-                                                            <small class="text-danger"><?php if (isset($loi2))  echo $loi2 ?></small>
+                                                                    <label for="Size">Size giày</label>
+                                                                    <input required value="<?php echo $row['Size']; ?>" required type="text" name="Size" class="form-control" id="Size" placeholder="Size giày">
+                                                              
 
-                                                        </div>
-                                                        <div class="form-group ">
-                                                            <label for="GiaBanCu">Giá Bán Cũ</label>
-                                                            <input class="form-control" type="text" name="GiaBanCu" value="<?php echo $row["GiaBanCu"] ?>">
-                                                            <small class="text-danger"><?php if (isset($loi3))  echo $loi3 ?></small>
+                                                                </div>
+                                                                <div class="form-group ">
 
-                                                        </div>
-                                                        <div class="form-group ">
-                                                            <label for="MaLG">Loại giày</label>
-                                                            <select name="MaLG" class="form-select" id="MaLG">
-                                                                <?php for ($i = 0; $i < count($arr); $i++) {  ?>
-                                                                    <option <?php if ($row["MaLG"] == $arr[$i]) echo "selected='selected' ";  ?> value="<?php echo $arr[$i]; ?>"><?php echo $arr1[$i]; ?></option>
-                                                                <?php } ?>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group ">
-                                                            <label for="MaTH">Thương hiệu</label>
-                                                            <select name="MaTH" class="form-select" id="MaTH">
-                                                                <?php for ($i = 0; $i < count($arr2); $i++) {  ?>
-                                                                    <option <?php if ($row["MaTH"] == $arr2[$i]) echo "selected='selected' ";  ?> value="<?php echo $arr2[$i]; ?>"><?php echo $arr3[$i]; ?></option>
-                                                                <?php } ?>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group ">
-                                                            <label for="MaNCC">Nhà cung cấp</label>
-                                                            <select name="MaNCC" class="form-select" id="MaNCC">
-                                                                <?php for ($i = 0; $i < count($arr4); $i++) {  ?>
-                                                                    <option <?php if ($row["MaNCC"] == $arr4[$i]) echo "selected='selected' ";  ?> value="<?php echo $arr4[$i]; ?>"><?php echo $arr5[$i]; ?></option>
-                                                                <?php } ?>
-                                                            </select>
+                                                                    <label for="Màu">Màu sắc</label>
+                                                                    <input required value="<?php echo $row['Màu']; ?>" required type="text" name="Màu" class="form-control" id="Màu" placeholder="Số lượng">
+ 
+
+                                                                </div>
+                                                                <div class="form-group ">
+                                                                    <label for="GiaBanCu">Giá Bán Cũ</label>
+                                                                    <input class="form-control" type="text" name="GiaBanCu" value="<?php echo $row["GiaBanCu"] ?>">
+                                                                    <small class="text-danger"><?php if (isset($loi3))  echo $loi3 ?></small>
+
+                                                                </div>
+                                                                <div class="form-group ">
+                                                                    <label for="MaLG">Loại giày</label>
+                                                                    <select name="MaLG" class="form-select" id="MaLG">
+                                                                        <?php for ($i = 0; $i < count($arr); $i++) {  ?>
+                                                                            <option <?php if ($row["MaLG"] == $arr[$i]) echo "selected='selected' ";  ?> value="<?php echo $arr[$i]; ?>"><?php echo $arr1[$i]; ?></option>
+                                                                        <?php } ?>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group ">
+                                                                    <label for="MaTH">Thương hiệu</label>
+                                                                    <select name="MaTH" class="form-select" id="MaTH">
+                                                                        <?php for ($i = 0; $i < count($arr2); $i++) {  ?>
+                                                                            <option <?php if ($row["MaTH"] == $arr2[$i]) echo "selected='selected' ";  ?> value="<?php echo $arr2[$i]; ?>"><?php echo $arr3[$i]; ?></option>
+                                                                        <?php } ?>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group ">
+                                                                    <label for="MaNCC">Nhà cung cấp</label>
+                                                                    <select name="MaNCC" class="form-select" id="MaNCC">
+                                                                        <?php for ($i = 0; $i < count($arr4); $i++) {  ?>
+                                                                            <option <?php if ($row["MaNCC"] == $arr4[$i]) echo "selected='selected' ";  ?> value="<?php echo $arr4[$i]; ?>"><?php echo $arr5[$i]; ?></option>
+                                                                        <?php } ?>
+                                                                    </select>
+                                                                </div>
+
+                                                            </div>
                                                         </div>
 
 
@@ -550,6 +594,38 @@ while ($row = mysqli_fetch_array($query_run_suppliers2)) {
     $(document).ready(function() {
         $('#data-table').DataTable();
     });
+</script>
+<script>
+    const inputImg = document.querySelector('#input-img')
+    inputImg.addEventListener('change', (e) => {
+        let file = e.target.files[0]
+        console.log(file)
+        if (!file) return
+        let img = document.createElement('img')
+        img = URL.createObjectURL(file)
+        document.querySelector('.preview').src = img;
+    })
+</script>
+<style>
+    .preview1 img {
+        width: 30%;
+    }
+</style>
+<script>
+    const inputImg1 = document.querySelector('#input-img1')
+
+    inputImg1.addEventListener('change', (e) => {
+        let file = e.target.files[0]
+        console.log(file)
+        if (!file) return
+        let img = document.createElement('img')
+        img.src = URL.createObjectURL(file)
+        document.querySelector('.preview1').appendChild(img)
+
+
+
+
+    })
 </script>
 
 <!-- <img src="../Images/ImgProducts/Image202211051378.jpg" alt="" srcset=""> -->

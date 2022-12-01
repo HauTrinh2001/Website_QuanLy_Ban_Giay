@@ -1,4 +1,5 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
 
@@ -9,6 +10,7 @@ function Add()
         <script type="text/javascript">
             Toastify({
                 text: `Thêm thành công!`,
+                avatar:`https://img.icons8.com/fluency/48/null/checked.png`,
             }).showToast();
         </script>
 <?php
@@ -21,6 +23,7 @@ function Edit()
         <script type="text/javascript">
             Toastify({
                 text: `Cập nhật thành công!`,
+                avatar:`https://img.icons8.com/fluency/48/null/checked.png`,
             }).showToast();
         </script>
 <?php
@@ -33,6 +36,7 @@ function Delete()
         <script type="text/javascript">
             Toastify({
                 text: `Xoá thành công!`,
+                avatar:`https://img.icons8.com/fluency/48/null/checked.png`,
             }).showToast();
         </script>
 <?php
@@ -53,3 +57,18 @@ function trang_truoc(){
 		<?php 
 	}
     ?>
+
+
+<?php
+function SuccessOder()
+{
+?>
+        <script type="text/javascript">
+            Toastify({
+                text: `Xác nhận đơn hàng thành công!`,
+                avatar:`https://img.icons8.com/fluency/48/null/checked.png`,
+            }).showToast();
+        </script>
+<?php
+}
+?>
