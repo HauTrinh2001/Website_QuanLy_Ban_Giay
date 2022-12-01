@@ -31,8 +31,9 @@
                             <img src="images/slide-1.jpg" alt="" />
                         </a>
                         <div class="slider-detils">
-                            <h3>MENS FOOT BALL <label>BOOTS</label></h3>
-                            <span>Stay true to your team all day, every day, game day.</span>
+                            <h3>BÓNG ĐÁ NAM <label>GIÀY</label></h3>
+                            <span>
+                                Mọi trận đấu đều quan trọng như đôi giày đang mang</span>
                         </div>
                     </li>
                     <li>
@@ -40,8 +41,9 @@
                             <img src="images/slide-4.jpg" alt="" />
                         </a>
                         <div class="slider-detils">
-                            <h3>MENS FOOT BALL <label>BOOTS</label></h3>
-                            <span>Stay true to your team all day, every day, game day.</span>
+                            <h3>BÓNG ĐÁ NAM <label>GIÀY</label></h3>
+                            <span>
+                                Mọi trận đấu đều quan trọng như đôi giày đang mang</span>
                         </div>
                     </li>
                     <li>
@@ -49,8 +51,11 @@
                             <img src="images/slide-1.jpg" alt="" />
                         </a>
                         <div class="slider-detils">
-                            <h3>MENS FOOT BALL <label>BOOTS</label></h3>
-                            <span>Stay true to your team all day, every day, game day.</span>
+
+                            <h3>BÓNG ĐÁ NAM <label>GIÀY</label></h3>
+                            <span>
+                                Mọi trận đấu đều quan trọng như đôi giày đang mang</span>
+
                         </div>
                     </li>
                 </ul>
@@ -148,7 +153,7 @@
                                     </div>
                                     <div class="product-info" style="margin-top:auto">
                                         <div class="product-info-cust">
-                                            <?php echo "<a href='details.php?MaGiay=" . $row['MaGiay'] . " '>" . 'Details' . "</a>" ?>
+                                            <?php echo "<a href='details.php?MaGiay=" . $row['MaGiay'] . " '>" . 'Chi Tiết' . "</a>" ?>
                                         </div>
                                         <div class="product-info-price">
                                             <?php echo "<a href='details.php?MaGiay=" . $row['MaGiay'] . " '>" . number_format($row['GiaBan'], 0, ',', '.') . 'Đ' . "</a>" ?>

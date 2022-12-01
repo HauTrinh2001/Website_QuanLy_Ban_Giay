@@ -10,26 +10,26 @@
 <div class="content login-box">
 	<div class="login-main">
 		<div class="wrap">
-			<h1>LOGIN OR CREATE AN ACCOUNT</h1>
+			<h1>ĐĂNG NHẬP HOẶC TẠO MỘT TÀI KHOẢN</h1>
 			<div class="login-left">
-				<h3>NEW CUSTOMERS</h3>
-				<p>By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.</p>
-				<a class="acount-btn" href="register.php">Creat an Account</a>
+				<h3>KHÁCH HÀNG MỚI</h3>
+				<p>Bằng cách tạo tài khoản với cửa hàng của chúng tôi, bạn có thể lưu trữ địa chỉ giao hàng, xem và theo dõi đơn hàng trong tài khoản của mình, v.v.</p>
+				<a class="acount-btn" href="register.php">Tạo một tài khoản</a>
 			</div>
 			<div class="login-right">
-				<h3>REGISTERED CUSTOMERS</h3>
-				<p>If you have an account with us, please log in.</p>
+				<h3>ĐÃ ĐĂNG KÝ</h3>
+				<p>Nếu bạn đã có tài khoản, xin vui lòng đăng nhập!!!</p>
 				<form method="post" action="login_submit.php">
 					<div>
-						<span>Email Address<label>*</label></span>
+						<span>Địa chỉ email<label>*</label></span>
 						<input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
 					</div>
 					<div>
-						<span>Password<label>*</label></span>
+						<span>mật khẩu<label>*</label></span>
 						<input type="password" name="password" pattern=".{6,}" required>
 					</div>
-					<a class="forgot" href="#">Forgot Your Password?</a>
-					<input type="submit" value="login" />
+					<a class="forgot" href="#">Quên mật khẩu?</a>
+					<input type="submit" value="đăng nhập" />
 				</form>
 			</div>
 			<div class="clear"> </div>

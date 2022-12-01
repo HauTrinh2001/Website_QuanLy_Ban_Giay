@@ -24,44 +24,45 @@ if (isset($_SESSION['email'])) {
 <div class="content login-box">
 	<div class="login-main">
 		<div class="wrap">
-			<h1>CREATE AN ACCOUNT</h1>
+			<h1>TẠO TÀI KHOẢN</h1>
 			<div class="register-grids">
 				<form action="user_registration_script.php" method="post">
 					<div class="register-top-grid">
-						<h3>PERSONAL INFORMATION</h3>
+						<h3>THÔNG TIN CÁ NHÂN</h3>
 						<div>
-							<span>First Name<label>*</label></span>
+							<span>TÊN<label>*</label></span>
 							<input type="text" name="firstname" required="true">
 						</div>
 						<div>
-							<span>Last Name<label>*</label></span>
+							<span>HỌ và tên lót<label>*</label></span>
 							<input type="text" name="lastname" required="true">
 						</div>
 						<div>
-							<span>Email Address<label>*</label></span>
+							<span>địa chỉ email<label>*</label></span>
 							<input type="email" name="email" required="true" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
 						</div>
+						<div>
+							<span>Số điện thoại<label>*</label></span>
+							<input type="text" name="sodt" required="true">
+						</div>
 						<div class="clear"> </div>
-						<a class="news-letter" href="#">
-							<label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i>Sign Up for Newsletter</label>
-						</a>
-						<div class="clear"> </div>
+
 					</div>
 					<div class="clear"> </div>
 					<div class="register-bottom-grid">
-						<h3>LOGIN INFORMATION</h3>
+						<h3>THÔNG TIN ĐĂNG NHẬP</h3>
 						<div>
-							<span>Password<label>*</label></span>
+							<span>mật khẩu<label>*</label></span>
 							<input type="password" name="password" required="true" pattern=".{6,}"> <!-- password > 6 ký tự -->
 						</div>
 						<div>
-							<span>Confirm Password<label>*</label></span>
+							<span>xác nhận mật khẩu<label>*</label></span>
 							<input type="password" name="ConfirmPassword" required="true" pattern=".{6,}"> <!-- password > 6 ký tự -->
 						</div>
 						<div class="clear"> </div>
 					</div>
 					<div class="clear"> </div>
-					<input type="submit" value="submit" name="submit" />
+					<input type="submit" value="Gửi" name="submit" />
 				</form>
 			</div>
 		</div>

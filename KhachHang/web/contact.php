@@ -39,8 +39,8 @@
             $mail->Port = 587;                                    // TCP port to connect to
 
             //Recipients
-            $mail->setFrom('hau.tm.61cntt@ntu.edu.vn', 'MinhHau');
-            $mail->addAddress('hau.tm.61cntt@ntu.edu.vn', 'MinhHau');     // Add a recipient              // Name is optional
+            $mail->setFrom($_POST['email'], $_POST['name']);
+            $mail->addAddress('hau.tm.61cntt@ntu.edu.vn', 'TrinhMinhHau');     // Add a recipient              // Name is optional
             //$mail->addReplyTo('info@example.com', 'Information');
 
             // $mail->addCC('cc@example.com');
@@ -57,7 +57,10 @@
             // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
             $mail->send();
-            echo "<h2 style='text-align:center;color:red;'>" . 'Gửi phản hồi thành công, chúng tôi sẽ phản hồi bạn sớm nhất!!!' . "</h2>";
+            // echo "<h2 style='text-align:center;color:red;'>" . 'Gửi phản hồi thành công, chúng tôi sẽ phản hồi bạn sớm nhất!!!' . "</h2>";
+            echo "<script>
+			alert('Gửi phản hồi thành công, chúng tôi sẽ phản hồi bạn sớm nhất!!!');
+			</script>";
         }
     } catch (Exception $e) {
         echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
@@ -73,7 +76,7 @@
             <div class="wrap">
                 <div class="contact-grids">
                     <div class="col_1_of_bottom span_1_of_first1">
-                        <h5>Address</h5>
+                        <h5>Địa chỉ</h5>
                         <ul class="list3">
                             <li>
                                 <img src="images/home.png" alt="">
@@ -84,16 +87,16 @@
                         </ul>
                     </div>
                     <div class="col_1_of_bottom span_1_of_first1">
-                        <h5>Phones</h5>
+                        <h5>Số điện thoại</h5>
                         <ul class="list3">
                             <li>
                                 <img src="images/phone.png" alt="">
                                 <div class="extra-wrap">
-                                    <p><span>Telephone:</span> 0355587440</p>
+                                    <p><span>Di động:</span> 0355587440</p>
                                 </div>
                                 <img src="images/fax.png" alt="">
                                 <div class="extra-wrap">
-                                    <p><span>FAX:</span> 0355587440</p>
+                                    <p><span>Số fax:</span> 0355587440</p>
                                 </div>
                             </li>
                         </ul>
@@ -114,18 +117,18 @@
                 <form method="post" action="">
                     <div class="contact-form">
                         <div class="contact-to">
-                            <input type="text" class="text" name="name" value="Name..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name...';}">
+                            <input type="text" class="text" name="name" value="Tên..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Tên...';}">
                             <input type="text" class="text" name="email" value="Email..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email...';}">
-                            <input type="text" class="text" name="subject" value="Subject..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Subject...';}">
+                            <input type="text" class="text" name="subject" value="Chủ đề..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Chủ đề...';}">
 
-                            <input type="password" class="text" name="password" placeholder="Password..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Subject...';}">
+                            <input type="password" class="text" name="password" placeholder="Mật khẩu..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Mật khẩu...';}">
 
 
                         </div>
                         <div class="text2">
-                            <textarea value="Message:" name="message" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message';}">Message..</textarea>
+                            <textarea value="Nội dung..." name="message" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Nội dung...';}">Nội dung...</textarea>
                         </div>
-                        <span><input type="submit" class="" value="Submit" name="submit"></span>
+                        <span><input type="submit" class="" value="Gửi" name="submit"></span>
                         <div class="clear"></div>
                     </div>
                 </form>

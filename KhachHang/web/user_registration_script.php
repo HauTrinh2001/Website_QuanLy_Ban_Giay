@@ -5,6 +5,7 @@ session_start();
 $firstname = mysqli_real_escape_string($con, $_POST['firstname']);
 $lastname = mysqli_real_escape_string($con, $_POST['lastname']);
 $email = mysqli_real_escape_string($con, $_POST['email']);
+$sodt = mysqli_real_escape_string($con, $_POST['sodt']);
 $regex_email = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[_a-z0-9-]+)*(\.[a-z]{2,3})$/";
 // preg_match kiểm tra 1 chuỗi  xem có định dạng đúng với các yêu cầu hay không 
 if (!preg_match($regex_email, $email)) {
@@ -47,7 +48,7 @@ if ($rows_fetched > 0) {
     <?php
     } else {
         $hoten = $lastname . " " . $firstname;
-        $user_registration_query = "insert into khachhang(hoten,Email,MatKhau,AnhKH) values ('$hoten','$email','$password','user.jpg')";
+        $user_registration_query = "insert into khachhang(hoten,Email,MatKhau,AnhKH,DienThoaiKH) values ('$hoten','$email','$password','user.jpg','$sodt')";
         //die($user_registration_query);
         $user_registration_result = mysqli_query($con, $user_registration_query) or die(mysqli_error($con));
         // echo "User successfully registered";

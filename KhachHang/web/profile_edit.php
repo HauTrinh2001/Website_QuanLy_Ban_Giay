@@ -26,15 +26,12 @@ if (mysqli_num_rows($result) <> 0) {
         <div class="row col-lg-8 border rounded mx-auto mt-3 p-2 shadow-lg">
             <div class="col-md-4 text-center" style="display: block; justify-content: center; margin-top: auto; margin-bottom: auto;">
                 <?php
-                if (!($row['AnhKH'])) {
+
+                $anh = $row['AnhKH'];
+                echo "<img src='imgKH/$anh'  class='js-image img-fluid rounded' style='width: 180px;height:180px;object-fit: cover;'>";
+
                 ?>
-                    <img src="imgKH/user.jpg" class="js-image img-fluid rounded" style="width: 180px;height:180px;object-fit: cover;">
-                <?php
-                } else {
-                    $anh = $row['AnhKH'];
-                    echo "<img src='imgKH/$anh'  class='js-image img-fluid rounded' style='width: 180px;height:180px;object-fit: cover;'>";
-                }
-                ?>
+                <input type="hidden" name="anhcu" value="<?php echo $row['AnhKH'] ?>">
                 <div>
                     <!-- <div class="mb-3">
 					  <label for="formFile" class="form-label" style="font-style: italic; font-size: 12px;">(Nhấn bên dưới để chọn ảnh từ thư viện)</label>

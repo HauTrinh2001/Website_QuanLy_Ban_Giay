@@ -40,7 +40,8 @@ if (mysqli_num_rows($result) <> 0) {
     $filename = $_FILES['anhkh']['tmp_name'];
     $path = "./imgKH/" . $newname;
     $fileSize = $_FILES["anhkh"]["size"];
-
+    $anhcu = $_POST['anhcu'];
+    $pathcu = "./imgKH/" . $anhcu;
 
     if ($fileSize > 100000000) {
         echo
@@ -52,12 +53,14 @@ if (mysqli_num_rows($result) <> 0) {
     } else {
         if (move_uploaded_file($filename, $path)) {
             $result = mysqli_query($con, "update khachhang set AnhKH='$newname' where MaKH='$email'") or die(mysqli_error($con));
-
+            if ($anhcu != 'user.jpg') {
+                unlink($pathcu);
+            }
 
             echo
             "
                     <script>
-                      alert('thanh cong');
+                      alert('Cập nhật thành công');
                     </script>
                     ";
         }

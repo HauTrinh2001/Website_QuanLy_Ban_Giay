@@ -1,4 +1,3 @@
-
 <div class="bottom-grids">
     <div class="bottom-top-grids" style="background: none;">
         <div class="wrap">
@@ -17,7 +16,7 @@
 </div>
 <div style="clear: both ;"></div>
 <div class="footer-left1" style="background-color: black;">
-    <p style=" width:100%; height:30px; text-align:center; color:white">Copyright by Nhóm 11</p>
+    <p style=" width:100%; height:30px; text-align:center; color:white">Bảng quyền thuộc về nhóm 11</p>
 </div>
 <style>
     #ThongTin li a {
@@ -34,4 +33,3 @@
         font-size: 0.8em;
     }
 </style>
-
