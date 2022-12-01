@@ -3,7 +3,7 @@
     include("Check_login.php");
 ?>
   <div class="pt-4 pb-2">
-              Danh sách thành viên
+            
               
     <style type="text/css">
         table,
@@ -40,7 +40,7 @@
 
 
     <br>
-    <h1 style="color:black;text-align:center">THÔNG TIN</h1>
+    <h1 style="color:black;text-align:center">DANH SÁCH THÀNH VIÊN</h1>
     <BR>
     <table>
         <tr>

@@ -1,6 +1,11 @@
 <?php
 include("./Function/Manager/Check_login.php");
 include("./Connect_DB/connect_ex.php");
+if (!isset($_GET['bai'])) {
+    $bai = "";
+} else {
+    $bai = $_GET['bai'];
+}
 ?>
 
 <div class="pagetitle">
@@ -8,7 +13,12 @@ include("./Connect_DB/connect_ex.php");
     <ul class="nav">
         <?php for ($i = 1; $i <= 10; $i++) {
             $link = "?thamso=baitapp3&bai=" . $i;  ?>
-            <li> <a href="<?php echo $link ?>"><?php echo "Bài " . $i; ?></a></li>
+            <li <?php if (isset($bai)) {
+                    if ($bai == $i) {
+
+                        echo "class='active'";
+                    }
+                }  ?>> <a href="<?php echo $link ?>"><?php echo "Bài " . $i; ?></a></li>
         <?php } ?>
     </ul>
 
@@ -17,11 +27,7 @@ include("./Connect_DB/connect_ex.php");
 <div class="content">
     <?php
 
-    if (!isset($_GET['bai'])) {
-        $bai = "";
-    } else {
-        $bai = $_GET['bai'];
-    }
+
 
 
 
@@ -102,9 +108,16 @@ include("./Connect_DB/connect_ex.php");
         font-size: 20px;
         font-weight: 600;
         text-transform: uppercase;
+        text-decoration: none;
     }
 
     .nav li:hover a {
         opacity: 0.8;
+    }
+
+    .nav li.active ::after {
+        width: 100%;
+        background: #4154f1;
+        display: block;
     }
 </style>

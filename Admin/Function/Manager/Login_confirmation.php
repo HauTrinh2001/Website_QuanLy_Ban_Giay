@@ -15,10 +15,10 @@
         else {
             $each = mysqli_fetch_array($ketqua);
             if(password_verify($mat_khau,$each["MatKhau"])) {
+				$_SESSION["MaQTV"] = $each["MaQTV"];
                 $_SESSION["TaiKhoan"] = "$tai_khoan";
-           
-                // header("Location:  ./Function/Manager/Home_page.php");
-				
+
+
             }
             else {
                 $loi =  "Mật khẩu không đúng !";
