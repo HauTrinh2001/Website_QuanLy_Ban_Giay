@@ -54,10 +54,11 @@ include("./Function/Statistical/Handle.php");
               <?php } ?>
             </tbody>
           </table>
-          <a href="./excel.php"> Export To Excel </a> </body>
+         
 
         </div>
         <div class="modal-footer">
+          <a class="btn btn-secondary" href="./Function/Statistical/excel.php"> Xuất Excel</a> 
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
         </div>
       </div>
