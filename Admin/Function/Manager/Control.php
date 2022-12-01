@@ -26,6 +26,9 @@
 		case "quantrivien":
             include("./Function/Staffs/Staff_Page.php");     
 		break;
+		case "nhacungcap":
+            include("./Function/Suppliers/Suppliers_Page.php");     
+		break;
 		case "nhanviengiaohang":
             include("./Function/Livraisons/Livraison_Page.php");     
 		break;
