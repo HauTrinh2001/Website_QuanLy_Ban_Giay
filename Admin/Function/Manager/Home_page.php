@@ -46,17 +46,17 @@ include("Header.php");
       </ul>
     </li><!-- End Components Nav -->
 
-
+    
     <li class="nav-heading">Quản lí</li>
     <li class="nav-item">
       <a class="nav-link collapsed" href="?thamso=sanpham">
-      <i class="bi bi-gem"></i>
+        <i class="bi bi-gem"></i>
         <span>Sản phẩm</span>
       </a>
     </li><!-- End F.A.Q Page Nav -->
     <li class="nav-item">
       <a class="nav-link collapsed" href="?thamso=thuonghieu">
-      <i class="bi bi-card-list"></i>
+        <i class="bi bi-card-list"></i>
         <span>Thương hiệu</span>
       </a>
     </li><!-- End Profile Page Nav -->
@@ -75,10 +75,10 @@ include("Header.php");
       </a>
     </li><!-- End Register Page Nav -->
 
-
-    <li class="nav-item">
+    <?php if($_SESSION["QuanLi"] == true) { ?>
+      <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-      <i class="bi bi-person-lines-fill"></i><span>Nhân viên</span><i class="bi bi-chevron-down ms-auto"></i>
+        <i class="bi bi-person-lines-fill"></i><span>Nhân viên</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
       <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
@@ -94,6 +94,9 @@ include("Header.php");
 
       </ul>
     </li><!-- End Forms Nav -->
+      <?php }
+    ?>
+
 
     <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
@@ -119,7 +122,7 @@ include("Header.php");
     </li><!-- End Charts Nav -->
     <li class="nav-item">
       <a class="nav-link collapsed" href="?thamso=thongke">
-      <i class="bi bi-graph-up-arrow"></i>
+        <i class="bi bi-graph-up-arrow"></i>
         <span>Thống kê</span>
       </a>
     </li><!-- End F.A.Q Page Nav -->
