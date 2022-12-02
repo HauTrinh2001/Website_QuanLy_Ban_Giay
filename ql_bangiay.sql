@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2022 at 08:10 AM
+-- Generation Time: Dec 02, 2022 at 06:46 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -31,24 +31,20 @@ CREATE TABLE `chitietdathang` (
   `SoDH` int(11) NOT NULL,
   `MaGiay` int(11) NOT NULL,
   `SoLuong` int(11) DEFAULT NULL,
-  `DonGia` int(11) DEFAULT NULL
+  `DonGia` int(11) DEFAULT NULL,
+  `Sizegiay` varchar(50) NOT NULL,
+  `Maugiay` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `chitietdathang`
 --
 
-INSERT INTO `chitietdathang` (`SoDH`, `MaGiay`, `SoLuong`, `DonGia`) VALUES
-(1, 7, 1, 2590000),
-(2, 4, 2, 850000),
-(2, 5, 2, 800000),
-(2, 6, 1, 2590000),
-(2, 26, 1, 950000),
-(2, 38, 3, 750000),
-(2, 44, 1, 750000),
-(3, 6, 6, 2590000),
-(4, 2, 4, 800000),
-(4, 3, 1, 800000);
+INSERT INTO `chitietdathang` (`SoDH`, `MaGiay`, `SoLuong`, `DonGia`, `Sizegiay`, `Maugiay`) VALUES
+(76, 3, 4, 800000, '43', 'yellow'),
+(76, 4, 1, 850000, '35', 'orange'),
+(76, 4, 1, 850000, '43', 'green'),
+(76, 44, 2, 750000, '41', 'blue');
 
 -- --------------------------------------------------------
 
@@ -72,10 +68,7 @@ CREATE TABLE `dondathang` (
 --
 
 INSERT INTO `dondathang` (`SoDH`, `MaKH`, `NgayGiao`, `DaThanhToan`, `TinhTrangGiaoHang`, `NgayDat`, `DiaChiGiaoHang`, `MaNVGH`) VALUES
-(1, 10, NULL, b'0', 'cho xac nhan', '2022-11-30 15:02:10', 'Ninh Hòa', NULL),
-(2, 10, NULL, b'0', 'cho xac nhan', '2022-11-30 19:45:50', 'Ninh Hòa', NULL),
-(3, 10, NULL, b'0', 'Chờ xác nhận', '2022-11-30 21:03:58', 'Ninh Hòa', NULL),
-(4, 10, NULL, b'0', 'Chờ xác nhận', '2022-11-30 22:10:49', 'Ninh Hòa', NULL);
+(76, 15, '2022-12-03 00:42:48', b'1', 'Giao hàng thành công', '2022-12-03 00:30:11', 'Ninh Hòa', 1);
 
 -- --------------------------------------------------------
 
@@ -105,8 +98,8 @@ CREATE TABLE `giay` (
 --
 
 INSERT INTO `giay` (`MaGiay`, `TenGiay`, `GiaBan`, `MoTa`, `AnhBia`, `NgayCapNhat`, `SoLuongTon`, `MaLG`, `MaTH`, `MaNCC`, `HienThiSanPham`, `GiaBanCu`, `Size`, `Màu`) VALUES
-(1, 'Giày trẻ em Nike Air Force 1 cổ điển màu ghi xanh', 800000, 'NK2022 Giày trẻ em không quân màu mới‼\r\n\r\nGiày trẻ em Nike Air Force cổ điển màu trắng xanh\r\n\r\nSê-ri chuyển đổi dành cho trẻ em, sắp ra mắt ~\r\n\r\nKiểu giày cổ điển nhất, có thể chịu đựng thử thách của “lịch sử”!\r\n\r\nGiày cổ điển! Vẫn còn giày thể thao chống lại ~\r\n\r\nChất liệu da, ngón chân rộng, đế ngoài cao su', 'anh1_Loai1.jpg', '0000-00-00 00:00:00', 20, 1, 3, 4, b'1', 700000, '35,36,37,38,39,40,41,42,43,44,45', 'red,orange,yellow,green,blue,purple'),
-(2, 'Giày trẻ em Nike Air Force 1 cổ điển màu trắng đỏ', 800000, 'NK2022 Giày trẻ em không quân màu mới‼\r\n\r\nGiày trẻ em Nike Air Force cổ điển màu trắng xanh\r\n\r\nSê-ri chuyển đổi dành cho trẻ em, sắp ra mắt ~\r\n\r\nKiểu giày cổ điển nhất, có thể chịu đựng thử thách của “lịch sử”!\r\n\r\nGiày cổ điển! Vẫn còn giày thể thao chống lại ~\r\n\r\nChất liệu da, ngón chân rộng, đế ngoài cao su', 'anh2_Loai1.jpg', '0000-00-00 00:00:00', 50, 1, 2, 5, b'1', 1000000, '35,36,37,38,39,40,41,42,43,44,45', 'red,orange,yellow,green,blue,purple'),
+(1, 'Giày trẻ em Nike Air Force 1 cổ điển màu ghi xanh', 800000, 'NK2022 Giày trẻ em không quân màu mới‼\r\n\r\nGiày trẻ em Nike Air Force cổ điển màu trắng xanh\r\n\r\nSê-ri chuyển đổi dành cho trẻ em, sắp ra mắt ~\r\n\r\nKiểu giày cổ điển nhất, có thể chịu đựng thử thách của “lịch sử”!\r\n\r\nGiày cổ điển! Vẫn còn giày thể thao chống lại ~\r\n\r\nChất liệu da, ngón chân rộng, đế ngoài cao su', 'anh1_Loai1.jpg', '0000-00-00 00:00:00', 20, 1, 3, 4, b'0', 700000, '35,36,37,38,39,40,41,42,43,44,45', 'red,orange,yellow,green,blue,purple'),
+(2, 'Giày trẻ em Nike Air Force 1 cổ điển màu trắng đỏ', 800000, 'NK2022 Giày trẻ em không quân màu mới‼\r\n\r\nGiày trẻ em Nike Air Force cổ điển màu trắng xanh\r\n\r\nSê-ri chuyển đổi dành cho trẻ em, sắp ra mắt ~\r\n\r\nKiểu giày cổ điển nhất, có thể chịu đựng thử thách của “lịch sử”!\r\n\r\nGiày cổ điển! Vẫn còn giày thể thao chống lại ~\r\n\r\nChất liệu da, ngón chân rộng, đế ngoài cao su', 'anh2_Loai1.jpg', '0000-00-00 00:00:00', 50, 1, 2, 5, b'0', 1000000, '35,36,37,38,39,40,41,42,43,44,45', 'red,orange,yellow,green,blue,purple'),
 (3, 'Giày trẻ em Adidas Drop Step cỏ ba lá màu xanh ghi', 800000, 'NK2022 Giày trẻ em không quân màu mới‼\r\n\r\nGiày trẻ em Nike Air Force cổ điển màu trắng xanh\r\n\r\nSê-ri chuyển đổi dành cho trẻ em, sắp ra mắt ~\r\n\r\nKiểu giày cổ điển nhất, có thể chịu đựng thử thách của “lịch sử”!\r\n\r\nGiày cổ điển! Vẫn còn giày thể thao chống lại ~\r\n\r\nChất liệu da, ngón chân rộng, đế ngoài cao su', 'anh3_Loai1.jpg', '0000-00-00 00:00:00', 75, 1, 1, 6, b'1', 900000, '35,36,37,38,39,40,41,42,43,44,45', 'red,orange,yellow,green,blue,purple'),
 (4, 'Giày trẻ em cao cổ đế mềm Adidas màu trắng đen', 850000, 'Giày trẻ em đế cao mềm và sáp siêu bất khả chiến bại\r\n\r\nPhong cách giày thể thao mới mẻ và bắt mắt, đồ đôi đỉnh cao là phong cách thời trang nước ngoài‼ ️Bạn nên mua đôi này, chúng thực sự đủ tốt để mặc', 'anh4_Loai1.jpg', '0000-00-00 00:00:00', 60, 1, 6, 2, b'1', 650000, '35,36,37,38,39,40,41,42,43,44,45', 'red,orange,yellow,green,blue,purple'),
 (5, 'Giày trẻ em Nike Dunk Low Disrupt 2 màu xanh tím than', 800000, 'NK2022 Giày trẻ em không quân màu mới‼\r\n\r\nGiày trẻ em Nike Air Force cổ điển màu trắng xanh\r\n\r\nSê-ri chuyển đổi dành cho trẻ em, sắp ra mắt ~\r\n\r\nKiểu giày cổ điển nhất, có thể chịu đựng thử thách của “lịch sử”!\r\n\r\nGiày cổ điển! Vẫn còn giày thể thao chống lại ~\r\n\r\nChất liệu da, ngón chân rộng, đế ngoài cao su', 'anh5_Loai1.jpg', '0000-00-00 00:00:00', 100, 1, 4, 9, b'1', 960000, '35,36,37,38,39,40,41,42,43,44,45', 'red,orange,yellow,green,blue,purple'),
@@ -122,7 +115,7 @@ INSERT INTO `giay` (`MaGiay`, `TenGiay`, `GiaBan`, `MoTa`, `AnhBia`, `NgayCapNha
 (15, 'Giày Dior Nữ siêu cấp Oblique Low”Walk’n’Dior” họa tiết màu hồng', 1950000, 'Phiên bản ưu tiên Giày Dior Nữ siêu cấp Oblique Low cổ thấp\r\n\r\n# Giày nữ được sản xuất với chất lượng tốt nhất\r\n\r\n# sử dụng quy trình thêu máy vi tính chính xác\r\n\r\n# để nâng cao cảm giác ba chiều của ma cà rồng, để đảm bảo rằng phiên bản ma cà rồng không bị lỗi mốt\r\n\r\n# lót và đế bằng da cừu mềm mại ❗️ chứng thực mô hình, bản dịch lại màu sắc trang nhã mới của mô hình cổ điển', 'anh5_Loai3.jpg', '0000-00-00 00:00:00', 75, 3, 1, 1, b'1', 2000000, '35,36,37,38,39,40,41,42,43,44,45', 'red,orange,yellow,green,blue,purple'),
 (16, 'Giày Jordan 1 trẻ em màu trắng gót đen', 950000, 'Middle Top Velcro Gradient Color Sneakers dành cho trẻ em\r\n\r\nKÍCH THƯỚC: 26-37 thước Anh\r\n\r\nPhong cách Joe cổ điển ❤️\r\n\r\nMàu gradient mẫu tự làm đẹp quá 👏🏻\r\n\r\nThiết kế khóa dán, dễ dàng mặc vào và cởi ra✌🏻\r\n\r\nĐơn giản và phong cách ✔️', 'anh1_Loai4.jpg', '0000-00-00 00:00:00', 50, 4, 10, 10, b'1', 1000000, '35,36,37,38,39,40,41,42,43,44,45', 'red,orange,yellow,green,blue,purple'),
 (17, 'Giày Jordan 1 trẻ em màu trắng gót tím pastel', 950000, 'Middle Top Velcro Gradient Color Sneakers dành cho trẻ em\r\n\r\nKÍCH THƯỚC: 26-37 thước Anh\r\n\r\nPhong cách Joe cổ điển ❤️\r\n\r\nMàu gradient mẫu tự làm đẹp quá 👏🏻\r\n\r\nThiết kế khóa dán, dễ dàng mặc vào và cởi ra✌🏻\r\n\r\nĐơn giản và phong cách ✔️\r\n\r\n', 'anh2_Loai4.jpg', '0000-00-00 00:00:00', 75, 4, 9, 9, b'1', 1000000, '35,36,37,38,39,40,41,42,43,44,45', 'red,orange,yellow,green,blue,purple'),
-(18, 'Giày Jordan 1 trẻ em màu hồng pastel', 950000, 'Middle Top Velcro Gradient Color Sneakers dành cho trẻ em\r\n\r\nKÍCH THƯỚC: 26-37 thước Anh\r\n\r\nPhong cách Joe cổ điển ❤️\r\n\r\nMàu gradient mẫu tự làm đẹp quá 👏🏻\r\n\r\nThiết kế khóa dán, dễ dàng mặc vào và cởi ra✌🏻\r\n\r\nĐơn giản và phong cách ✔️', 'anh3_Loai4.jpg', '0000-00-00 00:00:00', 60, 4, 8, 8, b'1', 1000000, '35,36,37,38,39,40,41,42,43,44,45', '35,36,37,38,39,40,41,42,43,44,45'),
+(18, 'Giày Jordan 1 trẻ em màu hồng pastel', 950000, 'Middle Top Velcro Gradient Color Sneakers dành cho trẻ em\r\n\r\nKÍCH THƯỚC: 26-37 thước Anh\r\n\r\nPhong cách Joe cổ điển ❤️\r\n\r\nMàu gradient mẫu tự làm đẹp quá 👏🏻\r\n\r\nThiết kế khóa dán, dễ dàng mặc vào và cởi ra✌🏻\r\n\r\nĐơn giản và phong cách ✔️', 'anh3_Loai4.jpg', '0000-00-00 00:00:00', 60, 4, 8, 8, b'1', 1000000, '35,36,37,38,39,40,41,42,43,44,45', 'red,orange,yellow,green,blue,purple'),
 (19, 'Giày Jordan 1 trẻ em x LV màu nâu họa tiết caro mũi ghi', 950000, 'Jordan 1 Checkerboard Gele High School High School Top Velcro Sneakers\r\n\r\nKÍCH THƯỚC: 26-37\r\n\r\nBàn cờ chung với các viên gạch LEGO\r\n\r\nĐầy niềm vui 🌈\r\n\r\nĐế ngoài bằng cao su chống mài mòn, chống trơn trượt, cảm giác chân tuyệt vời\r\n\r\nThiết kế khóa dán, dễ dàng mặc vào và cởi ra', 'anh4_Loai4.jpg', '0000-00-00 00:00:00', 100, 4, 7, 7, b'1', 1000000, '35,36,37,38,39,40,41,42,43,44,45', 'red,orange,yellow,green,blue,purple'),
 (20, 'Giày Jordan 1 trẻ em x LV màu nâu', 950000, 'Jordan 1 Checkerboard Gele High School High School Top Velcro Sneakers\r\n\r\nKÍCH THƯỚC: 26-37\r\n\r\nBàn cờ chung với các viên gạch LEGO\r\n\r\nĐầy niềm vui 🌈\r\n\r\nĐế ngoài bằng cao su chống mài mòn, chống trơn trượt, cảm giác chân tuyệt vời\r\n\r\nThiết kế khóa dán, dễ dàng mặc vào và cởi ra', 'anh5_Loai4.jpg', '0000-00-00 00:00:00', 75, 4, 1, 6, b'1', 1000000, '35,36,37,38,39,40,41,42,43,44,45', 'red,orange,yellow,green,blue,purple'),
 (21, 'Giày trẻ em cao cổ đế mềm Adidas màu trắng đen', 850000, 'Giày trẻ em đế cao mềm và sáp siêu bất khả chiến bại👇👇\r\n\r\nPhong cách giày thể thao mới mẻ và bắt mắt, đồ đôi đỉnh cao là phong cách thời trang nước ngoài‼ ️Bạn nên mua đôi này, chúng thực sự đủ tốt để mặc', 'anh1_Loai5.jpg', '0000-00-00 00:00:00', 50, 5, 1, 1, b'1', 900000, '35,36,37,38,39,40,41,42,43,44,45', 'red,orange,yellow,green,blue,purple'),
@@ -148,7 +141,11 @@ INSERT INTO `giay` (`MaGiay`, `TenGiay`, `GiaBan`, `MoTa`, `AnhBia`, `NgayCapNha
 (41, 'Giày Puma minions trẻ em màu trắng vàng', 850000, 'Minion là cảm hứng của thương hiệu giày Puma. Các fan của những chú Minion màu vàng đáng yêu có lẽ đã được thưởng thức bộ phim hoạt hình Despicable 3 của hãng phim Universal trên màn ảnh rộng.\r\n\r\nNhững chú Minion màu vàng này không những được trẻ em yêu thích mà còn có một lượng fan hùng hậu từ các khán giả nhiều tuổi.', 'anh1_Loai9.jpg', '0000-00-00 00:00:00', 60, 10, 13, 13, b'1', 1000000, '35,36,37,38,39,40,41,42,43,44,45', 'red,orange,yellow,green,blue,purple'),
 (42, 'Giày Puma minions màu vàng – PU003\r\n', 700000, 'Minion là cảm hứng của thương hiệu giày Puma. Các fan của những chú Minion màu vàng đáng yêu có lẽ đã được thưởng thức bộ phim hoạt hình Despicable 3 của hãng phim Universal trên màn ảnh rộng. Những chú Minion màu vàng này không những được trẻ em yêu thích mà còn có một lượng fan hùng hậu từ các khán giả nhiều tuổi.', 'anh2_Loai9.jpg', '0000-00-00 00:00:00', 60, 10, 5, 5, b'1', 1000000, '35,36,37,38,39,40,41,42,43,44,45', 'red,orange,yellow,green,blue,purple'),
 (43, 'Giày Puma minions màu trắng – PU002', 750000, 'Minion là cảm hứng của thương hiệu giày Puma. Các fan của những chú Minion màu vàng đáng yêu có lẽ đã được thưởng thức bộ phim hoạt hình Despicable 3 của hãng phim Universal trên màn ảnh rộng. Những chú Minion màu vàng này không những được trẻ em yêu thích mà còn có một lượng fan hùng hậu từ các khán giả nhiều tuổi.', 'anh3_Loai9.jpg', '0000-00-00 00:00:00', 60, 10, 7, 7, b'1', 1000000, '35,36,37,38,39,40,41,42,43,44,45', 'red,orange,yellow,green,blue,purple'),
-(44, 'Giày Puma minions màu xanh – PU001', 750000, 'Minion là cảm hứng của thương hiệu giày Puma. Các fan của những chú Minion màu vàng đáng yêu có lẽ đã được thưởng thức bộ phim hoạt hình Despicable 3 của hãng phim Universal trên màn ảnh rộng. Những chú Minion màu vàng này không những được trẻ em yêu thích mà còn có một lượng fan hùng hậu từ các khán giả nhiều tuổi.', 'anh4_Loai9.jpg', '0000-00-00 00:00:00', 60, 10, 11, 11, b'1', 1000000, '35,36,37,38,39,40,41,42,43,44,45', 'red,orange,yellow,green,blue,purple');
+(44, 'Giày Puma minions màu xanh – PU001', 750000, 'Minion là cảm hứng của thương hiệu giày Puma. Các fan của những chú Minion màu vàng đáng yêu có lẽ đã được thưởng thức bộ phim hoạt hình Despicable 3 của hãng phim Universal trên màn ảnh rộng. Những chú Minion màu vàng này không những được trẻ em yêu thích mà còn có một lượng fan hùng hậu từ các khán giả nhiều tuổi.', 'anh4_Loai9.jpg', '0000-00-00 00:00:00', 60, 10, 11, 11, b'1', 1000000, '35,36,37,38,39,40,41,42,43,44,45', 'red,orange,yellow,green,blue,purple'),
+(45, 'Thượng đình', 900000, 'Thượng đình mãi đỉnh', 'Image2022120289633.png', '2022-12-02 23:43:01', 56, 2, 1, 1, b'1', NULL, '34,35,36,37,38', 'red,blue,green'),
+(46, 'Thượng đình', 900000, 'Thượng đình mãi đỉnh', 'Image2022120280009.png', '2022-12-03 00:04:15', 56, 2, 1, 1, b'1', NULL, '34,35,36,37,38', 'red,blue,green'),
+(47, 'Thượng đình', 900000, 'Thượng đình mãi đỉnh', 'Image2022120255679.png', '2022-12-03 00:04:22', 56, 2, 1, 1, b'1', NULL, '34,35,36,37,38', 'red,blue,green'),
+(48, 'Thượng đình', 900000, 'Thượng đình mãi đỉnh', 'Image2022120297685.png', '2022-12-03 00:07:03', 56, 2, 1, 1, b'1', NULL, '34,35,36,37,38', 'red,blue,green');
 
 -- --------------------------------------------------------
 
@@ -162,17 +159,9 @@ CREATE TABLE `giohang` (
   `MaGiay` int(11) NOT NULL,
   `TrangThai` int(11) NOT NULL,
   `soluong` int(11) NOT NULL,
-  `Size` varchar(50) NOT NULL,
-  `Màu` varchar(200) NOT NULL
+  `Sizeee` varchar(50) NOT NULL,
+  `Mauuu` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `giohang`
---
-
-INSERT INTO `giohang` (`id`, `MaKH`, `MaGiay`, `TrangThai`, `soluong`, `Size`, `Màu`) VALUES
-(29, 10, 2, 1, 33, '35', 'red'),
-(30, 10, 6, 1, 6, '35', 'red');
 
 -- --------------------------------------------------------
 
@@ -198,18 +187,7 @@ CREATE TABLE `khachhang` (
 --
 
 INSERT INTO `khachhang` (`MaKH`, `HoTen`, `TaiKhoan`, `MatKhau`, `Email`, `DiaChiKH`, `DienThoaiKH`, `NgaySinh`, `GioiTinh`, `AnhKH`) VALUES
-(2, 'Trịnh Minh Hậu', '', '224cf2b695a5e8ecaecfb9015161fa4b', 'tmhaunct2001@gmail.com', '', '', NULL, b'1', 'a284294e7badfbda66fea132db44dc76.jpg'),
-(4, 'Trịnh Minh Hậu', 'MinhHau', '14e1b600b1fd579f47433b88e8d85291', 'hau.tm.61cntt@ntu.edu.vn', '', '0355587440', '2001-12-03 00:00:00', b'1', 'MinhHau.png'),
-(5, 'Trịnh Minh Hậu1', '', '819147a9688f575cf66eb8d8005f90ca', 'tmhau@gmail.com', '', '', NULL, b'1', 'MinhHau.png'),
-(6, 'Minh Hậu', NULL, '14e1b600b1fd579f47433b88e8d85291', 'hoai123@gmail.com', NULL, NULL, NULL, NULL, NULL),
-(7, 'Hau Minh', '', '14e1b600b1fd579f47433b88e8d85291', 'a@gmail.com', '', '', NULL, b'1', 'Image2022112838382.jpg'),
-(8, 'Lê Như Của', 'LeCua', '224cf2b695a5e8ecaecfb9015161fa4b', 'cua@gmail.com', 'Ninh Hòa', '0355587440', '2001-12-15 00:00:00', b'1', 'Image2022112827270.jpg'),
-(9, 'Hau Minh', NULL, '14e1b600b1fd579f47433b88e8d85291', 'minh123@gmail.com', NULL, NULL, NULL, NULL, 'user.jpg'),
-(10, 'Trịnh Văn Hoai', 'VanHoai', '224cf2b695a5e8ecaecfb9015161fa4b', 'hoai.tv.61cntt@ntu.edu.vn', 'Ninh Hòa', '0399844376', '2001-12-03 00:00:00', b'1', 'Image2022112963385.jpg'),
-(11, 'Thành Hưng', NULL, '14e1b600b1fd579f47433b88e8d85291', 'hung@gmail.com', NULL, NULL, NULL, NULL, 'user.jpg'),
-(12, 'Trịnh Minh Hậu', 'MinhHau', '47b180e37bfc878d68b067235649da54', 'minhhau123456@gmail.com', 'Ninh Hòa', '0355587440', '2001-12-03 00:00:00', b'1', 'Image2022112852160.png'),
-(13, 'Trịnh Minh  Hậu', '', '14e1b600b1fd579f47433b88e8d85291', 'hau123abc@gmail.com', '', '0355587440', NULL, b'1', 'Image2022113060250.jpg'),
-(14, 'Châu Văn Sang', '', '14e1b600b1fd579f47433b88e8d85291', 'vangsang@gmail.com', '', '12345688', NULL, b'1', 'Image2022113074214.jpg');
+(15, 'Trịnh Minh Hậu', 'MinhHau', '224cf2b695a5e8ecaecfb9015161fa4b', 'hau.tm.61cntt@ntu.edu.vn', 'Ninh Hòa', '0355587440', '2001-12-03 00:00:00', b'1', 'Image2022120298422.png');
 
 -- --------------------------------------------------------
 
@@ -285,6 +263,14 @@ CREATE TABLE `nhanviengiaohang` (
   `Email` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `nhanviengiaohang`
+--
+
+INSERT INTO `nhanviengiaohang` (`MaNVGH`, `HoTen`, `DienThoaiNV`, `AnhDaiDien`, `DiaChi`, `Email`) VALUES
+(1, 'Trần Văn Tiến Tới', '0366843210', 'ImageLi2022120256599.jpg', 'Khánh Phú', 'nvgh1@gmail.com'),
+(2, 'Trần Văn Tiến Tới', '0366843210', 'ImageLi2022120241628.jpg', 'Khánh Phú', 'nvgh1@gmail.com');
+
 -- --------------------------------------------------------
 
 --
@@ -308,7 +294,9 @@ CREATE TABLE `quantrivien` (
 --
 
 INSERT INTO `quantrivien` (`MaQTV`, `TaiKhoan`, `MatKhau`, `QuanLi`, `HoTen`, `DienThoaiNV`, `AnhDaiDien`, `DiaChi`, `Email`) VALUES
-(1, 'MinhHau', '$2y$10$QOVZH2JRrHCjJ5w/N2uVL.1LwYnJZb1iBX7G21dpMRPPYAYW.hKUK', b'1', 'Trịnh Minh Hậu', '0355587440', 'hau.jpg', 'ABC', 'ABC@ABC');
+(1, 'MinhHau', '$2y$10$QOVZH2JRrHCjJ5w/N2uVL.1LwYnJZb1iBX7G21dpMRPPYAYW.hKUK', b'1', 'Trịnh Minh Hậu', '0355587440', 'Image2022120232792.png', 'Ninh Hoa', 'ABC@ABC'),
+(2, 'MinhHau1', '$2y$10$QOVZH2JRrHCjJ5w/N2uVL.1LwYnJZb1iBX7G21dpMRPPYAYW.hKUK', b'1', 'Trịnh Minh Hậu', '0355587440', 'Image2022120147903.jpg', '', ''),
+(3, 'MinhHau3', '$2y$10$qAoyYxltJl3FeWSud1NxgOn0wU5eggB.LWlBgPWdEArAOy/3pIZve', b'0', 'Trịnh Minh Hậu', '0355587440', 'Image2022120238654.jpg', 'Ninh Hòa', 'hau.tm.61cntt@ntu.edu.vn');
 
 -- --------------------------------------------------------
 
@@ -350,7 +338,7 @@ INSERT INTO `thuonghieu` (`MaTH`, `TenTH`) VALUES
 -- Indexes for table `chitietdathang`
 --
 ALTER TABLE `chitietdathang`
-  ADD PRIMARY KEY (`SoDH`,`MaGiay`),
+  ADD PRIMARY KEY (`SoDH`,`MaGiay`,`Sizegiay`,`Maugiay`),
   ADD KEY `Fk_CTDH_G` (`MaGiay`);
 
 --
@@ -420,25 +408,25 @@ ALTER TABLE `thuonghieu`
 -- AUTO_INCREMENT for table `dondathang`
 --
 ALTER TABLE `dondathang`
-  MODIFY `SoDH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `SoDH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT for table `giay`
 --
 ALTER TABLE `giay`
-  MODIFY `MaGiay` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `MaGiay` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `giohang`
 --
 ALTER TABLE `giohang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT for table `khachhang`
 --
 ALTER TABLE `khachhang`
-  MODIFY `MaKH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `MaKH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `loaigiay`
@@ -456,13 +444,13 @@ ALTER TABLE `nhacungcap`
 -- AUTO_INCREMENT for table `nhanviengiaohang`
 --
 ALTER TABLE `nhanviengiaohang`
-  MODIFY `MaNVGH` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `MaNVGH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `quantrivien`
 --
 ALTER TABLE `quantrivien`
-  MODIFY `MaQTV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `MaQTV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `thuonghieu`
