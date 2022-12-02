@@ -17,12 +17,13 @@
 </head>
 <?php
 include("Layout_KhachHang_Header.php");
+require('Changquantity.php');
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 $MaKH =  $_SESSION["MaKH"];
-$query = "select *,giohang.Size as 'Size_Giay',giohang.Màu as'Mau_Giay' from giohang join giay on giohang.MaGiay = giay.MaGiay join khachhang on giohang.MaKH = khachhang.MaKH where giohang.MaKH = '$MaKH' ";
+$query = "select * from giohang join giay on giohang.MaGiay = giay.MaGiay join khachhang on giohang.MaKH = khachhang.MaKH where giohang.MaKH = '$MaKH' ";
 $result = mysqli_query($con, $query);
 $tongtien = "select sum(giay.GiaBan * giohang.soluong) from giohang join giay on giohang.MaGiay = giay.MaGiay where giohang.MaKH = '$MaKH'";
 $run_tongtien = mysqli_query($con, $tongtien);
@@ -54,107 +55,75 @@ if (isset($_POST['dathangne'])) {
     while ($row = mysqli_fetch_array($run_truyvangiohang)) {
       $soluong = $row["soluong"];
       $dongia = $row["GiaBan"];
+      $mau = $row['Mauuu'];
+      $size = $row['Sizeee'];
       $mag = $row["MaGiay"];
-      $thuchienthem = "insert into chitietdathang value('$donhangid','$mag','$soluong','$dongia')";
+      $thuchienthem = "insert into chitietdathang value('$donhangid','$mag','$soluong','$dongia','$size','$mau')";
       mysqli_query($con, $thuchienthem);
     }
     $thuchienxoa = "delete from giohang where MaKH = $MaKH";
-  mysqli_query($con, $thuchienxoa);
+    mysqli_query($con, $thuchienxoa);
   }
-      
 
-  
-      require './PHPMailer/src/Exception.php';
-      require './PHPMailer/src/PHPMailer.php';
-      require './PHPMailer/src/SMTP.php';
-      $mail = new PHPMailer(true);
-     
+
+
+  require './PHPMailer/src/Exception.php';
+  require './PHPMailer/src/PHPMailer.php';
+  require './PHPMailer/src/SMTP.php';
+  $mail = new PHPMailer(true);
+
   //xoá giỏ hàng
-  
+
   echo "<script>
   alert('Đặt hàng thàng công!!!');location = './orderlist.php';
   </script>";
   try {
-    $qr = "select * from khachhang where khachhang.MaKH = $MaKH";
-    $a =  mysqli_query($con, $qr);
+    $qr1 = "select * from khachhang where khachhang.MaKH = $MaKH";
+    $a =  mysqli_query($con, $qr1);
     $b = mysqli_fetch_array($a);
 
-        //Server settings
-        $mail->SMTPDebug = 0;                                 // Enable verbose debug output
-        $mail->isSMTP();                                      // Set mailer to use SMTP
-        $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+    //Server settings
+    $mail->SMTPDebug = 0;                                 // Enable verbose debug output
+    $mail->isSMTP();                                      // Set mailer to use SMTP
+    $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
 
-        $mail->SMTPAuth = true;
-                                 // Enable SMTP authentication
-            $mail->Username = 'tmhaunct2001@gmail.com';                 // SMTP username
-            $mail->Password = 'ooakwovagpxsevav';                           // SMTP password
-            $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-            $mail->Port = 587;                                    // TCP port to connect to
+    $mail->SMTPAuth = true;
+    // Enable SMTP authentication
+    $mail->Username = 'tmhaunct2001@gmail.com';                 // SMTP username
+    $mail->Password = 'ooakwovagpxsevav';                           // SMTP password
+    $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+    $mail->Port = 587;                                    // TCP port to connect to
 
-            //Recipients
-            $mail->setFrom('mhaunct2001@gmail.com', "Xac nhan dat hang");
-            $mail->addAddress($b['Email'],$b['HoTen']);     // Add a recipient              // Name is optional
-            //$mail->addReplyTo('info@example.com', 'Information');
+    //Recipients
+    $mail->setFrom('mhaunct2001@gmail.com', "Xac nhan dat hang");
+    $mail->addAddress($b['Email'], $b['HoTen']);     // Add a recipient              // Name is optional
+    //$mail->addReplyTo('info@example.com', 'Information');
 
-            // $mail->addCC('cc@example.com');
-            // $mail->addBCC('bcc@example.com');
+    // $mail->addCC('cc@example.com');
+    // $mail->addBCC('bcc@example.com');
 
-            //Attachments
-            // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-            // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
-            $hoten = $b['HoTen'];
-            //Content
-            $mail->isHTML(true);                                  // Set email format to HTML
-            $mail->Subject = "Xac nhan dat hang";
-            $mail->Body    = " Cam on  $hoten. , da dat hang thanh cong don hang co so tien la $tinh";
-            // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+    //Attachments
+    // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+    // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+    $hoten = $b['HoTen'];
+    //Content
+    $mail->isHTML(true);                                  // Set email format to HTML
+    $mail->Subject = "Xac nhan dat hang";
+    $mail->Body    = " Cảm ơn $hoten đã đặt hàng với đơn hàng có giá trị là : $tinh VNĐ";
+    // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
-            $mail->send();
-            // echo "<h2 style='text-align:center;color:red;'>" . 'Gửi phản hồi thành công, chúng tôi sẽ phản hồi bạn sớm nhất!!!' . "</h2>";
-         
-        
-    } catch (Exception $e) {
-        echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
-    }
-    }
-  
+    $mail->send();
+    // echo "<h2 style='text-align:center;color:red;'>" . 'Gửi phản hồi thành công, chúng tôi sẽ phản hồi bạn sớm nhất!!!' . "</h2>";
 
-?>
-<?php
 
-$id = "";
-$soluong = "";
-if (isset($_POST['tru'])) {
-  if (isset($_POST['maId'])) {
-    $id = $_POST['maId'];
+  } catch (Exception $e) {
+    echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
   }
-  if (isset($_POST['soluong'])) {
-    $soluong = $_POST['soluong'];
-  }
-
-  $soluong = $soluong - 1;
-  $update = "UPDATE `giohang` SET `soluong` = '$soluong' WHERE `giohang`.`id` = '$id';";
-  mysqli_query($con, $update);
-} else {
-  if (isset($_POST['cong'])) {
-    if (isset($_POST['maId'])) {
-      $id = $_POST['maId'];
-    }
-    if (isset($_POST['soluong'])) {
-      $soluong = $_POST['soluong'];
-    }
-    $soluong = $soluong + 1;
-    $update = "UPDATE `giohang` SET `soluong` = '$soluong' WHERE `giohang`.`id` = '$id';";
-    mysqli_query($con, $update);
-  }
-}
-if ($soluong <= 0) {
-  $qr = "delete from giohang where id='$id'";
-  mysqli_query($con, $qr);
 }
 
 
 ?>
+
 
 <body>
   <div class="card-body">
@@ -202,7 +171,7 @@ if ($soluong <= 0) {
                         <div class="col-lg-2 col-md-12 mb-4 mb-lg-0">
                           <!-- Image -->
                           <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
-                            <a href="./details.php?MaGiay=<?php echo $row['MaGiay'] ?>"><img style="width:100px; height: 75px;" src="./HinhAnhGiay/<?php echo $row['AnhBia']  ?>" /></a>
+                            <a href="./details.php?MaGiay=<?php echo $row['MaGiay'] ?>"><img style="width:100px; height: 75px;" src="../../Images/ImgProducts/<?php echo $row['AnhBia']  ?>" /></a>
                             <a href="#!">
                               <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
                             </a>
@@ -217,12 +186,12 @@ if ($soluong <= 0) {
                         </div>
                         <div class="col-lg-1 col-md-6 mb-4 mb-lg-0 fw-bold">
                           <!-- Data -->
-                          <p><strong><?php echo $row["Size_Giay"]  ?></strong></p>
+                          <p><strong><?php echo $row["Sizeee"]  ?></strong></p>
                           <!-- Data -->
                         </div>
                         <div class="col-lg-1 col-md-6 mb-4 mb-lg-0 fw-bold">
                           <!-- Data -->
-                          <p><strong><?php echo $row["Mau_Giay"]  ?></strong></p>
+                          <p><strong><?php echo $row["Mauuu"]  ?></strong></p>
                           <!-- Data -->
                         </div>
 
@@ -349,34 +318,35 @@ if ($soluong <= 0) {
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
   }
+
   .mid-grid-left {
-        display: none;
-    }
+    display: none;
+  }
 </style>
 
 
 
 
 <script>
-    $(document).ready(function() {
-        $('#data-table').DataTable({
-            language: {
-                lengthMenu: 'Hiển thị _MENU_ trường một trang',
-                zeroRecords: 'Không tìm thấy dữ liệu !',
-                info: 'Đang hiển thị trang _PAGE_ / _PAGES_',
-                infoEmpty: 'Không có bản ghi nào',
-                infoFiltered: '(được lọc từ _MAX_ bản ghi)',
-                "search": "Tìm kiếm:",
-                searchPlaceholder: "Nhập từ khoá !",
-                "paginate": {
-                    "first": "Đầu",
-                    "last": "Cuối",
-                    "next": "Sau",
-                    "previous": "Trước"
-                },
-            },
-        });
+  $(document).ready(function() {
+    $('#data-table').DataTable({
+      language: {
+        lengthMenu: 'Hiển thị _MENU_ trường một trang',
+        zeroRecords: 'Không tìm thấy dữ liệu !',
+        info: 'Đang hiển thị trang _PAGE_ / _PAGES_',
+        infoEmpty: 'Không có bản ghi nào',
+        infoFiltered: '(được lọc từ _MAX_ bản ghi)',
+        "search": "Tìm kiếm:",
+        searchPlaceholder: "Nhập từ khoá !",
+        "paginate": {
+          "first": "Đầu",
+          "last": "Cuối",
+          "next": "Sau",
+          "previous": "Trước"
+        },
+      },
     });
+  });
 </script>
 
 
@@ -384,7 +354,7 @@ if ($soluong <= 0) {
 
 
 <script>
-    $(document).ready(function() {
-        $('#data-table').DataTable();
-    });
+  $(document).ready(function() {
+    $('#data-table').DataTable();
+  });
 </script>

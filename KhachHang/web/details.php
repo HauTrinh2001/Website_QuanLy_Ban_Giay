@@ -59,12 +59,12 @@
       $size =  $_POST["size"];
       $mau =  $_POST["mau"];
       $giohang = "insert into GioHang value(null,'$MaKH','$MaGiay',1,1,'$size','$mau')";
-      $giohang_trung = "select * from giohang where MaKH = '$MaKH' and MaGiay = '$MaGiay' and Size = '$size' and Màu='$mau'";
+      $giohang_trung = "select * from giohang where MaKH = '$MaKH' and MaGiay = '$MaGiay' and Sizeee = '$size' and Mauuu='$mau'";
       $giohang_trung_result = mysqli_query($con, $giohang_trung);
       $row = mysqli_fetch_array($giohang_trung_result);
       if (mysqli_num_rows($giohang_trung_result) != 0) {
         $soluongmoi =  $row["soluong"] + 1;
-        $u = "UPDATE giohang SET soluong = '$soluongmoi' WHERE giohang.MaGiay = '$MaGiay'and Size = '$size' and Màu='$mau';";
+        $u = "UPDATE giohang SET soluong = '$soluongmoi' WHERE giohang.MaGiay = '$MaGiay'and Sizeee = '$size' and Mauuu='$mau';";
         mysqli_query($con, $u);
         echo "<script>
 				alert('Thêm vào giỏ hàng thành công!!!');
@@ -134,7 +134,7 @@
 
                   <li>
                     <!-- <img class="etalage_thumb_image" src="images/product-slide/image7_thumb.jpg" /> -->
-                    <img class="etalage_source_image" <?php echo 'src="HinhAnhGiay/' . $row['AnhBia'] . '" ' ?> />
+                    <img class="etalage_source_image" <?php echo 'src="../../Images/ImgProducts/' . $row['AnhBia'] . '" ' ?> />
                   </li>
                 </ul>
               </div>

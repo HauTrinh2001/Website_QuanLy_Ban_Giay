@@ -55,7 +55,7 @@ $query_run = mysqli_query($conn, $query);
                     </div>
                     <div class="form-group ">
 
-                        <label for="Them_Email">Địa chỉ</label>
+                        <label for="Them_Email">Email</label>
                         <input required value="<?php if (isset($Them_Email))  echo $Them_Email ?>" required type="text" name="Them_Email" class="form-control" id="Them_Email" placeholder="Nhập Email">
 
                     </div>
@@ -119,7 +119,7 @@ $query_run = mysqli_query($conn, $query);
                                 <td> <?php echo $row['HoTen']; ?> </td>
                                 <td> <?php echo $row['DienThoaiNV']; ?> </td>
                                 <td style="width:50px"><img style="width:100%" src="../Images/ImgLivraisons/<?php echo $row['AnhDaiDien'] ?>" alt=""></td>
-                            
+
                                 <td>
                                     <!-- DETAIL  -->
                                     <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#Modal_Detail<?php echo $row['MaNVGH']; ?>">
@@ -153,12 +153,12 @@ $query_run = mysqli_query($conn, $query);
                                                                                 <p class="text-primary"><?php echo $row['HoTen']; ?></p>
                                                                             </h6>
 
-                                                                    
+
 
                                                                             <p class="mb-3"><?php echo $row['DienThoaiNV']; ?></p>
 
 
-                                                                         
+
                                                                             <p class="mb-3"><span class="font-weight-bold"> Địa chỉ: </span> <?php echo $row['DiaChi']; ?> </p>
                                                                             <p class="mb-3"><span class="font-weight-bold"> Email: </span> <?php echo $row['Email']; ?></p>
 
@@ -218,7 +218,7 @@ $query_run = mysqli_query($conn, $query);
                                                             <small class="text-danger"><?php if (isset($loi))  echo $loi ?></small>
 
                                                         </div>
-                   
+
                                                         <div class="form-group ">
                                                             <label for="">Ảnh</label>
                                                             <img class="preview" height="200px" src="../Images/ImgLivraisons/<?php echo $row['AnhDaiDien'] ?>" alt="" srcset="">
@@ -231,14 +231,14 @@ $query_run = mysqli_query($conn, $query);
 
                                                             <label for="Sua_DiaChi">Địa chỉ</label>
                                                             <input required value="<?php echo $row['DiaChi']; ?>" required type="text" name="Sua_DiaChi" class="form-control" id="Sua_DiaChi" placeholder="Địa chỉ">
-                                                     
+
                                                         </div>
                                                         <div class="form-group ">
                                                             <label for="Sua_Email">Email</label>
                                                             <input required value="<?php echo $row['Email']; ?>" required type="text" name="Sua_Email" class="form-control" id="Sua_Email" placeholder="Email">
 
                                                         </div>
-                                                      
+
 
 
 

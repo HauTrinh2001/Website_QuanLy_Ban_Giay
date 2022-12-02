@@ -180,6 +180,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="noidung_dropdown">
                   <a style="color:black;" href="profileKH.php">Xem thông tin</a>
                   <a style="color:black;" href="orderlist.php">Xem đơn hàng</a>
+                  <a style="color:black;" href="history_Cart.php">Xem lịch sử</a>
                   <a style="color:black" href="changepwd.php">Đổi mật khẩu</a>
                   <a style="color:black" href="logout.php">Đăng xuất</a>
                 </div>

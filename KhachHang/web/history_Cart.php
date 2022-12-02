@@ -24,7 +24,7 @@ include("connection.php");
 $MaKH =  $_SESSION["MaKH"];
 $query = "SELECT *,Sum(chitietdathang.SoLuong) as 'TongSanPham' FROM dondathang 
 join KhachHang on dondathang.MaKH = KhachHang.MaKH join chitietdathang 
-ON chitietdathang.SoDH = dondathang.SoDH where dondathang.MaKH = $MaKH and dondathang.TinhTrangGiaoHang!='Giao hàng thành công' GROUP BY dondathang.SoDH";
+ON chitietdathang.SoDH = dondathang.SoDH where dondathang.MaKH = $MaKH and dondathang.TinhTrangGiaoHang='Giao hàng thành công' GROUP BY dondathang.SoDH";
 $query_run = mysqli_query($con, $query);
 
 
@@ -35,7 +35,7 @@ $query_run = mysqli_query($con, $query);
     <div class="container-fluid ">
 
         <div class="card p-3">
-            <h1 class="font-weight-bold text-center"> ĐƠN ĐẶT HÀNG CỦA TÔI</h1>
+            <h1 class="font-weight-bold text-center">LỊCH SỬ ĐẶT HÀNG</h1>
         </div>
 
         <div class="card">
@@ -90,6 +90,7 @@ $query_run = mysqli_query($con, $query);
                                                         <table class="table table-bordered table-secondary table-hover display text-center">
                                                             <thead class="thead-dark">
                                                                 <th>#</th>
+
                                                                 <th>Size giày</th>
                                                                 <th>Màu giày</th>
                                                                 <th>Tên giày</th>

@@ -135,7 +135,7 @@
                                     <div class="product-pic" style="display:flex;flex-direction: column;flex:1">
 
                                         <?php echo "<a href='details.php?MaGiay=" . $row['MaGiay'] . " '>" ?>
-                                        <?php echo '<img class="hinh" src="HinhAnhGiay/' . $row['AnhBia'] . '" width="200px" height="150px">'; ?>
+                                        <?php echo '<img class="hinh" src="../../Images/ImgProducts/' . $row['AnhBia'] . '" width="200px" height="150px">'; ?>
                                         <?php "</a>" ?>
                                         <style>
                                             .hinh {

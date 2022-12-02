@@ -171,11 +171,11 @@ $query_nvgh = mysqli_query($conn, "Select * from nhanviengiaohang");
                                                         <div class="form-group">
                                                             <label> Nhân viên giao hàng </label>
                                                             <select class="form-control" name="nhanviengiaohang" id="">
-                                                            <?php while($rr = mysqli_fetch_array($query_nvgh)) { ?>
-                                                                <option value="<?php echo $rr["MaNVGH"] ?>"><?php echo $rr["HoTen"] ?></option>
+                                                                <?php while ($rr = mysqli_fetch_array($query_nvgh)) { ?>
+                                                                    <option value="<?php echo $rr["MaNVGH"] ?>"><?php echo $rr["HoTen"] ?></option>
                                                                 <?php } ?>
-                                                               
-                                                               
+
+
                                                             </select>
 
                                                         </div>
@@ -198,7 +198,7 @@ $query_nvgh = mysqli_query($conn, "Select * from nhanviengiaohang");
                                             <!-- modal-xl -->
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="Label_Edit">Xoá</h5>
+                                                    <h5 class="modal-title" id="Label_Edit">Thanh Toán</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
@@ -208,7 +208,7 @@ $query_nvgh = mysqli_query($conn, "Select * from nhanviengiaohang");
 
                                                         <div class="form-group">
 
-                                                            <label>Giao thành công <span class="text-danger font-weight-bold"> <?php echo $row['SoDH']; ?></span> ?</label>
+                                                            <label>Giao thành công đơn hàng <span class="text-danger font-weight-bold"> <?php echo $row['SoDH']; ?></span> ?</label>
 
                                                         </div>
 

@@ -11,7 +11,7 @@
     <div class="full">
         <div class="left">
             <div class="image">
-                <img src="./img_Member/MinhHau.png" alt="gfg-logo" style="width:100px;height:100px;">
+                <img src="./img_Member/AnhNam.jpg" alt="gfg-logo" style="width:100px;height:100px;">
             </div>
             <div class="Contact">
                 <h2>Thông tin cá nhân</h2>

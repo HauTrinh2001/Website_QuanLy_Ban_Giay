@@ -20,7 +20,7 @@
 include("Layout_KhachHang_Header.php");
 require('Changquantity.php');
 $MaKH =  $_SESSION["MaKH"];
-$query = "select *,giohang.Size as 'Size_Giay',giohang.Màu as'Mau_Giay' from giohang join giay on giohang.MaGiay = giay.MaGiay join khachhang on giohang.MaKH = khachhang.MaKH where giohang.MaKH = '$MaKH' ";
+$query = "select * from giohang join giay on giohang.MaGiay = giay.MaGiay join khachhang on giohang.MaKH = khachhang.MaKH where giohang.MaKH = '$MaKH' ";
 $result = mysqli_query($con, $query);
 $tongtien = "select sum(giay.GiaBan * giohang.soluong) from giohang join giay on giohang.MaGiay = giay.MaGiay where giohang.MaKH = '$MaKH'";
 $run_tongtien = mysqli_query($con, $tongtien);
@@ -80,7 +80,7 @@ $count = $row1['count'];
                         <div class="col-lg-2 col-md-12 mb-4 mb-lg-0">
                           <!-- Image -->
                           <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
-                            <a href="./details.php?MaGiay=<?php echo $row['MaGiay'] ?>"><img style="width:100px; height: 75px;" src="./HinhAnhGiay/<?php echo $row['AnhBia']  ?>" /></a>
+                            <a href="./details.php?MaGiay=<?php echo $row['MaGiay'] ?>"><img style="width:100px; height: 75px;" src="../../Images/ImgProducts/<?php echo $row['AnhBia']  ?>" /></a>
                             <a href="#!">
                               <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
                             </a>
@@ -95,12 +95,12 @@ $count = $row1['count'];
                         </div>
                         <div class="col-lg-1 col-md-6 mb-4 mb-lg-0 fw-bold">
                           <!-- Data -->
-                          <p><strong><?php echo $row["Size_Giay"]  ?></strong></p>
+                          <p><strong><?php echo $row["Sizeee"]  ?></strong></p>
                           <!-- Data -->
                         </div>
                         <div class="col-lg-1 col-md-6 mb-4 mb-lg-0 fw-bold">
                           <!-- Data -->
-                          <p><strong><?php echo $row["Mau_Giay"]  ?></strong></p>
+                          <p><strong><?php echo $row["Mauuu"]  ?></strong></p>
                           <!-- Data -->
                         </div>
 
@@ -222,7 +222,8 @@ $count = $row1['count'];
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
   }
+
   .mid-grid-left {
-        display: none;
-    }
+    display: none;
+  }
 </style>
